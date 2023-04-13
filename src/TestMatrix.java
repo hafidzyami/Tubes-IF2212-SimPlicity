@@ -26,7 +26,7 @@ public class TestMatrix {
         for (ArrayList<?> temp : matrix) {
             System.out.println(temp.toString().replaceAll("[\\[\\]\\,\\ ]", ""));
         }
-
+        
     }
 
 }
