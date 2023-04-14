@@ -1,45 +1,43 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class World {
     private static World instance = new World();
-    private ArrayList<ArrayList<String>> map;
-    private ArrayList<Rumah> homeList ;
-    private final int LEN_CAPACITY = 64;
-    private final int WID_CAPACITY = 64;
+    private Tile map;
+    private ArrayList<Home> homeList ;
+    private final int LEN_CAPACITY = 5;
+    private final int WID_CAPACITY = 10;
 
     private World() {
-        String[] arr = new String[LEN_CAPACITY];
-        Arrays.fill(arr, "c");
-        ArrayList<String> row = new ArrayList<>(Arrays.asList(arr)) ;
-        ArrayList<ArrayList<String>> matrix = new ArrayList<ArrayList<String>>();
-        for (int i = 0;i < WID_CAPACITY;i++) {
-            matrix.add(row);
-        }
+        Tile matrix = new Tile(LEN_CAPACITY,WID_CAPACITY);
         this.map = matrix;
+        this.homeList = new ArrayList<>();
     }
 
     public void printMap() {
-        System.out.println("ini peta");
-        for (ArrayList<?> temp : map) {
-            System.out.println(temp.toString().replaceAll("[\\[\\]\\,\\ ]", ""));
+        map.printTile();
+    }
+
+    public void updateMap() {
+        for(Home temp : homeList) {
+            int idX = temp.getLocX();
+            int idY = temp.getLocY();
+
+            map.changeTile("H", idX, idY);
         }
-        System.out.println("ya itu peta");
     }
 
     public static World getZaWarudo() {
         return instance;
     }
 
-    public void printListRumah() {
+    public void printHomeList() {
         System.out.println("ini list rumah");
     }
-    
-    public void addRumah(Rumah Home) {
-        homeList.add(Home);
+
+    public void addNewHome() {
+        Home home = Home.newHome();
+        homeList.add(home);
+        updateMap();
     }
 
-    public void removeRumah(Rumah Home) {
-        homeList.remove(Home);
-    }
 }
