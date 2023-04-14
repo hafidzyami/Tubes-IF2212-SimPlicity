@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class World {
     private static World instance = new World();
     private ArrayList<ArrayList<String>> map;
-    private ArrayList<Rumah> homeList ;
+    private ArrayList<Home> homeList ;
     private final int LEN_CAPACITY = 64;
     private final int WID_CAPACITY = 64;
 
@@ -35,11 +35,11 @@ public class World {
         System.out.println("ini list rumah");
     }
     
-    public void addRumah(Rumah Home) {
+    public void addRumah(Home Home) {
         homeList.add(Home);
     }
 
-    public void removeRumah(Rumah Home) {
+    public void removeRumah(Home Home) {
         homeList.remove(Home);
     }
 }
