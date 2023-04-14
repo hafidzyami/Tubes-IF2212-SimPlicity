@@ -1,7 +1,14 @@
 public class Main {
+    public static void space() {
+        System.out.println();
+    }
     public static void main(String[] args) {
-        World dunia = World.getZaWarudo();
+        World world = World.getZaWarudo();
 
-        dunia.printMap();
+        world.printMap();
+        Sim Bobi = new Sim("Bobi Orange Milk");
+        space();
+        world.addNewHome();
+        world.printMap();
     }
 }

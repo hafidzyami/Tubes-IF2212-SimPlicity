@@ -1,4 +1,4 @@
 public interface HaveDimension {
-    public Home cekRumah();
+    public Home checkHome();
 
 }
