@@ -1,12 +1,13 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import java.awt.Point;
 
 public class Home {
     private int homeNumber ;
-    private Point locationOnMap;
+    private Point location;
     private HashMap <String,Room> roomList = new HashMap<>(); 
-    private int roomTotal;
+    private Sim owner;
 
     
     Random randomizer = new Random(12345678);
@@ -16,7 +17,7 @@ public class Home {
     }
 
     public Home(Point locationOnMap) {
-        this.locationOnMap = locationOnMap;
+        this.location = location;
     }
     
     public static Home newHome() {
@@ -26,15 +27,19 @@ public class Home {
         return retHome;
     }
 
-    public Point getLocationOnMap() {
-        return locationOnMap;
+    public Point getLocation() {
+        return location;
     }
 
+    public HashMap <String,Room> getRoomList () {
+        return roomList;
+    }
+    
     public int getLocX() {
-        return (int) locationOnMap.getX();
+        return (int) location.getX();
     }
 
     public int getLocY() {
-        return (int) locationOnMap.getY();
+        return (int) location.getY();
     }
 }

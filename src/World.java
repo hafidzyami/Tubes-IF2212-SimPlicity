@@ -4,6 +4,9 @@ public class World {
     private static World instance = new World();
     private Tile map;
     private ArrayList<Home> homeList ;
+    private WorldClock worldClock;
+
+    // Don't forget change to 64x64
     private final int LEN_CAPACITY = 5;
     private final int WID_CAPACITY = 10;
 
@@ -26,7 +29,7 @@ public class World {
         }
     }
 
-    public static World getZaWarudo() {
+    public static World getInstance() {
         return instance;
     }
 
