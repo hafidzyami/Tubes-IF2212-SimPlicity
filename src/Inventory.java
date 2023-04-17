@@ -1,5 +1,12 @@
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Inventory {
-    private HashMap <String,Item> itemList;
+    private ArrayList <Item> itemList = new ArrayList<>();
+
+    
+    public Inventory(Item ... items) {
+        for(Item temp : items) {
+            itemList.add(temp);
+        }
+    }
 }

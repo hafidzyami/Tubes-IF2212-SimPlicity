@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Tile  {
     //private String[][] sketch;
     private int length;
@@ -14,7 +12,6 @@ public class Tile  {
         for(int i = 0; i < width; i++) {
             for(int j = 0; j < length; j++) {
                 //String s =String.valueOf(k);
-                // read information from somewhere
                 tile[i][j] = "E";
                 //k++;
             }
@@ -22,6 +19,10 @@ public class Tile  {
     }
 
     public void printTile() {
+        /* System.out.print("\033[H\033[2J");  
+        System.out.flush(); */ 
+        //System.out.println();
+        
         for(String[] temp1 : tile) {
             for(String temp2 : temp1) {
                 System.out.print(temp2 +" ");
@@ -34,7 +35,4 @@ public class Tile  {
         tile[Y-1][X-1] = S;
     } 
 
-    public void fromRoomExpand() {
-        
-    }
 }

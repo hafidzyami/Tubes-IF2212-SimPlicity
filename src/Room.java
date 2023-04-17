@@ -2,7 +2,7 @@ import java.util.HashMap;
 
 public class Room {
     private HashMap <String,Item> itemList = new HashMap<>();
-
+    private String roomName;
     /* Game akan men-generate rumah dengan 
     1 ruangan yang dimensi 6x6 dengan objek basic 
     berupa kasur, toilet, kompor, kursi, meja, dan jam */
