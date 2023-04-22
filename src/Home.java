@@ -16,7 +16,7 @@ public class Home {
 
     }
 
-    public Home(Point locationOnMap) {
+    public Home(Point location) {
         this.location = location;
     }
     
