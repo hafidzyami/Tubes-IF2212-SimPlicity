@@ -22,8 +22,8 @@ public class Menu {
     }
 
     public static void exit() {
-        System.out.println("ini exit");
-        System.out.println("Terima kasih telah bermain");
+        System.out.println("Terima kasih telah bermain, sampai jumpa!");
+        exit();
     }
 
     public static void viewSimInfo() {
