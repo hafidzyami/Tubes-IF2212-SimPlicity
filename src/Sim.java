@@ -27,6 +27,7 @@ public class Sim implements Runnable {
         System.out.println(fullName + " Sedang beraktivitas");
     }
 
+    //getter 
     public String getSimInfo() {
         String rets = "Nama: " + fullName + " \n";
         rets += ("Pekerjaan: " + job + " \n");
@@ -61,7 +62,63 @@ public class Sim implements Runnable {
         return status;
     }
 
+    // active action 
+    public void work (int duration){
 
+    }
+
+    public void sport (int duration){
+
+    }
+
+    public void sleep (int duration){
+
+    }
+
+    public void eat (){
+
+    }
+
+    public void cook () {
+
+    }
+
+    public void visit (int duration){
+
+    }
+
+    public void pee() {
+
+    }
+
+    // needed time action 
+    public void upgradeHome() {
+
+    }
+
+    public void buyItem() {
+
+    }
+
+    //not needed time action 
+    public void moveToRoom() {
+
+    }
+
+    public void seeInventory() {
+
+    }
+
+    public void installItem() {
+
+    }
+
+    public void seeTime() {
+
+    }
+
+
+    //driver
     public static void main(String[] args) {
         Sim Bobi = new Sim("Bobi");
         System.out.println(Bobi.getSimInfo());
