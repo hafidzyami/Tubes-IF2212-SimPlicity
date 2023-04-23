@@ -64,7 +64,7 @@ public class Sim implements Runnable {
 
     // active action 
     public void work (int duration){
-
+        //nunggu Job
     }
 
     public void sport (int duration){
@@ -76,7 +76,11 @@ public class Sim implements Runnable {
     }
 
     public void eat (){
-
+    /** Makan berarti Sim mengambil makanan yang ada di Inventory untuk kemudian dikonsumsi. 
+     * Konsumsi makanan akan mengurangi jumlah makanan terkait pada inventory sejumlah 1 buah 
+     * dan meningkatkan tingkat kekenyangan Sim sejumlah satuan kekenyangan makanan terkait. */  
+    
+     // nunggu food
     }
 
     public void cook () {
@@ -97,7 +101,7 @@ public class Sim implements Runnable {
     }
 
     public void buyItem() {
-
+        //tabel bahan makanan dimana
     }
 
     //not needed time action 
@@ -114,7 +118,7 @@ public class Sim implements Runnable {
     }
 
     public void seeTime() {
-
+        //nunggu clock
     }
 
 
