@@ -135,6 +135,11 @@ public class Sim implements Runnable {
 
     }
 
+    public void recitate(int duration){
+        int temp = duration/60;
+        this.mood += 3 * temp;
+    }
+
     // needed time action 
     public void upgradeHome() {
 
