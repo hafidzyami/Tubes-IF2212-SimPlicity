@@ -1,3 +1,5 @@
+import java.awt.Point;
+
 public class Sim implements Runnable {
     private String fullName;
     private String job;
@@ -122,7 +124,7 @@ public class Sim implements Runnable {
     }
 
     public void visit (int duration){
-
+       
     }
 
     public void pee() {
@@ -147,7 +149,31 @@ public class Sim implements Runnable {
 
     }
 
-    public void installItem() {
+    public void installItem(Tile tile, String name, Point upperLeft, int width, int length){
+        //jujur gw gatau ini pake thread atau engga
+        if( ((int) upperLeft.getX() + length - 1 > 6) || ((int) upperLeft.getY() + width - 1 > 6) ){
+            System.out.println("Item tidak bisa diletakkan!");
+        }
+        else{
+            boolean flag = false;
+            for(int i = (int) upperLeft.getX(); i < length + (int) upperLeft.getX(); i++){
+                for(int j = (int) upperLeft.getY(); j < width + (int) upperLeft.getY(); j++){
+                    if(!tile.getTile(i, j).equals("E")){
+                        flag = true;
+                    }
+                }
+            }
+            if(flag){
+                System.out.println("Terdapat item lain!");
+            }
+            else{
+                for(int i = (int) upperLeft.getX(); i < length + (int) upperLeft.getX(); i++){
+                    for(int j = (int) upperLeft.getY(); j < width + (int) upperLeft.getY(); j++){
+                        tile.changeTile(name, i, j);
+                    }
+                };
+            }
+        }
 
     }
 
