@@ -78,6 +78,7 @@ public class Sim implements Runnable {
         this.health += 5 * temp;
         this.hunger -= 5 * temp;
         this.mood += 10 * temp;
+        System.out.println("Sedang olahraga");
 
     }
 
@@ -133,12 +134,16 @@ public class Sim implements Runnable {
     }
 
     public void pee() {
-
+        this.status = "pee";
+        this.hunger -= 20;
+        this.mood += 10;
+        System.out.println("Sedang buang air");
     }
 
     public void recitate(int duration){
         int temp = duration/60;
         this.mood += 3 * temp;
+        System.out.println("Sedang mengaji");
     }
 
     // needed time action 
