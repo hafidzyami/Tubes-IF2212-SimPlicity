@@ -6,12 +6,12 @@ public class NonFoodItem extends Item implements PurchaseAble {
     // private String relatedAction;
 
     // atribut 
-    private String name;
-    private Point upperLeft;
-    private int length;
-    private int width;
-    private int price;
-    private boolean isAvailable;
+    protected String name;
+    protected Point upperLeft;
+    protected int length;
+    protected int width;
+    protected int price;
+    protected boolean isAvailable;
 
 
     // konstruktor
@@ -56,9 +56,6 @@ public class NonFoodItem extends Item implements PurchaseAble {
             this.price = 50;
             this.length = 3;
             this.width = 3;
-        }
-        else if(name.equals("Clock")){
-            // ini belum plis
         }
     }
 
