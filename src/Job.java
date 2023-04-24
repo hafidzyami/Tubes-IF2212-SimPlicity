@@ -9,20 +9,20 @@ public class Job {
     }
 
     //getter 
-    public String getName() {
+    public String getJobName() {
         return this.name;
     }
 
-    public int getSalary() {
+    public int getDaySalary() {
         return this.salary;
     }
 
     //setter 
-    public void setName(String name) {
+    public void setJobName(String name) {
         this.name = name; 
     }
 
-    public void setSalary(int salary){
+    public void setDaySalary(int salary){
         this.salary = salary; 
     }
 }
