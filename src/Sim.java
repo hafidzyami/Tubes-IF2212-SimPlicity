@@ -16,6 +16,9 @@ public class Sim implements Runnable {
         this.money = 100;
         this.job = "sopir";
         
+        // pada awal di buat status bersifat "idle"
+        this.status = "idle";
+        
     }
     public void run() {
         try {
@@ -71,8 +74,39 @@ public class Sim implements Runnable {
 
     }
 
-    public void sleep (int duration){
+    public void gainMood(int mood){
+        this.mood += mood;
+    }
 
+    public void gainHealth(int health){
+        this.health += health;
+    }
+
+
+    public void sleep (int duration){
+        this.status = "sleep";
+        Thread t = new Thread(new Runnable(){
+            public void run(){
+                int sleepTime = 0;
+                while(sleepTime != duration){
+                    try{
+                        Thread.sleep(1000); 
+                        sleepTime++;
+                        System.out.println("Sedang tidur selama " + sleepTime);
+                    }
+                    catch (InterruptedException e){
+                        e.printStackTrace();
+                    }
+                }
+                
+                if(sleepTime >= 3){
+                    gainMood(30*(duration/4));
+                    gainHealth(20*(duration/4));
+                }
+            } 
+        });
+
+        t.start();
     }
 
     public void eat (){
@@ -125,6 +159,8 @@ public class Sim implements Runnable {
     //driver
     public static void main(String[] args) {
         Sim Bobi = new Sim("Bobi");
+        System.out.println(Bobi.getSimInfo());
+        Bobi.sleep(240);
         System.out.println(Bobi.getSimInfo());
     }
 
