@@ -73,6 +73,7 @@ public class Sim implements Runnable {
     }
 
     public void sport (int duration){
+        this.status = "sport";
         int temp = duration/20;
         this.health += 5 * temp;
         this.hunger -= 5 * temp;
