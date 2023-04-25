@@ -68,6 +68,10 @@ public class Sim implements Runnable {
     }
 
     //setter 
+    public void setIdle(){
+        this.status = "idle";
+    }
+
     public void gainMood(int mood){
         this.mood += mood;
     }
@@ -110,6 +114,8 @@ public class Sim implements Runnable {
                         e.printStackTrace();
                     }
                 }
+
+                setIdle();
                 
                 if(sleepTime >= 3){
                     gainMood(30*(duration/4));
