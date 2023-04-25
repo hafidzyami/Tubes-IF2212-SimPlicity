@@ -42,4 +42,8 @@ public class Home {
     public int getLocY() {
         return (int) location.getY();
     }
+
+    public void addRoom(String roomName, Room room){
+        this.roomList.put(roomName, room);
+    }
 }
