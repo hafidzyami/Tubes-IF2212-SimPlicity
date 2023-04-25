@@ -67,6 +67,19 @@ public class Sim implements Runnable {
         return status;
     }
 
+    //setter 
+    public void gainMood(int mood){
+        this.mood += mood;
+    }
+
+    public void gainHealth(int health){
+        this.health += health;
+    }
+
+    public void gainHunger( int hunger){
+        this.hunger += hunger;
+    }
+    
     // active action 
     public void work (int duration){
         //nunggu Job
@@ -81,15 +94,6 @@ public class Sim implements Runnable {
         System.out.println("Sedang olahraga");
 
     }
-
-    public void gainMood(int mood){
-        this.mood += mood;
-    }
-
-    public void gainHealth(int health){
-        this.health += health;
-    }
-
 
     public void sleep (int duration){
         this.status = "sleep";
