@@ -18,11 +18,11 @@ public class Inventory {
         return inventoryCount;
     }
 
-    public void addInventory(Item items){
-        itemList.add(items);
+    public Item getItem (int i){
+        return itemList.get(i);
     }
 
-    public void deleteInventory(Item items){
+    public int getIndeksItem(Item items){
         int idx = 0;
         int idxhsl = -1;
         for (Item i : itemList){
@@ -33,7 +33,17 @@ public class Inventory {
                 idx++;
             }
         }
-        if (idxhsl != -1){
+        return idxhsl;
+    }
+
+    public void addInventory(Item items){
+        itemList.add(items);
+    }
+
+    public void deleteInventory(Item items){
+        int idx = 0;
+        int idxhsl = -1;
+        if(getIndeksItem(items) != -1){
             itemList.remove(idxhsl);
         }
     }
