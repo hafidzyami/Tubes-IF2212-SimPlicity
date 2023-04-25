@@ -10,6 +10,10 @@ public class Sim implements Runnable {
     private int health;
     private String status;
 
+    // ini nyoba
+    public Room currentRoom;
+    public Home myHome;
+
     public Sim(String nama,Item ... items) {
         this.fullName = nama;
         this.hunger = 80;
@@ -189,8 +193,17 @@ public class Sim implements Runnable {
     }
 
     //not needed time action 
-    public void moveToRoom() {
-
+    public void moveToRoom(String roomName) {
+        if(this.currentRoom.getRoomName().equals(roomName)){
+            System.out.println("Tidak bisa berpindah ke room yang sama!");
+        }
+        else if(this.myHome.getRoomList().containsKey(roomName)){
+            this.currentRoom = this.myHome.getRoomList().get(roomName);
+            System.out.println("Anda diteleportasi ke " + roomName);
+        }
+        else{
+            System.out.println("Tidak ada ruang dengan nama tersebut!");
+        }
     }
 
     public void seeInventory() {
@@ -277,10 +290,28 @@ public class Sim implements Runnable {
     public static void main(String[] args) {
         Sim Bobi = new Sim("Bobi");
         System.out.println(Bobi.getSimInfo());
-        Bobi.sleep(240);
-        System.out.println(Bobi.getSimInfo());
-        Bobi.sport(10);
-        System.out.println(Bobi.getSimInfo());
+        Bobi.myHome = new Home().newHome();
+        Bobi.currentRoom = Bobi.myHome.getRoomList().get("ruang01");
+        System.out.println(Bobi.currentRoom.getRoomName());
+        System.out.println(Bobi.currentRoom.getItemList());
+
+        // buat ruangan baru di rumah bobi
+        Room ruang02 = new Room("dapur");
+        Bobi.myHome.addRoom("ruang02", ruang02);
+
+        // coba pindah ke dapur atau room02
+        Bobi.moveToRoom("ruang02");
+        System.out.println(Bobi.currentRoom.getRoomName());
+        System.out.println(Bobi.currentRoom.getItemList());
+
+
+
+
+
+
+
+        
+        
     }
 
 }
