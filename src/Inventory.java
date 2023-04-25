@@ -41,10 +41,8 @@ public class Inventory {
     }
 
     public void deleteInventory(Item items){
-        int idx = 0;
-        int idxhsl = -1;
         if(getIndeksItem(items) != -1){
-            itemList.remove(idxhsl);
+            itemList.remove(getIndeksItem(items));
         }
     }
     public void printInventory(){
