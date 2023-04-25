@@ -79,7 +79,7 @@ public class Sim implements Runnable {
     public void gainHunger( int hunger){
         this.hunger += hunger;
     }
-    
+
     // active action 
     public void work (int duration){
         //nunggu Job
@@ -144,12 +144,6 @@ public class Sim implements Runnable {
         System.out.println("Sedang buang air");
     }
 
-    public void recitate(int duration){
-        int temp = duration/60;
-        this.mood += 3 * temp;
-        System.out.println("Sedang mengaji");
-    }
-
     // needed time action 
     public void upgradeHome() {
 
@@ -200,6 +194,32 @@ public class Sim implements Runnable {
         //nunggu clock
     }
 
+    //costum action 
+    public void crying() {
+        this.status = "crying"; 
+        Thread t = new Thread(new Runnable(){
+            public void run(){
+                try{
+                    Thread.sleep(1000); 
+                    gainHunger(-10);
+                    gainMood(10);
+                    System.out.println("Sim sedang menangis :(");
+                }
+                catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+
+            } 
+        });
+
+        t.start();
+    }
+
+    public void recitate(int duration){
+        int temp = duration/60;
+        this.mood += 3 * temp;
+        System.out.println("Sedang mengaji");
+    }
 
     //driver
     public static void main(String[] args) {
