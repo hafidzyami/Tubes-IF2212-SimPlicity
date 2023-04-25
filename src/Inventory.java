@@ -10,7 +10,7 @@ public class Inventory {
         inventoryCount = 0;
     }
 
-    public ArrayList getInventory(){
+    public ArrayList<Item> getInventory(){
         return itemList;
     }
 
