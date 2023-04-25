@@ -91,13 +91,29 @@ public class Sim implements Runnable {
 
     public void sport (int duration){
         this.status = "sport";
-        int temp = duration/20;
-        this.health += 5 * temp;
-        this.hunger -= 5 * temp;
-        this.mood += 10 * temp;
-        System.out.println("Sedang olahraga");
-
+        Thread t = new Thread(new Runnable(){
+            public void run(){
+                int sportTime = 0;
+                int temp = duration/20;
+                while(sportTime != duration){
+                    try{
+                        Thread.sleep(1000); 
+                        sportTime++;
+                        System.out.println("Sedang olahraga selama " + sportTime + " detik");
+                    }
+                    catch (InterruptedException e){
+                        e.printStackTrace();
+                    }
+                }
+                setIdle();
+                gainHealth(5*temp);
+                gainHunger(-5*temp);
+                gainMood(10*temp);
+            } 
+        });
+        t.start();
     }
+
 
     public void sleep (int duration){
         this.status = "sleep";
@@ -108,7 +124,7 @@ public class Sim implements Runnable {
                     try{
                         Thread.sleep(1000); 
                         sleepTime++;
-                        System.out.println("Sedang tidur selama " + sleepTime);
+                        System.out.println("Sedang tidur selama " + sleepTime + " detik");
                     }
                     catch (InterruptedException e){
                         e.printStackTrace();
@@ -145,9 +161,22 @@ public class Sim implements Runnable {
 
     public void pee() {
         this.status = "pee";
-        this.hunger -= 20;
-        this.mood += 10;
-        System.out.println("Sedang buang air");
+        System.out.println("Sim sedang buang air")
+        Thread t = new Thread(new Runnable(){
+            public void run(){
+                try{
+                    Thread.sleep(10000); 
+                    gainHunger(-20);
+                    gainMood(10);
+                    System.out.println("Sim telah buang air selama 10 detik");
+                }
+                catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+            } 
+        });
+
+        t.start();
     }
 
     // needed time action 
@@ -222,9 +251,26 @@ public class Sim implements Runnable {
     }
 
     public void recitate(int duration){
-        int temp = duration/60;
-        this.mood += 3 * temp;
-        System.out.println("Sedang mengaji");
+        this.status = "recitate";
+        Thread t = new Thread(new Runnable(){
+            public void run(){
+                int recitateTime = 0;
+                int temp = duration/60;
+                while(recitateTime != duration){
+                    try{
+                        Thread.sleep(1000); 
+                        recitateTime++;
+                        System.out.println("Sedang mengaji selama " + recitateTime + " detik");
+                    }
+                    catch (InterruptedException e){
+                        e.printStackTrace();
+                    }
+                }
+                setIdle();
+                gainMood(3*temp);
+            } 
+        });
+        t.start();
     }
 
     //driver
