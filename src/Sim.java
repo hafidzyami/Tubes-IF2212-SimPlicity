@@ -10,6 +10,7 @@ public class Sim implements Runnable {
     private int health;
     private String status;
 
+    //konstruktor
     public Sim(String nama,Item ... items) {
         this.fullName = nama;
         this.hunger = 80;
@@ -67,6 +68,10 @@ public class Sim implements Runnable {
         return status;
     }
 
+    public int getMoney(){
+        return money; 
+    }
+
     //setter 
     public void setIdle(){
         this.status = "idle";
@@ -84,9 +89,39 @@ public class Sim implements Runnable {
         this.hunger += hunger;
     }
 
+    public void gainMoney(int money){
+        this.money += money; 
+    }
+
     // active action 
     public void work (int duration){
-        //nunggu Job
+        this.status = "work"; 
+        System.out.println("Sim sedang bekerja sebagai " + getSimJob());
+        Thread t = new Thread(new Runnable(){
+            float salary = (float)job.getDaySalary(); 
+            float total_salary = 0; 
+            public void run(){
+                int workTime = 0; 
+                int temp = duration/30; 
+                for (int i = 0; i < temp; i++){
+                    try{
+                        System.out.println("work work work");
+                        Thread.sleep(30 * 1000);
+                        gainHunger(-10); 
+                        gainMood(-10); 
+                        total_salary += salary/8;
+                    }
+                    catch (InterruptedException e){
+                        e.printStackTrace();
+                    }
+                }
+                gainMoney((int)total_salary); 
+                System.out.println("sim telah selesai bekerja dan mendapatkan "+ total_salary); 
+                System.out.println("uang sim menjadi : " + getMoney()); 
+            }
+        });
+        t.start(); 
+
     }
 
     public void sport (int duration){
