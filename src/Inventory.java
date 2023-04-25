@@ -39,7 +39,7 @@ public class Inventory {
     }
     public void printInventory(){
         for (Item i :itemList){
-            System.out.prinln(i.name);
+            System.out.println(i.name);
         }
     }
 }

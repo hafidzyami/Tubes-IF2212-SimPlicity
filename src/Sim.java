@@ -161,7 +161,7 @@ public class Sim implements Runnable {
 
     public void pee() {
         this.status = "pee";
-        System.out.println("Sim sedang buang air")
+        System.out.println("Sim sedang buang air");
         Thread t = new Thread(new Runnable(){
             public void run(){
                 try{
@@ -278,6 +278,8 @@ public class Sim implements Runnable {
         Sim Bobi = new Sim("Bobi");
         System.out.println(Bobi.getSimInfo());
         Bobi.sleep(240);
+        System.out.println(Bobi.getSimInfo());
+        Bobi.sport(10);
         System.out.println(Bobi.getSimInfo());
     }
 
