@@ -232,8 +232,32 @@ public class Sim implements Runnable {
 
     }
 
-    public void buyItem() {
-        //tabel bahan makanan dimana
+    public void buyItem(FoodIngredients item) {
+        this.status = "buying item"; 
+        Thread t = new Thread(new Runnable(){
+            public void run(){
+                try {
+                    if (item != null && item.getPrice(item.name) <= getMoney()) {
+                        Thread.sleep(10000); 
+                        gainMoney(-item.getPrice(item.name));
+                        System.out.println("sim membeli" + item.name + "dengan harga" + item.getPrice(item.name));
+                        int deliveryTime = (int) (Math.random() * 5 * 1) * 30;
+                        System.out.println("barang akan tersedia dalam waktu "+ deliveryTime + "detik, silahkan menunggu");
+                        try{
+                            Thread.sleep(deliveryTime);
+                        } catch (InterruptedException e){
+                            e.printStackTrace();
+                        }
+                        inventory.addInventory(item);
+                    } else {
+                        System.out.println("uang sim tidak cukup!");
+                    }
+                } catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 
     //not needed time action 

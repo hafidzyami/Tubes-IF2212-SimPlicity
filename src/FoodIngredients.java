@@ -1,6 +1,6 @@
 public class FoodIngredients extends Food {
     private int price;
-    private String name;
+    public String name;
 
     public FoodIngredients(String name) {
         this.name = name;
@@ -43,4 +43,30 @@ public class FoodIngredients extends Food {
                 break;
         }
     }
+
+    public int getPrice(String name){
+        switch (name) {
+            case "Rice":
+                return 5;
+            case "Potato":
+                return 3;
+            case "Chicken":
+                return 10;
+            case "Beef":
+                return 12;
+            case "Carrot":
+                return 3;
+            case "Spinach":
+                return 3;
+            case "Nut":
+                return 2;
+            case "Milk":
+                return 2;
+                
+            default:
+                this.name = null;
+                return 0;
+        }
+    }
+
 }
