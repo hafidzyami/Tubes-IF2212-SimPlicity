@@ -31,8 +31,8 @@ public class Menu {
         System.out.println(sim.getSimInfo());
     }
 
-    public static void viewCurrentLocation() {
-        System.out.println("ini lokasi sekarang");
+    public static void viewCurrentLocation(Sim sim) {
+        System.out.println("Sim berada di rumah" + sim.currentHome + "di dalam ruangan" + sim.currentRoom);
     }
 
     public static void viewInventory() {
