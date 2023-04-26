@@ -281,7 +281,7 @@ public class Sim implements Runnable {
     }
 
     public void seeInventory() {
-
+        inventory.printInventory();
     }
 
     public void installItem(Room room, NonFoodItem item, int wantedX, int wantedY){
