@@ -12,7 +12,7 @@ public class Sim implements Runnable {
 
     // ini nyoba
     public Room currentRoom;
-    public Home myHome;
+    public Home currentHome;
     public Job simJob;
     public Clock clock;
 
@@ -269,8 +269,8 @@ public class Sim implements Runnable {
         if(this.currentRoom.getRoomName().equals(roomName)){
             System.out.println("Tidak bisa berpindah ke room yang sama!");
         }
-        else if(this.myHome.getRoomList().containsKey(roomName)){
-            this.currentRoom = this.myHome.getRoomList().get(roomName);
+        else if(this.currentHome.getRoomList().containsKey(roomName)){
+            this.currentRoom = this.currentHome.getRoomList().get(roomName);
             System.out.println("Anda diteleportasi ke " + roomName);
         }
         else{
@@ -394,14 +394,14 @@ public class Sim implements Runnable {
     public static void main(String[] args) {
         Sim Bobi = new Sim("Bobi");
         System.out.println(Bobi.getSimInfo());
-        Bobi.myHome = new Home().newHome();
-        Bobi.currentRoom = Bobi.myHome.getRoomList().get("ruang01");
+        Bobi.currentHome = new Home().newHome();
+        Bobi.currentRoom = Bobi.currentHome.getRoomList().get("ruang01");
         System.out.println(Bobi.currentRoom.getRoomName());
         System.out.println(Bobi.currentRoom.getItemList());
 
         // buat ruangan baru di rumah bobi
         Room ruang02 = new Room("dapur");
-        Bobi.myHome.addRoom("ruang02", ruang02);
+        Bobi.currentHome.addRoom("ruang02", ruang02);
 
         // coba pindah ke dapur atau room02
         Bobi.moveToRoom("ruang02");
