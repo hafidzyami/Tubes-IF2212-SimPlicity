@@ -138,34 +138,28 @@ public class Sim implements Runnable {
     }
 
     public void sport (int duration){
-        if(duration % 20 != 0){
-            System.out.println("Durasi olahraga harus kelipatan 20 detik!");
-        }
-        else{
-            this.status = "sport";
-            Thread t = new Thread(new Runnable(){
-                public void run(){
-                    int sportTime = 0;
-                    int temp = duration/20;
-                    while(sportTime != duration){
-                        try{
-                            Thread.sleep(1000); 
-                            sportTime++;
-                            System.out.println("Sedang olahraga selama " + sportTime + " detik");
-                        }
-                        catch (InterruptedException e){
-                            e.printStackTrace();
-                        }
+        this.status = "sport";
+        Thread t = new Thread(new Runnable(){
+            public void run(){
+                int sportTime = 0;
+                int temp = duration/20;
+                while(sportTime != duration){
+                    try{
+                        Thread.sleep(1000); 
+                        sportTime++;
+                        System.out.println("Sedang olahraga selama " + sportTime + " detik");
                     }
-                    setIdle();
-                    gainHealth(5*temp);
-                    gainHunger(-5*temp);
-                    gainMood(10*temp);
-                } 
-            });
-            t.start();
-        }
-        
+                    catch (InterruptedException e){
+                        e.printStackTrace();
+                    }
+                }
+                setIdle();
+                gainHealth(5*temp);
+                gainHunger(-5*temp);
+                gainMood(10*temp);
+            } 
+        });
+        t.start();
     }
 
 
@@ -197,12 +191,15 @@ public class Sim implements Runnable {
         t.start();
     }
 
-    public void eat (){
-    /** Makan berarti Sim mengambil makanan yang ada di Inventory untuk kemudian dikonsumsi. 
-     * Konsumsi makanan akan mengurangi jumlah makanan terkait pada inventory sejumlah 1 buah 
-     * dan meningkatkan tingkat kekenyangan Sim sejumlah satuan kekenyangan makanan terkait. */  
-    
-     // nunggu food
+    public void eat (FoodCooked food){
+        this.status = "makan";
+        Thread t = new Thread(new Runnable(){
+            public void run(){
+                
+            } 
+        });
+
+        t.start();
     }
 
     public void cook () {
@@ -238,15 +235,15 @@ public class Sim implements Runnable {
 
     }
 
-    public void buyItem(FoodIngredients item) {
+    public void buyItem(PurchaseAble item) {
         this.status = "buying item"; 
         Thread t = new Thread(new Runnable(){
             public void run(){
                 try {
-                    if (item != null && item.getPrice(item.name) <= getMoney()) {
+                    if (item != null && item.getPrice() <= getMoney()) {
                         Thread.sleep(10000); 
-                        gainMoney(-item.getPrice(item.name));
-                        System.out.println("sim membeli" + item.name + "dengan harga" + item.getPrice(item.name));
+                        gainMoney(-item.getPrice());
+                        System.out.println("sim membeli" + item.getName() + "dengan harga" + item.getPrice());
                         int deliveryTime = (int) (Math.random() * 5 * 1) * 30;
                         System.out.println("barang akan tersedia dalam waktu "+ deliveryTime + "detik, silahkan menunggu");
                         try{
@@ -263,6 +260,7 @@ public class Sim implements Runnable {
                 }
             }
         });
+        t.start();
 
     }
 

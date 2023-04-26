@@ -23,10 +23,12 @@ public class Menu {
 
     public static void exit() {
         System.out.println("Terima kasih telah bermain, sampai jumpa!");
+        exit();
     }
 
-    public static void viewSimInfo() {
-        System.out.println("ini lihat info sim");
+    public static void viewSimInfo(World world) {
+        Sim sim = world.getPlayedSim(); 
+        System.out.println(sim.getSimInfo());
     }
 
     public static void viewCurrentLocation() {

@@ -5,6 +5,7 @@ public class World {
     private Tile map;
     private ArrayList<Home> homeList ;
     private WorldClock worldClock;
+    private Sim playedSim;
 
     // Don't forget change to 64x64
     private final int LEN_CAPACITY = 5;
@@ -33,10 +34,18 @@ public class World {
         return instance;
     }
 
+    public Sim getPlayedSim(){
+        return playedSim;
+    }
+
     public void printHomeList() {
         System.out.println("ini list rumah");
     }
 
+    public void setPlayedSim(Sim sim){
+        this.playedSim = sim; 
+    }
+    
     public void addNewHome() {
         Home home = Home.newHome();
         homeList.add(home);

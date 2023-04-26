@@ -40,6 +40,10 @@ public class Inventory {
         itemList.add(items);
     }
 
+    public void addInventory(PurchaseAble items){
+        itemList.add((Item) items);
+    }
+
     public void deleteInventory(Item items){
         if(getIndeksItem(items) != -1){
             itemList.remove(getIndeksItem(items));

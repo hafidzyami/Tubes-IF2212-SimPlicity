@@ -23,6 +23,9 @@ public class Game {
                     playing = false;
                     Menu.exit();
                     break;
+                case "4","view sim info" :
+                    Menu.viewSimInfo(world);
+                    break;
                 default :
             }
         }

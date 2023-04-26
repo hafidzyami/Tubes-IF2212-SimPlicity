@@ -1,4 +1,4 @@
-public class FoodIngredients extends Food {
+public class FoodIngredients extends Food implements PurchaseAble {
     private int price;
     public String name;
 
@@ -44,29 +44,12 @@ public class FoodIngredients extends Food {
         }
     }
 
-    public int getPrice(String name){
-        switch (name) {
-            case "Rice":
-                return 5;
-            case "Potato":
-                return 3;
-            case "Chicken":
-                return 10;
-            case "Beef":
-                return 12;
-            case "Carrot":
-                return 3;
-            case "Spinach":
-                return 3;
-            case "Nut":
-                return 2;
-            case "Milk":
-                return 2;
-                
-            default:
-                this.name = null;
-                return 0;
-        }
+    public int getPrice(){
+        return price;
+    }
+
+    public String getName(){
+        return name;
     }
 
 }
