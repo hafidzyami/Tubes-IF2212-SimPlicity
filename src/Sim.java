@@ -138,28 +138,34 @@ public class Sim implements Runnable {
     }
 
     public void sport (int duration){
-        this.status = "sport";
-        Thread t = new Thread(new Runnable(){
-            public void run(){
-                int sportTime = 0;
-                int temp = duration/20;
-                while(sportTime != duration){
-                    try{
-                        Thread.sleep(1000); 
-                        sportTime++;
-                        System.out.println("Sedang olahraga selama " + sportTime + " detik");
+        if(duration % 20 != 0){
+            System.out.println("Durasi olahraga harus kelipatan 20 detik!");
+        }
+        else{
+            this.status = "sport";
+            Thread t = new Thread(new Runnable(){
+                public void run(){
+                    int sportTime = 0;
+                    int temp = duration/20;
+                    while(sportTime != duration){
+                        try{
+                            Thread.sleep(1000); 
+                            sportTime++;
+                            System.out.println("Sedang olahraga selama " + sportTime + " detik");
+                        }
+                        catch (InterruptedException e){
+                            e.printStackTrace();
+                        }
                     }
-                    catch (InterruptedException e){
-                        e.printStackTrace();
-                    }
-                }
-                setIdle();
-                gainHealth(5*temp);
-                gainHunger(-5*temp);
-                gainMood(10*temp);
-            } 
-        });
-        t.start();
+                    setIdle();
+                    gainHealth(5*temp);
+                    gainHunger(-5*temp);
+                    gainMood(10*temp);
+                } 
+            });
+            t.start();
+        }
+        
     }
 
 
