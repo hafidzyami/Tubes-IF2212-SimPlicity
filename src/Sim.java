@@ -13,6 +13,7 @@ public class Sim implements Runnable {
     // ini nyoba
     public Room currentRoom;
     public Home myHome;
+    public Job simJob;
 
     //konstruktor
     public Sim(String nama,Item ... items) {
@@ -99,32 +100,39 @@ public class Sim implements Runnable {
 
     // active action 
     public void work (int duration){
-        this.status = "work"; 
-        System.out.println("Sim sedang bekerja sebagai " + getSimJob());
-        Thread t = new Thread(new Runnable(){
-            float salary = (float)job.getDaySalary(); 
-            float total_salary = 0; 
-            public void run(){
-                int workTime = 0; 
-                int temp = duration/30; 
-                for (int i = 0; i < temp; i++){
-                    try{
-                        System.out.println("work work work");
-                        Thread.sleep(30 * 1000);
-                        gainHunger(-10); 
-                        gainMood(-10); 
-                        total_salary += salary/8;
-                    }
-                    catch (InterruptedException e){
-                        e.printStackTrace();
+        if (duration % 120 != 0){
+            System.out.println("durasi bekerja yang dimasukan harus berupa kelipatan 120!");
+        } else {
+            this.status = "work"; 
+            System.out.println("Sim sedang bekerja sebagai " + getSimJob());
+            Thread t = new Thread(new Runnable(){
+                int timeWork = 0;
+                public void run(){
+                    int temp = duration/30; 
+                    for (int i = 0; i < temp; i++){
+                        try{
+                            System.out.println("work work work");
+                            Thread.sleep(30 * 1000);
+                            gainHunger(-10); 
+                            gainMood(-10); 
+
+                            timeWork += 30; 
+                            if (timeWork == 240){
+                                gainMoney(simJob.getDaySalary()); 
+                                System.out.println("sim telah selesai bekerja dan mendapatkan "+ simJob.getDaySalary()); 
+                                System.out.println("uang sim menjadi : " + getMoney()); 
+                            } else {
+                                System.out.println("sim sudah bekerja selama "+ (float)timeWork/60 + "menit");
+                            }
+                        }
+                        catch (InterruptedException e){
+                            e.printStackTrace();
+                        }
                     }
                 }
-                gainMoney((int)total_salary); 
-                System.out.println("sim telah selesai bekerja dan mendapatkan "+ total_salary); 
-                System.out.println("uang sim menjadi : " + getMoney()); 
-            }
-        });
-        t.start(); 
+            });
+            t.start(); 
+        }
 
     }
 
