@@ -26,7 +26,7 @@ public class Inventory {
         int idx = 0;
         int idxhsl = -1;
         for (Item i : itemList){
-            if(i.name.equals(items.name)){
+            if(i.getName().equals(items.getName())){
                 idxhsl = idx;
             }
             else {

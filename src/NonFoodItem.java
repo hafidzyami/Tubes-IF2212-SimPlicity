@@ -89,6 +89,10 @@ public class NonFoodItem extends Item implements PurchaseAble {
         this.isAvailable = status;
     }
 
+    public void setUpperLeft(int x, int y){
+        upperLeft.setLocation(x, y);
+    }
+
     public static void main(String[] args){
         NonFoodItem sb = new NonFoodItem("Single Bed");
         System.out.println("name :" + sb.name);

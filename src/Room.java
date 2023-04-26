@@ -6,6 +6,13 @@ public class Room {
     /* Game akan men-generate rumah dengan 
     1 ruangan yang dimensi 6x6 dengan objek basic 
     berupa kasur, toilet, kompor, kursi, meja, dan jam */
+    private Tile roomTile = new Tile(6, 6);
+
+    public Tile getRoomTile(){
+        return this.roomTile;
+    }
+    
+
     public Room(String roomName) {
         this.roomName = roomName;
     }
@@ -22,6 +29,10 @@ public class Room {
         this.itemList.remove(name);
     }
 
+    public void addItem(String key, Item item){
+        this.itemList.put(key, item);
+    }
+
     public static Room firstRoom() {
         Room retRoom = new Room("Main Room");
 
@@ -35,6 +46,12 @@ public class Room {
         retRoom.itemList.put("meja01",meja01);
         retRoom.itemList.put("jam01",jam01);
         return retRoom;
+    }
+
+    public static void main(String[] args){
+        Room room = new Room("dapur").firstRoom();
+        System.out.println(room.getItemList().get("kursi01").getName());
+
     }
 
 }

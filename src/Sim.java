@@ -12,7 +12,7 @@ public class Sim implements Runnable {
 
     // ini nyoba
     public Room currentRoom;
-    public Home currentHome;
+    public Home myHome;
     public Job simJob;
     public Clock clock;
 
@@ -138,28 +138,34 @@ public class Sim implements Runnable {
     }
 
     public void sport (int duration){
-        this.status = "sport";
-        Thread t = new Thread(new Runnable(){
-            public void run(){
-                int sportTime = 0;
-                int temp = duration/20;
-                while(sportTime != duration){
-                    try{
-                        Thread.sleep(1000); 
-                        sportTime++;
-                        System.out.println("Sedang olahraga selama " + sportTime + " detik");
+        if(duration % 20 != 0){
+            System.out.println("Durasi olahraga harus kelipatan 20 detik!");
+        }
+        else{
+            this.status = "sport";
+            Thread t = new Thread(new Runnable(){
+                public void run(){
+                    int sportTime = 0;
+                    int temp = duration/20;
+                    while(sportTime != duration){
+                        try{
+                            Thread.sleep(1000); 
+                            sportTime++;
+                            System.out.println("Sedang olahraga selama " + sportTime + " detik");
+                        }
+                        catch (InterruptedException e){
+                            e.printStackTrace();
+                        }
                     }
-                    catch (InterruptedException e){
-                        e.printStackTrace();
-                    }
-                }
-                setIdle();
-                gainHealth(5*temp);
-                gainHunger(-5*temp);
-                gainMood(10*temp);
-            } 
-        });
-        t.start();
+                    setIdle();
+                    gainHealth(5*temp);
+                    gainHunger(-5*temp);
+                    gainMood(10*temp);
+                } 
+            });
+            t.start();
+        }
+        
     }
 
 
@@ -191,15 +197,12 @@ public class Sim implements Runnable {
         t.start();
     }
 
-    public void eat (FoodCooked food){
-        this.status = "makan";
-        Thread t = new Thread(new Runnable(){
-            public void run(){
-                
-            } 
-        });
-
-        t.start();
+    public void eat (){
+    /** Makan berarti Sim mengambil makanan yang ada di Inventory untuk kemudian dikonsumsi. 
+     * Konsumsi makanan akan mengurangi jumlah makanan terkait pada inventory sejumlah 1 buah 
+     * dan meningkatkan tingkat kekenyangan Sim sejumlah satuan kekenyangan makanan terkait. */  
+    
+     // nunggu food
     }
 
     public void cook () {
@@ -235,15 +238,15 @@ public class Sim implements Runnable {
 
     }
 
-    public void buyItem(PurchaseAble item) {
+    public void buyItem(FoodIngredients item) {
         this.status = "buying item"; 
         Thread t = new Thread(new Runnable(){
             public void run(){
                 try {
-                    if (item != null && item.getPrice() <= getMoney()) {
+                    if (item != null && item.getPrice(item.name) <= getMoney()) {
                         Thread.sleep(10000); 
-                        gainMoney(-item.getPrice());
-                        System.out.println("sim membeli" + item.getName() + "dengan harga" + item.getPrice());
+                        gainMoney(-item.getPrice(item.name));
+                        System.out.println("sim membeli" + item.name + "dengan harga" + item.getPrice(item.name));
                         int deliveryTime = (int) (Math.random() * 5 * 1) * 30;
                         System.out.println("barang akan tersedia dalam waktu "+ deliveryTime + "detik, silahkan menunggu");
                         try{
@@ -260,7 +263,6 @@ public class Sim implements Runnable {
                 }
             }
         });
-        t.start();
 
     }
 
@@ -269,8 +271,8 @@ public class Sim implements Runnable {
         if(this.currentRoom.getRoomName().equals(roomName)){
             System.out.println("Tidak bisa berpindah ke room yang sama!");
         }
-        else if(this.currentHome.getRoomList().containsKey(roomName)){
-            this.currentRoom = this.currentHome.getRoomList().get(roomName);
+        else if(this.myHome.getRoomList().containsKey(roomName)){
+            this.currentRoom = this.myHome.getRoomList().get(roomName);
             System.out.println("Anda diteleportasi ke " + roomName);
         }
         else{
@@ -282,16 +284,16 @@ public class Sim implements Runnable {
 
     }
 
-    public void installItem(Tile tile, String name, Point upperLeft, int width, int length){
-        //jujur gw gatau ini pake thread atau engga
-        if( ((int) upperLeft.getX() + length - 1 > 6) || ((int) upperLeft.getY() + width - 1 > 6) ){
+    public void installItem(Room room, NonFoodItem item, int wantedX, int wantedY){
+        
+        if( (wantedX + item.getLength() - 1 > 6) || (wantedY + item.getWidth() - 1 > 6) ){
             System.out.println("Item tidak bisa diletakkan!");
         }
         else{
             boolean flag = false;
-            for(int i = (int) upperLeft.getX(); i < length + (int) upperLeft.getX(); i++){
-                for(int j = (int) upperLeft.getY(); j < width + (int) upperLeft.getY(); j++){
-                    if(!tile.getTile(i, j).equals("E")){
+            for(int i = wantedX; i < item.getLength() + wantedX; i++){
+                for(int j = wantedY; j < item.getWidth() + wantedY; j++){
+                    if(!room.getRoomTile().getTile(i, j).equals("E")){
                         flag = true;
                     }
                 }
@@ -300,9 +302,13 @@ public class Sim implements Runnable {
                 System.out.println("Terdapat item lain!");
             }
             else{
-                for(int i = (int) upperLeft.getX(); i < length + (int) upperLeft.getX(); i++){
-                    for(int j = (int) upperLeft.getY(); j < width + (int) upperLeft.getY(); j++){
-                        tile.changeTile(name, i, j);
+                // ini harus dihapus item dari inventory tapi error
+                this.inventory.deleteInventory(item);
+                currentRoom.addItem(item.getName(), item);
+                item.setUpperLeft(wantedX, wantedY);
+                for(int i = wantedX; i < item.getLength() + wantedX; i++){
+                    for(int j = wantedY; j < item.getWidth() + wantedY; j++){
+                        room.getRoomTile().changeTile(item.getName(), i, j);
                     }
                 };
             }
@@ -394,14 +400,14 @@ public class Sim implements Runnable {
     public static void main(String[] args) {
         Sim Bobi = new Sim("Bobi");
         System.out.println(Bobi.getSimInfo());
-        Bobi.currentHome = new Home().newHome();
-        Bobi.currentRoom = Bobi.currentHome.getRoomList().get("ruang01");
+        Bobi.myHome = new Home().newHome();
+        Bobi.currentRoom = Bobi.myHome.getRoomList().get("ruang01");
         System.out.println(Bobi.currentRoom.getRoomName());
         System.out.println(Bobi.currentRoom.getItemList());
 
         // buat ruangan baru di rumah bobi
         Room ruang02 = new Room("dapur");
-        Bobi.currentHome.addRoom("ruang02", ruang02);
+        Bobi.myHome.addRoom("ruang02", ruang02);
 
         // coba pindah ke dapur atau room02
         Bobi.moveToRoom("ruang02");
@@ -421,6 +427,16 @@ public class Sim implements Runnable {
 
         // bobi coba mencuri yang gaada barangnya
         Bobi.steal("kursi01");
+
+        // print tile dapur
+        Bobi.currentRoom.getRoomTile().printTile();
+
+        // pasang barang di dapur
+        NonFoodItem nfi = (NonFoodItem) Bobi.inventory.getItem(0);
+        Bobi.installItem(Bobi.currentRoom, nfi, 1, 1);
+        Bobi.currentRoom.getRoomTile().printTile();
+        
+    
 
         
     }
