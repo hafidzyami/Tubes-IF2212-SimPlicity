@@ -18,6 +18,10 @@ public class Room {
         return this.itemList;
     }
 
+    public void removeItem(String name){
+        this.itemList.remove(name);
+    }
+
     public static Room firstRoom() {
         Room retRoom = new Room("Main Room");
 

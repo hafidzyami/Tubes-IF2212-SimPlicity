@@ -321,6 +321,17 @@ public class Sim implements Runnable {
         t.start();
     }
 
+    public void steal(String itemName){
+        if(currentRoom.getItemList().containsKey(itemName)){
+            this.inventory.addInventory(currentRoom.getItemList().get(itemName));
+            currentRoom.removeItem(itemName);
+            System.out.println("Kamu berhasil mencuri barang " + itemName + ", silahkan lihat di inventory kamu!");
+        }
+        else{
+            System.out.println("Tidak bisa mencuri barang tersebut karena barang tidak ada!");
+        }
+    }
+
     //driver
     public static void main(String[] args) {
         Sim Bobi = new Sim("Bobi");
@@ -339,13 +350,20 @@ public class Sim implements Runnable {
         System.out.println(Bobi.currentRoom.getRoomName());
         System.out.println(Bobi.currentRoom.getItemList());
 
+        // pindah ke main room
+        Bobi.moveToRoom("ruang01");
+        System.out.println(Bobi.currentRoom.getRoomName());
+        System.out.println(Bobi.currentRoom.getItemList());
 
 
+        // Bobi mencuri ih maling, ternyata bisa ges
+        Bobi.steal("kursi01");
+        System.out.println(Bobi.currentRoom.getItemList());
+        System.out.println(Bobi.inventory.getInventory());
 
+        // bobi coba mencuri yang gaada barangnya
+        Bobi.steal("kursi01");
 
-
-
-        
         
     }
 
