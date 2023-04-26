@@ -59,8 +59,9 @@ public class Menu {
         System.out.println("ganti sim");
     }
 
-    public static void listObject() {
-        System.out.println("daftar objek");
+    public static void listObject(World world) {
+        Sim sim = world.getPlayedSim();
+        sim.seeInventory();
     }
 
     public static void goToObject() {

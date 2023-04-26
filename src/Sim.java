@@ -279,7 +279,7 @@ public class Sim implements Runnable {
     }
 
     public void seeInventory() {
-
+        inventory.printInventory();
     }
 
     public void installItem(Tile tile, String name, Point upperLeft, int width, int length){
