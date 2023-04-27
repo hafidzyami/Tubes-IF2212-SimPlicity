@@ -52,4 +52,8 @@ public class World {
         updateMap();
     }
 
+    public ArrayList<Home> getHomeList(){
+        return this.homeList;
+    }
+
 }

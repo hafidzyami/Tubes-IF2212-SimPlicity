@@ -12,7 +12,8 @@ public class Sim implements Runnable {
 
     // ini nyoba
     public Room currentRoom;
-    public Home myHome;
+    public Home currentHome;
+    public World currentWorld;
     public Job simJob;
     public Clock clock;
 
@@ -81,6 +82,10 @@ public class Sim implements Runnable {
     //setter 
     public void setIdle(){
         this.status = "idle";
+    }
+
+    public void setSimStatus(String status){
+        this.status = status;
     }
 
     public void gainMood(int mood){
@@ -209,8 +214,49 @@ public class Sim implements Runnable {
 
     }
 
-    public void visit (int duration){
-       
+    public void visit (int x2, int y2, int duration){
+        this.status = "onTheWay";
+        System.out.println("Sim berkunjung");
+        int x1 = currentHome.getLocX();
+        int y1 = currentHome.getLocY();
+        Thread t = new Thread(new Runnable(){
+            public void run(){
+                double distance = Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
+                int tick = 0;
+                while(getSimStatus().equals("onTheWay")){
+                    try{
+                        System.out.println("Sim sedang dalam perjalanan!");
+                        Thread.sleep(1000);
+                        tick++;
+                        if(tick >= distance){
+                            System.out.println("Sim sudah sampai!");
+                            setSimStatus("visit");
+                            // ini belum diset currentHome pindah gitu 
+                            tick = 0;
+                        }
+                    }
+                    catch (InterruptedException e){
+                        e.printStackTrace();
+                    }
+                }
+                while(tick <= duration){
+                    try{
+                        System.out.println("Sim sedang berkunjung selama " + tick);
+                        Thread.sleep(1000);
+                        tick++;
+                        if(tick == duration){
+                            System.out.println("waktu kunjungan sudah habis!");
+                        }
+                    }
+                    catch (InterruptedException e){
+                        e.printStackTrace();
+                    }
+                }
+                gainMood(10*(duration/30));
+                gainHunger(-10*(duration/30));
+            } 
+        });
+        t.start();
     }
 
     public void pee() {
@@ -271,8 +317,8 @@ public class Sim implements Runnable {
         if(this.currentRoom.getRoomName().equals(roomName)){
             System.out.println("Tidak bisa berpindah ke room yang sama!");
         }
-        else if(this.myHome.getRoomList().containsKey(roomName)){
-            this.currentRoom = this.myHome.getRoomList().get(roomName);
+        else if(this.currentHome.getRoomList().containsKey(roomName)){
+            this.currentRoom = this.currentHome.getRoomList().get(roomName);
             System.out.println("Anda diteleportasi ke " + roomName);
         }
         else{
@@ -400,14 +446,14 @@ public class Sim implements Runnable {
     public static void main(String[] args) {
         Sim Bobi = new Sim("Bobi");
         System.out.println(Bobi.getSimInfo());
-        Bobi.myHome = new Home().newHome();
-        Bobi.currentRoom = Bobi.myHome.getRoomList().get("ruang01");
+        Bobi.currentHome = new Home().newHome();
+        Bobi.currentRoom = Bobi.currentHome.getRoomList().get("ruang01");
         System.out.println(Bobi.currentRoom.getRoomName());
         System.out.println(Bobi.currentRoom.getItemList());
 
         // buat ruangan baru di rumah bobi
         Room ruang02 = new Room("dapur");
-        Bobi.myHome.addRoom("ruang02", ruang02);
+        Bobi.currentHome.addRoom("ruang02", ruang02);
 
         // coba pindah ke dapur atau room02
         Bobi.moveToRoom("ruang02");
