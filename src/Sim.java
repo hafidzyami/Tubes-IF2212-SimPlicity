@@ -2,7 +2,7 @@ import java.awt.Point;
 
 public class Sim implements Runnable {
     private String fullName;
-    private String job;
+    private Job job;
     private int money;
     private Inventory inventory = new Inventory();
     private int hunger;
@@ -25,7 +25,7 @@ public class Sim implements Runnable {
         this.mood = 80;
         this.health = 80;
         this.money = 100;
-        this.job = "sopir";
+        this.job = Job.firstJob();
         
         // pada awal di buat status bersifat "idle"
         this.status = "idle";
@@ -56,7 +56,7 @@ public class Sim implements Runnable {
         return rets;
     }
 
-    public String getSimJob() {
+    public Job getSimJob() {
         return job;
     }
 
