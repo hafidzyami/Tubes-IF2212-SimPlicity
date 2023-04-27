@@ -10,8 +10,12 @@ public class Game {
         while (!(command.equals("startgame") || command.equals("1"))) {
             command = CLI.wrongInput();
         }
+        System.out.print("Masukkan nama sim: ");
+        Sim sim1 = new Sim(input.nextLine());
+        world.addSimList(sim1);
+        world.setPlayedSim(sim1);
         while(playing) {
-            command = CLI.ListMenu();
+            command = CLI.playing();
             switch(command.toLowerCase()) {
                 case "1","startgame" :
                     CLI.repeatedStart();

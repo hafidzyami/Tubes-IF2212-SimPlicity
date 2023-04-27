@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashMap;
-
 
 public class World {
     private static World instance = new World();

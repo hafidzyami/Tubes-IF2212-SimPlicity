@@ -18,12 +18,10 @@ public class Menu {
         System.out.println("12 : untuk melihat daftar objek di dalam ruangan");
         System.out.println("13 : untuk membuat sim jalan menuju sebuah objek");
         System.out.println("14 : untuk melakukan aksi pada suatu objek");
-        CLI.wait(5000);
     }
 
     public static void exit() {
         System.out.println("Terima kasih telah bermain, sampai jumpa!");
-        exit();
     }
 
     public static void viewSimInfo(World world) {
@@ -82,6 +80,6 @@ public class Menu {
     }
 
     public static void changeJob(String nama) {
-        
+
     }
 }

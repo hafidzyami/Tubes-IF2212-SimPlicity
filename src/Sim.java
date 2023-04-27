@@ -48,7 +48,7 @@ public class Sim implements Runnable {
 
     public String getSimInfo() {
         String rets = "Nama: " + fullName + " \n";
-        rets += ("Pekerjaan: " + job + " \n");
+        rets += ("Pekerjaan: " + job.getJobName() + " \n");
         rets += ("Kesehatan: " + health + " \n");
         rets += ("Kekenyangan: " + hunger + " \n");
         rets += ("Mood: " + mood + " \n");
