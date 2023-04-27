@@ -30,7 +30,10 @@ public class Game {
                     Menu.viewCurrentLocation(world.getPlayedSim());
                     break;
                 case "10", "add sim":
+<<<<<<< Updated upstream
                     
+=======
+>>>>>>> Stashed changes
                 default :
             }
         }

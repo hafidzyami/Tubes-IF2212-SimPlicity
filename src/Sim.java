@@ -205,14 +205,14 @@ public class Sim implements Runnable {
 
     public void eat (FoodCooked food){
         this.status = "eat";
-        System.out.println("Sim sedang makan" + food.name);
+        System.out.println("Sim sedang makan " + food.mealName);
         Thread t = new Thread(new Runnable(){
             public void run(){
                 try{
                     Thread.sleep(30000); 
                     gainHunger(food.getSatiation());
                     System.out.println("Sim telah makan!");
-                    System.out.println("Kekenyagan sim saat ini :" + getSimHunger());
+                    System.out.println("Kekenyagan sim saat ini : " + getSimHunger());
                 }
                 catch (InterruptedException e){
                     e.printStackTrace();
@@ -306,7 +306,7 @@ public class Sim implements Runnable {
                         gainMoney(-item.getPrice());
                         System.out.println("sim membeli" + item.getName() + "dengan harga" + item.getPrice());
                         int deliveryTime = (int) (Math.random() * 5 * 1) * 30;
-                        System.out.println("barang akan tersedia dalam waktu "+ deliveryTime + "detik, silahkan menunggu");
+                        System.out.println("barang akan tersedia dalam waktu "+ deliveryTime + " detik, silahkan menunggu");
                         try{
                             Thread.sleep(deliveryTime);
                         } catch (InterruptedException e){
@@ -384,13 +384,14 @@ public class Sim implements Runnable {
     //costum action 
     public void crying() {
         this.status = "crying"; 
+        System.out.println("Sim akan menangis karena stress");
         Thread t = new Thread(new Runnable(){
             public void run(){
                 try{
                     Thread.sleep(1000); 
                     gainHunger(-10);
                     gainMood(10);
-                    System.out.println("Sim sedang menangis :(");
+                    System.out.println("Sim sudah selesai menangis :(");
                 }
                 catch (InterruptedException e){
                     e.printStackTrace();
@@ -468,6 +469,9 @@ public class Sim implements Runnable {
         // bobi coba mencuri yang gaada barangnya
         Bobi.steal("kursi01");
 
+        // bobi coba nangis 
+        Bobi.crying();
+
         // print tile dapur
         Bobi.currentRoom.getRoomTile().printTile();
 
@@ -476,8 +480,9 @@ public class Sim implements Runnable {
         Bobi.installItem(Bobi.currentRoom, nfi, 1, 1);
         Bobi.currentRoom.getRoomTile().printTile();
         
-    
-
+        //bobi makan
+        FoodCooked makan = new FoodCooked("Nut Milk");
+        Bobi.eat(makan);
         
     }
 
