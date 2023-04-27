@@ -377,25 +377,7 @@ public class Sim implements Runnable {
         this.status = "see time";
         System.out.println("Sim sedang melihat waktu");
         Menu.goToObject(); //ke clock
-        /* menunjukkan sisa waktu pada hari tersebut 
-        beserta sisa waktu yang masih ada untuk seluruh tindakan yang bisa ditinggal 
-        (Contoh: Upgrade rumah tapi sudah berlalu waktu 10 menit, 
-        maka seharusnya waktu yang masih ada adalah 8 menit).*/ 
-        Thread t = new Thread(new Runnable(){
-            public void run(){
-                try{
-                    Thread.sleep(10000); 
-                    System.out.println("Harini hanya tersisa waktu" + clock.getTime());
-                    //gimana cara tau sisa waktu untuk aksi yang bisa ditinggal ya allah :(
-                }
-                catch (InterruptedException e){
-                    e.printStackTrace();
-                }
-            } 
-        });
-
-        t.start();
-
+        System.out.println("waktu saat ini adalah...");
     }
 
     //costum action 
