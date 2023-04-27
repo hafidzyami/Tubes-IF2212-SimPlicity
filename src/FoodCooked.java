@@ -2,10 +2,9 @@ import java.util.ArrayList;
 
 public class FoodCooked extends Food implements CookAble {
     private ArrayList<FoodIngredients> ingredients;
-    public String mealName;
 
     public FoodCooked(String mealName) {
-        this.mealName = mealName;
+        this.name = mealName;
         switch (mealName) {
             case "Chicken Rice":
                 setSatiation(16);

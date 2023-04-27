@@ -11,9 +11,13 @@ public class Game {
             command = CLI.wrongInput();
         }
         System.out.print("Masukkan nama sim: ");
-        Sim sim1 = new Sim(input.nextLine());
+        Home home1 = Home.newHome(world);
+        Sim sim1 = new Sim(input.nextLine(),home1);
+        home1.setOwner(sim1);
+        sim1.setCurrentRoom(home1.getRoomList().get("ruang01"));
         world.addSimList(sim1);
         world.setPlayedSim(sim1);
+        //sim1.setCurrentRoom();
         while(playing) {
             command = CLI.playing();
             switch(command.toLowerCase()) {

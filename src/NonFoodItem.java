@@ -6,7 +6,6 @@ public class NonFoodItem extends Item implements PurchaseAble {
     // private String relatedAction;
 
     // atribut 
-    protected String name;
     protected Point upperLeft;
     protected int length;
     protected int width;

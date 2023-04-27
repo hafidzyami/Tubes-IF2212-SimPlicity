@@ -3,19 +3,21 @@ import java.util.HashMap;
 public class Room {
     private HashMap <String,Item> itemList = new HashMap<>();
     private String roomName;
+    private Home RoomLoc;
     /* Game akan men-generate rumah dengan 
     1 ruangan yang dimensi 6x6 dengan objek basic 
     berupa kasur, toilet, kompor, kursi, meja, dan jam */
     private Tile roomTile = new Tile(6, 6);
 
+    public Room(String roomName,Home home) {
+        this.roomName = roomName;
+        this.RoomLoc = home;
+    }
+
     public Tile getRoomTile(){
         return this.roomTile;
     }
     
-
-    public Room(String roomName) {
-        this.roomName = roomName;
-    }
 
     public String getRoomName(){
         return this.roomName;
@@ -33,19 +35,8 @@ public class Room {
         this.itemList.put(key, item);
     }
 
-    public static Room firstRoom(World world) {
-        Sim sim = world.getPlayedSim();
-        Room retRoom = new Room("Main Room");
-
-        Item toilet01 = new NonFoodItem("Toilet");
-        Item kursi01 = new NonFoodItem("Table and Chair");
-        Item meja01 = new NonFoodItem("Clock");
-        Item jam01 = new NonFoodItem("Gas Stove");
-
-        sim.getSimInventory().addInventory(toilet01);
-        sim.getSimInventory().addInventory(kursi01);
-        sim.getSimInventory().addInventory(meja01);
-        sim.getSimInventory().addInventory(jam01);
+    public static Room firstRoom(Home home) {
+        Room retRoom = new Room("Ruang utama",home);
         return retRoom;
     }
 

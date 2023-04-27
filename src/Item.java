@@ -1,5 +1,5 @@
 public abstract class Item {
-    public String name;
+    protected String name;
 
     public String getName(){
         return name;

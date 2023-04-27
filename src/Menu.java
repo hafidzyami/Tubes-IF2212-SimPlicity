@@ -30,7 +30,8 @@ public class Menu {
     }
 
     public static void viewCurrentLocation(Sim sim) {
-        System.out.println("Sim berada di rumah" + sim.currentHome + "di dalam ruangan" + sim.currentRoom);
+        String owner = sim.currentHome.getOwner().getSimName();
+        System.out.println(sim.getSimName() + " berada di rumah milik " + owner + " di dalam " + sim.currentRoom.getRoomName());
     }
 
     public static void viewInventory(World world) {
@@ -51,8 +52,11 @@ public class Menu {
     }
 
     public static void addSim(World world, String name) {
-        Sim sim = new Sim(name);
+        Home home = Home.newHome(world);
+        Sim sim = new Sim(name,home);
+        home.setOwner(sim);
         world.addSimList(sim);
+        sim.setCurrentRoom(home.getRoomList().get("ruang01"));
         System.out.println("Sim berhasil ditambahkan!");
     }
 
