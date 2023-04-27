@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Menu {
     public static void help() {
         System.out.println("⋅˚₊‧ ୨ Selamat datang di Sim-Plicity ୧ ‧₊˚ ⋅");
@@ -39,8 +41,15 @@ public class Menu {
         sim.seeInventory();
     }
 
-    public static void upgradeHouse() {
+    public static void upgradeHouse(Sim sim, String roomName, Home home) {
         System.out.println("rumah sedang diupgrade");
+
+        Room room = new Room(roomName, home);
+        Scanner input = new Scanner(System.in);
+        System.out.println("Pilih letak ruangan dari " + sim.currentRoom.getRoomName());
+        // Roomloc roomLoc input.nextLine(); (input lokasi ruangan akan berada)
+        input.close();
+        
     }
 
     public static void moveRoom() {
@@ -73,13 +82,24 @@ public class Menu {
         }
     }
 
-    public static void goToObject(World world, String itemKey) {
-        Sim sim = world.getPlayedSim();
-        sim.useItem = sim.currentRoom.getItemList().get(itemKey);
+    public static void goToObject(Sim sim, String itemKey) {
+        if (sim.getSimStatus().equals("idle")) {
+            sim.setSimStatus("walking");
+            //pindah lokasi sim ke objek
+            sim.setSimStatus("idle");
+            //print aksi yang bisa dilakukan            
+        } else {
+            System.out.println("Sim sedang melakukan aktivitas");
+        }
         System.out.println("pergi ke objek ini " + sim.useItem.getName());
     }
 
-    public static void action() {
+    public static void action(NonFoodItem item) {
+        if (item.getStatus()) {
+            //list aksi yang bisa dilakukan
+        } else {
+            System.out.println(item.getName() + " sedang digunakan");
+        }
         System.out.println("ini aksi");
     }
 
