@@ -16,6 +16,7 @@ public class Sim implements Runnable {
     public World currentWorld;
     public Job simJob;
     public Clock clock;
+    public Item useItem;
 
     //konstruktor
     public Sim(String nama,Item ... items) {

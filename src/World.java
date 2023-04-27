@@ -1,11 +1,14 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+
 
 public class World {
     private static World instance = new World();
     private Tile map;
-    private ArrayList<Home> homeList ;
+    private ArrayList<Home> homeList;
     private WorldClock worldClock;
     private Sim playedSim;
+    private ArrayList<Sim> simList = new ArrayList<>();
 
     // Don't forget change to 64x64
     private final int LEN_CAPACITY = 5;
@@ -54,6 +57,14 @@ public class World {
 
     public ArrayList<Home> getHomeList(){
         return this.homeList;
+    }
+
+    public ArrayList<Sim> getSimList(){
+        return this.simList;
+    }
+
+    public void addSimList(Sim sim){
+        this.simList.add(sim);
     }
 
 }

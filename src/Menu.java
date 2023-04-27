@@ -52,6 +52,7 @@ public class Menu {
     }
 
     public static void addSim() {
+        
         System.out.println("tambah sim");
     }
 
@@ -64,8 +65,10 @@ public class Menu {
         sim.seeInventory();
     }
 
-    public static void goToObject() {
-        System.out.println("pergi ke objek ini");
+    public static void goToObject(World world, String itemKey) {
+        Sim sim = world.getPlayedSim();
+        sim.useItem = sim.currentRoom.getItemList().get(itemKey);
+        System.out.println("pergi ke objek ini " + sim.useItem.getName());
     }
 
     public static void Action() {

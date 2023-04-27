@@ -26,6 +26,11 @@ public class Game {
                 case "4","view sim info" :
                     Menu.viewSimInfo(world);
                     break;
+                case "5", "view current location":
+                    Menu.viewCurrentLocation(world.getPlayedSim());
+                    break;
+                case "10", "add sim":
+                    
                 default :
             }
         }
