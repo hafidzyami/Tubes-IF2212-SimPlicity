@@ -50,7 +50,7 @@ public class World {
     }
     
     public void addNewHome() {
-        Home home = Home.newHome();
+        Home home = Home.newHome(this);
         homeList.add(home);
         updateMap();
     }

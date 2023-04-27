@@ -1,7 +1,6 @@
 public class WorldClock  {
     private int gameDay;
     private int totalElapsed; //satuan detik
-    private final int _IN_DAY = 12;
 
     public WorldClock() {
         gameDay = 1;

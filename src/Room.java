@@ -33,7 +33,8 @@ public class Room {
         this.itemList.put(key, item);
     }
 
-    public static Room firstRoom() {
+    public static Room firstRoom(World world) {
+        Sim sim = world.getPlayedSim();
         Room retRoom = new Room("Main Room");
 
         Item toilet01 = new NonFoodItem("Toilet");
@@ -41,17 +42,16 @@ public class Room {
         Item meja01 = new NonFoodItem("Clock");
         Item jam01 = new NonFoodItem("Gas Stove");
 
-        retRoom.itemList.put("toilet01",toilet01);
-        retRoom.itemList.put("kursi01",kursi01);
-        retRoom.itemList.put("meja01",meja01);
-        retRoom.itemList.put("jam01",jam01);
+        sim.getSimInventory().addInventory(toilet01);
+        sim.getSimInventory().addInventory(kursi01);
+        sim.getSimInventory().addInventory(meja01);
+        sim.getSimInventory().addInventory(jam01);
         return retRoom;
     }
 
     public static void main(String[] args){
-        Room room = new Room("dapur").firstRoom();
-        System.out.println(room.getItemList().get("kursi01").getName());
-
+        //Room room = new Room("dapur").firstRoom();
+        //System.out.println(room.getItemList().get("kursi01").getName());
     }
 
 }

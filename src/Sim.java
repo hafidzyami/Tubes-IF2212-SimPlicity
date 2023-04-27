@@ -443,9 +443,10 @@ public class Sim implements Runnable {
 
     //driver
     public static void main(String[] args) {
+        World world = World.getInstance();
         Sim Bobi = new Sim("Bobi");
         System.out.println(Bobi.getSimInfo());
-        Bobi.currentHome = new Home().newHome();
+        Bobi.currentHome = new Home().newHome(world);
         Bobi.currentRoom = Bobi.currentHome.getRoomList().get("ruang01");
         System.out.println(Bobi.currentRoom.getRoomName());
         System.out.println(Bobi.currentRoom.getItemList());

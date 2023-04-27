@@ -20,9 +20,9 @@ public class Home {
         this.location = location;
     }
     
-    public static Home newHome() {
+    public static Home newHome(World world) {
         Home retHome = new Home(new Point(3, 4));
-        Room ruang01 = Room.firstRoom();
+        Room ruang01 = Room.firstRoom(world);
         retHome.roomList.put("ruang01",ruang01);
         return retHome;
     }
