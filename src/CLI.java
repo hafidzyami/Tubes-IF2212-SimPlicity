@@ -22,7 +22,7 @@ public class CLI {
 
     public static String ListMenu() {
         System.out.println("Berikut adalah menu yang tersedia");
-        System.out.println("Silakan pilih nama atau nomor menu yang diiinginkan");
+        System.out.println("Silakan pilih nama atau nomor menu yang diinginkan");
         System.out.println("1. startgame");
         System.out.println("2. help");
         System.out.println("3. exit");
@@ -37,6 +37,12 @@ public class CLI {
         System.out.println("12. list object");
         System.out.println("13. go to object");
         System.out.println("14. action");
+        retS = input.nextLine();
+        return retS;
+    }
+    public static String playing() {
+        System.out.println("Masukkan command");
+        System.out.println("Tekan 2 atau ketik help untuk memanggil bantuan");
         retS = input.nextLine();
         return retS;
     }
