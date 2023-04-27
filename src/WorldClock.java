@@ -1,7 +1,7 @@
 public class WorldClock  {
     private int gameDay;
     private int totalElapsed; //satuan detik
-    private final int MINUTE_IN_DAY = 12;
+    private final int _IN_DAY = 12;
 
     public WorldClock() {
         gameDay = 1;
@@ -12,15 +12,24 @@ public class WorldClock  {
     }
 
     public int getDay() {
-        gameDay = totalElapsed / 720 ;
+        gameDay = (totalElapsed / 720 ) + 1;
         return gameDay;
     }
 
-    
+    public int getSisaWaktu() {
+        getDay();
+        /* System.out.println(totalElapsed);
+        System.out.println(gameDay); */
+        return gameDay * 720 - totalElapsed;
+    }
+
+
     public static void main(String[] args) {
         WorldClock jam = new WorldClock();
         jam.updateTime(40);
         jam.updateTime(1000);
+        
+        System.out.println(jam.getSisaWaktu());
         System.out.println(jam.gameDay);
     }
 }
