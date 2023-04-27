@@ -35,7 +35,7 @@ public class Game {
                     break;
 
                 case "6", "view inventory":
-                    Menu.viewInventory();;
+                    Menu.viewInventory(world);;
                     break;
 
                 case "7", "upgrade house":

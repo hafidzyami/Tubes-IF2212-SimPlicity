@@ -35,8 +35,9 @@ public class Menu {
         System.out.println("Sim berada di rumah" + sim.currentHome + "di dalam ruangan" + sim.currentRoom);
     }
 
-    public static void viewInventory() {
-        System.out.println("ini inventory");
+    public static void viewInventory(World world) {
+        Sim sim = world.getPlayedSim();
+        sim.seeInventory();
     }
 
     public static void upgradeHouse() {
@@ -64,7 +65,10 @@ public class Menu {
 
     public static void listObject(World world) {
         Sim sim = world.getPlayedSim();
-        sim.seeInventory();
+        System.out.println("Berikut List Objek dalam ruangan");
+        for(Item i : sim.currentRoom.getItemList().values()){
+            System.out.println(i.getName());
+        }
     }
 
     public static void goToObject(World world, String itemKey) {
