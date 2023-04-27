@@ -202,12 +202,23 @@ public class Sim implements Runnable {
         t.start();
     }
 
-    public void eat (){
-    /** Makan berarti Sim mengambil makanan yang ada di Inventory untuk kemudian dikonsumsi. 
-     * Konsumsi makanan akan mengurangi jumlah makanan terkait pada inventory sejumlah 1 buah 
-     * dan meningkatkan tingkat kekenyangan Sim sejumlah satuan kekenyangan makanan terkait. */  
-    
-     // nunggu food
+    public void eat (FoodCooked food){
+        this.status = "eat";
+        System.out.println("Sim sedang makan" + food.name);
+        Thread t = new Thread(new Runnable(){
+            public void run(){
+                try{
+                    Thread.sleep(30000); 
+                    gainHunger(food.getSatiation());
+                    System.out.println("Sim telah makan!");
+                    System.out.println("Kekenyagan sim saat ini :" + getSimHunger());
+                }
+                catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+            } 
+        });
+        t.start();
     }
 
     public void cook () {
