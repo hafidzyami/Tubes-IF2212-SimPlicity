@@ -203,12 +203,23 @@ public class Sim implements Runnable {
         t.start();
     }
 
-    public void eat (){
-    /** Makan berarti Sim mengambil makanan yang ada di Inventory untuk kemudian dikonsumsi. 
-     * Konsumsi makanan akan mengurangi jumlah makanan terkait pada inventory sejumlah 1 buah 
-     * dan meningkatkan tingkat kekenyangan Sim sejumlah satuan kekenyangan makanan terkait. */  
-    
-     // nunggu food
+    public void eat (FoodCooked food){
+        this.status = "eat";
+        System.out.println("Sim sedang makan" + food.name);
+        Thread t = new Thread(new Runnable(){
+            public void run(){
+                try{
+                    Thread.sleep(30000); 
+                    gainHunger(food.getSatiation());
+                    System.out.println("Sim telah makan!");
+                    System.out.println("Kekenyagan sim saat ini :" + getSimHunger());
+                }
+                catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+            } 
+        });
+        t.start();
     }
 
     public void cook () {
@@ -285,15 +296,15 @@ public class Sim implements Runnable {
 
     }
 
-    public void buyItem(FoodIngredients item) {
+    public void buyItem(PurchaseAble item) {
         this.status = "buying item"; 
         Thread t = new Thread(new Runnable(){
             public void run(){
                 try {
-                    if (item != null && item.getPrice(item.name) <= getMoney()) {
+                    if (item != null && item.getPrice() <= getMoney()) {
                         Thread.sleep(10000); 
-                        gainMoney(-item.getPrice(item.name));
-                        System.out.println("sim membeli" + item.name + "dengan harga" + item.getPrice(item.name));
+                        gainMoney(-item.getPrice());
+                        System.out.println("sim membeli" + item.getName() + "dengan harga" + item.getPrice());
                         int deliveryTime = (int) (Math.random() * 5 * 1) * 30;
                         System.out.println("barang akan tersedia dalam waktu "+ deliveryTime + "detik, silahkan menunggu");
                         try{
@@ -367,25 +378,7 @@ public class Sim implements Runnable {
         this.status = "see time";
         System.out.println("Sim sedang melihat waktu");
         Menu.goToObject(); //ke clock
-        /* menunjukkan sisa waktu pada hari tersebut 
-        beserta sisa waktu yang masih ada untuk seluruh tindakan yang bisa ditinggal 
-        (Contoh: Upgrade rumah tapi sudah berlalu waktu 10 menit, 
-        maka seharusnya waktu yang masih ada adalah 8 menit).*/ 
-        Thread t = new Thread(new Runnable(){
-            public void run(){
-                try{
-                    Thread.sleep(10000); 
-                    System.out.println("Harini hanya tersisa waktu" + clock.getTime());
-                    //gimana cara tau sisa waktu untuk aksi yang bisa ditinggal ya allah :(
-                }
-                catch (InterruptedException e){
-                    e.printStackTrace();
-                }
-            } 
-        });
-
-        t.start();
-
+        System.out.println("waktu saat ini adalah...");
     }
 
     //costum action 

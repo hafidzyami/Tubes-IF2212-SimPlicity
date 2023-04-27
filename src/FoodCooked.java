@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class FoodCooked extends Food {
     private ArrayList<FoodIngredients> ingredients;
-    private String mealName;
+    public String mealName;
 
     public FoodCooked(String mealName) {
         this.mealName = mealName;
@@ -26,5 +26,10 @@ public class FoodCooked extends Food {
                 mealName = null;
                 break;
         }
+    }
+
+    //getter 
+    public int getSatiation(){
+        return satiation; 
     }
 }
