@@ -41,6 +41,9 @@ public class World {
         return playedSim;
     }
 
+    public WorldClock getWorldClock() {
+        return worldClock;
+    }
     public void printHomeList() {
         System.out.println("ini list rumah");
     }
