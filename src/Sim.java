@@ -377,7 +377,7 @@ public class Sim implements Runnable {
     public void seeTime() {
         this.status = "see time";
         System.out.println("Sim sedang melihat waktu");
-        Menu.goToObject(); //ke clock
+        //Menu.goToObject(); //ke clock
         System.out.println("waktu saat ini adalah...");
     }
 
