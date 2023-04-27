@@ -35,11 +35,26 @@ public class Game {
                     Menu.addSim(world, name);
                     break;
                 case "11", "change sim":
-                    System.out.println("Daftar Sim yang tersedia :");
-                    world.printSimList();
-                    System.out.println("Silahkan pilih sim berdasarkan nomor di atas! : ");
-                    int idx = input.nextInt();
-                    Menu.changeSim(world, idx);
+                    if(world.getSimList().size() > 0){
+                        System.out.println("Daftar Sim yang tersedia :");
+                        world.printSimList();
+                        System.out.println("Silahkan pilih sim berdasarkan nomor di atas : ");
+                        boolean flag = true;
+                        while(flag){
+                            int idx = input.nextInt();
+                            if(idx > 0 && idx <= world.getSimList().size()){
+                                flag = false;
+                                Menu.changeSim(world, idx);
+                            }
+                            else{
+                                System.out.println("Index yang Kamu pilih di luar jangkauan!");
+                            }
+                        }
+                    }
+                    else{
+                        System.out.println("Tidak ada Sim untuk dipilih! Silahkan add Sim!");
+                    }
+                    break;
                 default :
             }
         }
