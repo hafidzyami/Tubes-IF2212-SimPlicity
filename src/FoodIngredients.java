@@ -43,4 +43,8 @@ public class FoodIngredients extends Food {
                 break;
         }
     }
+
+    public int getPrice() {
+        return price;
+    }
 }

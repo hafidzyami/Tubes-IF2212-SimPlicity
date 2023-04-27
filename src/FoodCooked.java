@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class FoodCooked extends Food {
+public class FoodCooked extends Food implements CookAble {
     private ArrayList<FoodIngredients> ingredients;
     private String mealName;
 
@@ -27,4 +27,10 @@ public class FoodCooked extends Food {
                 break;
         }
     }
+
+    public ArrayList<FoodIngredients> getIngredientsList() {
+        return ingredients;
+    }
+
+    public CookAble processCook();
 }
