@@ -31,6 +31,4 @@ public class FoodCooked extends Food implements CookAble {
     public ArrayList<FoodIngredients> getIngredientsList() {
         return ingredients;
     }
-
-    public CookAble processCook();
 }
