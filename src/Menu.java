@@ -73,7 +73,11 @@ public class Menu {
         System.out.println("pergi ke objek ini " + sim.useItem.getName());
     }
 
-    public static void Action() {
-        System.out.println("ini bantuan");
+    public static void action() {
+        System.out.println("ini aksi");
+    }
+
+    public static void changeJob(String nama) {
+        
     }
 }
