@@ -4,8 +4,27 @@ public class Job {
 
     //konstruktor 
     public Job(String name, int salary){
-        this.name = name; 
-        this.salary = salary; 
+        this.name = name;
+        switch (name) {
+            case "Badut Sulap":
+                setDaySalary(15);
+                break;
+            case "Koki":
+                setDaySalary(30);
+                break;
+            case "Polisi":
+                setDaySalary(35);
+                break;
+            case "Programmer":
+                setDaySalary(45);
+                break;
+            case "Dokter":
+                setDaySalary(50);
+                break;
+            default:
+                name = null;
+                break;
+        }
     }
 
     //getter 
