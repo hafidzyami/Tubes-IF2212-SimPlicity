@@ -7,11 +7,6 @@ public class Inventory {
     
     public Inventory() {
         itemList = new ArrayList<>();
-        itemList.add(new NonFoodItem("Single Bed"));
-        itemList.add(new NonFoodItem("Toilet"));
-        itemList.add(new NonFoodItem("Gas Stove"));
-        itemList.add(new NonFoodItem("Table and Chair"));
-        itemList.add(new NonFoodItem("Clock"));    
         inventoryCount = 0;
     }
 
