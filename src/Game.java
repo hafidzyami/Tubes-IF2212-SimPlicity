@@ -30,6 +30,16 @@ public class Game {
                     Menu.viewCurrentLocation(world.getPlayedSim());
                     break;
                 case "10", "add sim":
+                    System.out.println("Masukkan nama Sim");
+                    String name = input.nextLine();
+                    Menu.addSim(world, name);
+                    break;
+                case "11", "change sim":
+                    System.out.println("Daftar Sim yang tersedia :");
+                    world.printSimList();
+                    System.out.println("Silahkan pilih sim berdasarkan nomor di atas! : ");
+                    int idx = input.nextInt();
+                    Menu.changeSim(world, idx);
                 default :
             }
         }

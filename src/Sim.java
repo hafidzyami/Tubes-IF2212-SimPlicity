@@ -19,7 +19,7 @@ public class Sim implements Runnable {
     public Item useItem;
 
     //konstruktor
-    public Sim(String nama,Item ... items) {
+    public Sim(String nama) {
         this.fullName = nama;
         this.hunger = 80;
         this.mood = 80;
@@ -42,6 +42,10 @@ public class Sim implements Runnable {
     }
 
     //getter 
+    public String getSimName(){
+        return this.fullName;
+    }
+
     public String getSimInfo() {
         String rets = "Nama: " + fullName + " \n";
         rets += ("Pekerjaan: " + job + " \n");

@@ -67,4 +67,10 @@ public class World {
         this.simList.add(sim);
     }
 
+    public void printSimList(){
+        for(int i = 0 ; i < simList.size(); i++){
+            System.out.println((i+1) + ". " + simList.get(i).getSimName());
+        }
+    }
+
 }

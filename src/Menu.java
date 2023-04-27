@@ -51,13 +51,15 @@ public class Menu {
         System.out.println("edir ruang");
     }
 
-    public static void addSim() {
-        
-        System.out.println("tambah sim");
+    public static void addSim(World world, String name) {
+        Sim sim = new Sim(name);
+        world.addSimList(sim);
+        System.out.println("Sim berhasil ditambahkan!");
     }
 
-    public static void changeSim() {
-        System.out.println("ganti sim");
+    public static void changeSim(World world, int idx) {
+        world.setPlayedSim(world.getSimList().get(idx-1));
+        System.out.println("Berhasil mengganti Sim ke " + world.getSimList().get(idx-1).getSimName());
     }
 
     public static void listObject(World world) {
