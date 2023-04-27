@@ -1,26 +1,34 @@
-import java.time.Duration;
-import java.time.Instant;
-
 public class WorldClock  {
-    private Instant startTime = Instant.now();
-    private Duration gameTime;
     private int gameDay;
-    private static final int MINUTE_IN_DAY = 12;
+    private int totalElapsed; //satuan detik
 
     public WorldClock() {
-        this.gameDay = 1;
+        gameDay = 1;
     }
-    
-    public int getGameDay() {
-        Instant now = Instant.now();
-        Duration.between(startTime, now);
-        refreshTime();
+
+    public void updateTime(int duration) {
+        this.totalElapsed += duration;
+    }
+
+    public int getDay() {
+        gameDay = (totalElapsed / 720 ) + 1;
         return gameDay;
     }
 
-    private void refreshTime() {
-        gameDay =(int) (gameTime.toSeconds() % 12);
+    public int getSisaWaktu() {
+        getDay();
+        /* System.out.println(totalElapsed);
+        System.out.println(gameDay); */
+        return gameDay * 720 - totalElapsed;
     }
 
 
+    public static void main(String[] args) {
+        WorldClock jam = new WorldClock();
+        jam.updateTime(40);
+        jam.updateTime(1000);
+        
+        System.out.println(jam.getSisaWaktu());
+        System.out.println(jam.gameDay);
+    }
 }

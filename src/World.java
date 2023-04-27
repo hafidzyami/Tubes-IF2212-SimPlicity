@@ -1,10 +1,14 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+
 
 public class World {
     private static World instance = new World();
     private Tile map;
-    private ArrayList<Home> homeList ;
+    private ArrayList<Home> homeList;
     private WorldClock worldClock;
+    private Sim playedSim;
+    private ArrayList<Sim> simList = new ArrayList<>();
 
     // Don't forget change to 64x64
     private final int LEN_CAPACITY = 5;
@@ -33,14 +37,43 @@ public class World {
         return instance;
     }
 
+    public Sim getPlayedSim(){
+        return playedSim;
+    }
+
+    public WorldClock getWorldClock() {
+        return worldClock;
+    }
     public void printHomeList() {
         System.out.println("ini list rumah");
     }
 
+    public void setPlayedSim(Sim sim){
+        this.playedSim = sim; 
+    }
+    
     public void addNewHome() {
-        Home home = Home.newHome();
+        Home home = Home.newHome(this);
         homeList.add(home);
         updateMap();
+    }
+
+    public ArrayList<Home> getHomeList(){
+        return this.homeList;
+    }
+
+    public ArrayList<Sim> getSimList(){
+        return this.simList;
+    }
+
+    public void addSimList(Sim sim){
+        this.simList.add(sim);
+    }
+
+    public void printSimList(){
+        for(int i = 0 ; i < simList.size(); i++){
+            System.out.println((i+1) + ". " + simList.get(i).getSimName());
+        }
     }
 
 }

@@ -16,13 +16,13 @@ public class Home {
 
     }
 
-    public Home(Point locationOnMap) {
+    public Home(Point location) {
         this.location = location;
     }
     
-    public static Home newHome() {
+    public static Home newHome(World world) {
         Home retHome = new Home(new Point(3, 4));
-        Room ruang01 = Room.firstRoom();
+        Room ruang01 = Room.firstRoom(world);
         retHome.roomList.put("ruang01",ruang01);
         return retHome;
     }
@@ -41,5 +41,9 @@ public class Home {
 
     public int getLocY() {
         return (int) location.getY();
+    }
+
+    public void addRoom(String roomName, Room room){
+        this.roomList.put(roomName, room);
     }
 }

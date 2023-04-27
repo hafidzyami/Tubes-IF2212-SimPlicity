@@ -1,6 +1,6 @@
-public class FoodIngredients extends Food {
+public class FoodIngredients extends Food implements PurchaseAble {
     private int price;
-    private String name;
+    public String name;
 
     public FoodIngredients(String name) {
         this.name = name;
@@ -44,7 +44,12 @@ public class FoodIngredients extends Food {
         }
     }
 
-    public int getPrice() {
+    public int getPrice(){
         return price;
     }
+
+    public String getName(){
+        return name;
+    }
+
 }

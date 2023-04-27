@@ -35,4 +35,8 @@ public class Tile  {
         tile[Y-1][X-1] = S;
     } 
 
+    public String getTile(int X, int Y){
+        return tile[Y-1][X-1];
+    }
+
 }

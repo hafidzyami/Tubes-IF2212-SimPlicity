@@ -10,7 +10,7 @@ public class Inventory {
         inventoryCount = 0;
     }
 
-    public ArrayList getInventory(){
+    public ArrayList<Item> getInventory(){
         return itemList;
     }
 
@@ -18,28 +18,40 @@ public class Inventory {
         return inventoryCount;
     }
 
-    public void addInventory(Item items){
-        itemList.add(items);
+    public Item getItem (int i){
+        return itemList.get(i);
     }
 
-    public void deleteInventory(Item items){
+    public int getIndeksItem(Item items){
         int idx = 0;
         int idxhsl = -1;
         for (Item i : itemList){
-            if(i.name.equals(items.name)){
+            if(i.getName().equals(items.getName())){
                 idxhsl = idx;
             }
             else {
                 idx++;
             }
         }
-        if (idxhsl != -1){
-            itemList.remove(idxhsl);
+        return idxhsl;
+    }
+
+    public void addInventory(Item items){
+        itemList.add(items);
+    }
+
+    public void addInventory(PurchaseAble items){
+        itemList.add((Item) items);
+    }
+
+    public void deleteInventory(Item items){
+        if(getIndeksItem(items) != -1){
+            itemList.remove(getIndeksItem(items));
         }
     }
     public void printInventory(){
         for (Item i :itemList){
-            System.out.prinln(i.name);
+            System.out.println(i.name);
         }
     }
 }

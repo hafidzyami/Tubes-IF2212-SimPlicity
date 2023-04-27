@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class FoodCooked extends Food implements CookAble {
     private ArrayList<FoodIngredients> ingredients;
-    private String mealName;
+    public String mealName;
 
     public FoodCooked(String mealName) {
         this.mealName = mealName;
