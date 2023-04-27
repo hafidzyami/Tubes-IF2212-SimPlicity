@@ -9,28 +9,31 @@ public class Sim implements Runnable {
     private int mood;
     private int health;
     private String status;
+    private final Home myHome;
 
     // ini nyoba
     public Room currentRoom;
     public Home currentHome;
     public World currentWorld;
-    public Job simJob;
+    
     public Clock clock;
     public Item useItem;
 
     //konstruktor
-    public Sim(String nama) {
+    public Sim(String nama,Home home) {
         this.fullName = nama;
         this.hunger = 80;
         this.mood = 80;
         this.health = 80;
         this.money = 100;
         this.job = Job.firstJob();
-        
+        this.myHome = home;
+        this.currentHome = home;
         // pada awal di buat status bersifat "idle"
         this.status = "idle";
         
     }
+
     public void run() {
         try {
             Thread.sleep(5000);
@@ -84,6 +87,15 @@ public class Sim implements Runnable {
         return money; 
     }
 
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
+
+    public Home getCurrentHome() {
+        return currentHome;
+    }
+        
+
     //setter 
     public void setIdle(){
         this.status = "idle";
@@ -109,6 +121,10 @@ public class Sim implements Runnable {
         this.money += money; 
     }
 
+    public void setCurrentRoom(Room room) {
+        this.currentRoom = room;
+    }
+
     // active action 
     public void work (int duration){
         if (duration % 120 != 0){
@@ -129,8 +145,8 @@ public class Sim implements Runnable {
 
                             timeWork += 30; 
                             if (timeWork == 240){
-                                gainMoney(simJob.getDaySalary()); 
-                                System.out.println("sim telah selesai bekerja dan mendapatkan "+ simJob.getDaySalary()); 
+                                gainMoney(getSimJob().getDaySalary()); 
+                                System.out.println("sim telah selesai bekerja dan mendapatkan "+ getSimJob().getDaySalary()); 
                                 System.out.println("uang sim menjadi : " + getMoney()); 
                             } else {
                                 System.out.println("sim sudah bekerja selama "+ (float)timeWork/60 + "menit");
@@ -207,9 +223,9 @@ public class Sim implements Runnable {
         t.start();
     }
 
-    public void eat (FoodCooked food){
+    public void eat (Food food){
         this.status = "eat";
-        System.out.println("Sim sedang makan " + food.mealName);
+        System.out.println("Sim sedang makan " + food.getName());
         Thread t = new Thread(new Runnable(){
             public void run(){
                 try{
@@ -444,7 +460,8 @@ public class Sim implements Runnable {
     //driver
     public static void main(String[] args) {
         World world = World.getInstance();
-        Sim Bobi = new Sim("Bobi");
+        Home home = Home.newHome(world);
+        Sim Bobi = new Sim("Bobi",home);
         System.out.println(Bobi.getSimInfo());
         Bobi.currentHome = new Home().newHome(world);
         Bobi.currentRoom = Bobi.currentHome.getRoomList().get("ruang01");
@@ -452,7 +469,7 @@ public class Sim implements Runnable {
         System.out.println(Bobi.currentRoom.getItemList());
 
         // buat ruangan baru di rumah bobi
-        Room ruang02 = new Room("dapur");
+        Room ruang02 = new Room("dapur",Bobi.getCurrentHome());
         Bobi.currentHome.addRoom("ruang02", ruang02);
 
         // coba pindah ke dapur atau room02

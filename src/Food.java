@@ -5,5 +5,10 @@ public abstract class Food extends Item {
         this.satiation = satiation;
     }
 
-    // public (Type waktu) increaseTime(){
+    //getter 
+    public int getSatiation(){
+        return satiation; 
     }
+
+    // public (Type waktu) increaseTime(){
+}

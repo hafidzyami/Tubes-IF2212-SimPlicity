@@ -7,7 +7,12 @@ public class Inventory {
     
     public Inventory() {
         itemList = new ArrayList<>();
-        inventoryCount = 0;
+        itemList.add(new NonFoodItem("Single Bed"));
+        itemList.add(new NonFoodItem("Toilet"));
+        itemList.add(new NonFoodItem("Gas Stove"));
+        itemList.add(new NonFoodItem("Table and Chair"));
+        itemList.add(new NonFoodItem("Clock"));    
+        inventoryCount = itemList.size();
     }
 
     public ArrayList<Item> getInventory(){
@@ -38,20 +43,23 @@ public class Inventory {
 
     public void addInventory(Item items){
         itemList.add(items);
+        inventoryCount++;
     }
 
     public void addInventory(PurchaseAble items){
         itemList.add((Item) items);
+        inventoryCount++;
     }
 
     public void deleteInventory(Item items){
         if(getIndeksItem(items) != -1){
             itemList.remove(getIndeksItem(items));
         }
+        inventoryCount--;
     }
     public void printInventory(){
-        for (Item i :itemList){
-            System.out.println(i.name);
+        for (Item temp :itemList){
+            System.out.println(temp.name);
         }
     }
 }

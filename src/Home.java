@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-import java.awt.Point;
 
 public class Home {
     private int homeNumber ;
@@ -9,7 +8,6 @@ public class Home {
     private HashMap <String,Room> roomList = new HashMap<>(); 
     private Sim owner;
 
-    
     Random randomizer = new Random(12345678);
     
     public Home() {
@@ -22,7 +20,14 @@ public class Home {
     
     public static Home newHome(World world) {
         Home retHome = new Home(new Point(3, 4));
-        Room ruang01 = Room.firstRoom(world);
+        Room ruang01 = Room.firstRoom(retHome);
+        retHome.roomList.put("ruang01",ruang01);
+        return retHome;
+    }
+
+    public static Home newHome(World world,Point point) {
+        Home retHome = new Home(new Point(point.getX(),point.getY()));
+        Room ruang01 = Room.firstRoom(retHome);
         retHome.roomList.put("ruang01",ruang01);
         return retHome;
     }
@@ -41,6 +46,14 @@ public class Home {
 
     public int getLocY() {
         return (int) location.getY();
+    }
+
+    public Sim getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Sim sim) {
+        this.owner = sim;
     }
 
     public void addRoom(String roomName, Room room){

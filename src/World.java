@@ -5,6 +5,7 @@ public class World {
     private Tile map;
     private ArrayList<Home> homeList;
     private WorldClock worldClock;
+
     private Sim playedSim;
     private ArrayList<Sim> simList = new ArrayList<>();
 
@@ -16,6 +17,7 @@ public class World {
         Tile matrix = new Tile(LEN_CAPACITY,WID_CAPACITY);
         this.map = matrix;
         this.homeList = new ArrayList<>();
+        
     }
 
     public void printMap() {
@@ -73,5 +75,9 @@ public class World {
             System.out.println((i+1) + ". " + simList.get(i).getSimName());
         }
     }
-
+    public static void main(String[] args) {
+        World world = World.getInstance();
+        world.printMap();
+        System.out.println(world.getHomeList());
+    }
 }
