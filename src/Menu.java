@@ -48,16 +48,31 @@ public class Menu {
         Scanner input = new Scanner(System.in);
         System.out.println("Pilih letak ruangan dari " + sim.currentRoom.getRoomName());
         // Roomloc roomLoc input.nextLine(); (input lokasi ruangan akan berada)
-        input.close();
-        
+        input.close(); 
     }
 
     public static void moveRoom() {
         System.out.println("pindah ruang");
     }
 
-    public static void editRoom() {
-        System.out.println("edir ruang");
+    public static void editRoom(int idx, Sim sim) {
+        if(idx == 1){
+            // ini yang beli barang
+        }
+        else if(idx == 2){
+            sim.currentRoom.getRoomTile().printTile();
+            System.out.println("Silahkan pilih nomor barang yang ingin dipasang dari inventory kamu : ");
+            sim.seeInventory();
+            Scanner input = new Scanner(System.in);
+            int idxItem = input.nextInt();
+            System.out.println("Silahkan pilih posisi upperLeft (X) dari barang yang ingin di pasang : ");
+            int wantedX = input.nextInt();
+            System.out.println("Silahkan pilih posisi upperLeft (Y) dari barang yang ingin di pasang : ");
+            int wantedY = input.nextInt();
+            sim.installItem(sim.currentRoom, idxItem-1, wantedX, wantedY);
+            sim.currentRoom.getRoomTile().printTile();
+        }
+
     }
 
     public static void addSim(World world, String name) {
@@ -82,26 +97,19 @@ public class Menu {
         }
     }
 
-    public static void goToObject(Sim sim, String itemKey) {
-        if (sim.getSimStatus().equals("idle")) {
-            sim.setSimStatus("walking");
-            //pindah lokasi sim ke objek
-            sim.setSimStatus("idle");
-            //print aksi yang bisa dilakukan            
-        } else {
-            System.out.println("Sim sedang melakukan aktivitas");
-        }
-        System.out.println("pergi ke objek ini " + sim.useItem.getName());
+    public static void goToObject(World world, String itemKey) {
+        Sim sim = world.getPlayedSim();
+        sim.useItem = sim.currentRoom.getItemList().get(itemKey);
     }
 
-    public static void action(NonFoodItem item) {
-        if (item.getStatus()) {
-            //list aksi yang bisa dilakukan
-        } else {
-            System.out.println(item.getName() + " sedang digunakan");
-        }
-        System.out.println("ini aksi");
-    }
+    // public static void action(NonFoodItem item) {
+    //     if (item.getStatus()) {
+    //         //list aksi yang bisa dilakukan
+    //     } else {
+    //         System.out.println(item.getName() + " sedang digunakan");
+    //     }
+    //     System.out.println("ini aksi");
+    // }
 
     public static void changeJob(String nama) {
 

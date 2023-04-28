@@ -58,8 +58,8 @@ public class Inventory {
         inventoryCount--;
     }
     public void printInventory(){
-        for (Item temp :itemList){
-            System.out.println(temp.name);
+        for (int i = 0; i < itemList.size(); i++){
+            System.out.println((i+1) + ". " + itemList.get(i).getName());
         }
     }
 }

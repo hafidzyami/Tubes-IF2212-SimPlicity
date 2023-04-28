@@ -45,6 +45,10 @@ public class Sim implements Runnable {
     }
 
     //getter 
+    public Home getMyHome(){
+        return this.myHome;
+    }
+
     public String getSimName(){
         return this.fullName;
     }
@@ -362,8 +366,8 @@ public class Sim implements Runnable {
         inventory.printInventory();
     }
 
-    public void installItem(Room room, NonFoodItem item, int wantedX, int wantedY){
-        
+    public void installItem(Room room, int idxItem, int wantedX, int wantedY){
+        NonFoodItem item = (NonFoodItem) this.inventory.getItem(idxItem);
         if( (wantedX + item.getLength() - 1 > 6) || (wantedY + item.getWidth() - 1 > 6) ){
             System.out.println("Item tidak bisa diletakkan!");
         }
@@ -499,7 +503,7 @@ public class Sim implements Runnable {
 
         // pasang barang di dapur
         NonFoodItem nfi = (NonFoodItem) Bobi.inventory.getItem(0);
-        Bobi.installItem(Bobi.currentRoom, nfi, 1, 1);
+        // Bobi.installItem(Bobi.currentRoom, nfi, 1, 1);
         Bobi.currentRoom.getRoomTile().printTile();
         
         //bobi makan

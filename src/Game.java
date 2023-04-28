@@ -47,7 +47,7 @@ public class Game {
                     break;
 
                 case "7", "upgrade house":
-                    Menu.upgradeHouse();
+                    Menu.upgradeHouse(world.getPlayedSim(), "blabla", world.getPlayedSim().getMyHome());
                     break;
 
                 case "8", "move room":
@@ -55,10 +55,14 @@ public class Game {
                     break;
 
                 case "9", "edit room":
-                    Menu.editRoom();;
+                    System.out.println("Silahkan pilih aksi berikut :");
+                    System.out.println("1. Membeli barang");
+                    System.out.println("2. Install barang");
+                    int idx = input.nextInt();
+                    Menu.editRoom(idx, world.getPlayedSim());
                     break;
                 case "10", "add sim":
-                    System.out.println("Masukkan nama Sim");
+                    System.out.print("Masukkan nama Sim :");
                     String name = input.nextLine();
                     Menu.addSim(world, name);
                     break;
@@ -70,10 +74,10 @@ public class Game {
                         System.out.println("Silahkan pilih sim berdasarkan nomor di atas : ");
                         boolean flag = true;
                         while(flag){
-                            int idx = input.nextInt();
-                            if(idx > 0 && idx <= world.getSimList().size()){
+                            int cmd11 = input.nextInt();
+                            if(cmd11 > 0 && cmd11 <= world.getSimList().size()){
                                 flag = false;
-                                Menu.changeSim(world, idx);
+                                Menu.changeSim(world, cmd11);
                             }
                             else{
                                 System.out.println("Index yang Kamu pilih di luar jangkauan!");
@@ -94,7 +98,7 @@ public class Game {
                     break;
 
                 case "14","action" :
-                    Menu.action();
+                    // Menu.action();
                     break;
 
                 case "15","change job" :
