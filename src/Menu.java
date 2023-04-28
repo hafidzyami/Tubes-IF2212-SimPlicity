@@ -115,14 +115,15 @@ public class Menu {
         System.out.println("Sim sedang menggunakan " + sim.useItem);
     }
 
-    // public static void action(NonFoodItem item) {
-    //     if (item.getStatus()) {
-    //         //list aksi yang bisa dilakukan
-    //     } else {
-    //         System.out.println(item.getName() + " sedang digunakan");
-    //     }
-    //     System.out.println("ini aksi");
-    // }
+    public static void action(NonFoodItem item) {
+        if (item.getStatus()) {
+            //list aksi yang bisa dilakukan
+            System.out.println(item.getName());
+        } else {
+            System.out.println(item.getName() + " sedang digunakan");
+        }
+        System.out.println("ini aksi");
+    }
 
     public static void changeJob(String nama) {
 
