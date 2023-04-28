@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
-public class Inventory {
-    private ArrayList <Item> itemList;
+public class Inventory < T extends Item> {
+    private ArrayList <T> itemList;
     private int inventoryCount;
 
     
