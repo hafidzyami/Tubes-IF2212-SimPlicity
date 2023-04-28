@@ -13,6 +13,7 @@ public class Sim implements Runnable {
     public Room currentRoom;
     public Home currentHome;
     public World currentWorld;
+    public int waktuKerja;
     
     public Clock clock;
     public String useItem;
@@ -108,25 +109,39 @@ public class Sim implements Runnable {
         this.status = status;
     }
 
+    public void setCurrentRoom(Room room) {
+        this.currentRoom = room;
+    }
+
+    //gainer
     public void gainMood(int mood){
         this.mood += mood;
+        if (this.mood>= 100) {
+            this.mood = 100; 
+        }
     }
 
     public void gainHealth(int health){
         this.health += health;
+        if (this.health >= 100){
+            this.health = 100;
+        }
     }
 
     public void gainHunger( int hunger){
         this.hunger += hunger;
+        if (this.hunger >= 100){
+            this.hunger = 100;
+        }
     }
 
     public void gainMoney(int money){
         this.money += money; 
+        if (this.money >= 100){
+            this.money = 100;
+        }
     }
 
-    public void setCurrentRoom(Room room) {
-        this.currentRoom = room;
-    }
 
     // active action 
     public void work (int duration){
@@ -159,6 +174,7 @@ public class Sim implements Runnable {
                             e.printStackTrace();
                         }
                     }
+                    currentWorld.getWorldClock().updateTime(duration);
                 }
             });
             t.start(); 
