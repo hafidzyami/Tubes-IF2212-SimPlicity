@@ -49,8 +49,8 @@ public class Inventory < T extends Item> {
     public void deleteInventory(Item items){
         if(getIndeksItem(items) != -1){
             itemList.remove(getIndeksItem(items));
+            inventoryCount--;
         }
-        inventoryCount--;
     }
     public void printInventory(){
         for (int i = 0; i < itemList.size(); i++){
