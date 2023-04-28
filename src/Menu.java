@@ -57,7 +57,22 @@ public class Menu {
 
     public static void editRoom(int idx, Sim sim) {
         if(idx == 1){
-            // ini yang beli barang
+            System.out.println("Silahkan pilih barang yang ingin dibeli : ");
+            CLI.printPurchaseAble();
+            Scanner input = new Scanner(System.in);
+            System.out.println("Silahkan pilih 1 untuk Non Food");
+            System.out.println("Silahkan pilih 2 untuk Food Ingredients");
+            int idxBeli =Integer.parseInt()input.nextLine(null);
+            System.out.println("Silahkan masukan nama barang : ");
+            String name = input.nextLine();
+            if(idxBeli == 1){
+                PurchaseAble item = new NonFoodItem(name);
+                sim.buyItem(item);
+            }
+            else{
+                PurchaseAble item = new FoodIngredients(name);
+                sim.buyItem(item);
+            }
         }
         else if(idx == 2){
             sim.currentRoom.getRoomTile().printTile();
@@ -115,14 +130,8 @@ public class Menu {
         System.out.println("Sim sedang menggunakan " + sim.useItem);
     }
 
-    public static void action(NonFoodItem item) {
-        if (item.getStatus()) {
-            //list aksi yang bisa dilakukan
-            System.out.println(item.getName());
-        } else {
-            System.out.println(item.getName() + " sedang digunakan");
-        }
-        System.out.println("ini aksi");
+    public static void action(World world) {
+        
     }
 
     public static void changeJob(String nama) {

@@ -65,4 +65,26 @@ public class CLI {
             
         }
     }
+
+    public static void printPurchaseAble(){
+        System.out.println("==== Non Food Item : ====");
+        System.out.println("1. Single Bed - 50");
+        System.out.println("2. Queen Size Bed - 100");
+        System.out.println("3. King Size Bed - 150");
+        System.out.println("4. Toilet - 50");
+        System.out.println("5. Gas Stove - 100");
+        System.out.println("6. Electric Stove - 200");
+        System.out.println("7. Table And Chair - 50");
+        System.out.println("==== Food Item : ====");
+        System.out.println("8. Rice - 5");
+        System.out.println("9. Potato - 3");
+        System.out.println("10. Chicken - 10");
+        System.out.println("11. Beef - 12");
+        System.out.println("12. Carrot - 3");
+        System.out.println("13. Spinach  - 3");
+        System.out.println("14. Nut - 2");
+        System.out.println("15. Milk - 2");
+
+
+    }
 }

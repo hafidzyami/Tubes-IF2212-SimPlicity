@@ -111,8 +111,7 @@ public class Game {
                     break;
 
                 case "14","action" :
-                    NonFoodItem item = new NonFoodItem(input.nextLine());
-                    Menu.action(item);
+                    
                     break;
 
                 case "15","change job" :

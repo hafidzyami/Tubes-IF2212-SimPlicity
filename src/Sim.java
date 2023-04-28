@@ -13,11 +13,9 @@ public class Sim implements Runnable {
     public Room currentRoom;
     public Home currentHome;
     public World currentWorld;
-    public int waktuKerja;
     
     public Clock clock;
     public String useItem;
-    public WorldClock worldClock;
 
     //konstruktor
     public Sim(String nama,Home home) {
@@ -109,39 +107,25 @@ public class Sim implements Runnable {
         this.status = status;
     }
 
-    public void setCurrentRoom(Room room) {
-        this.currentRoom = room;
-    }
-
-    //gainer
     public void gainMood(int mood){
         this.mood += mood;
-        if (this.mood>= 100) {
-            this.mood = 100; 
-        }
     }
 
     public void gainHealth(int health){
         this.health += health;
-        if (this.health >= 100){
-            this.health = 100;
-        }
     }
 
     public void gainHunger( int hunger){
         this.hunger += hunger;
-        if (this.hunger >= 100){
-            this.hunger = 100;
-        }
     }
 
     public void gainMoney(int money){
         this.money += money; 
-        if (this.money >= 100){
-            this.money = 100;
-        }
     }
 
+    public void setCurrentRoom(Room room) {
+        this.currentRoom = room;
+    }
 
     // active action 
     public void work (int duration){
@@ -174,17 +158,11 @@ public class Sim implements Runnable {
                             e.printStackTrace();
                         }
                     }
-                    currentWorld.getWorldClock().updateTime(duration);
                 }
             });
             t.start(); 
         }
 
-    }
-
-    public void changeJob (Job job) {
-        this.status = "changing job"; 
-        //cara ngitung waktu gimana anjay 
     }
 
     public void sport (int duration){
@@ -286,7 +264,7 @@ public class Sim implements Runnable {
                         tick++;
                         if(tick >= distance){
                             System.out.println("Sim sudah sampai!");
-                            setSimStatus("visit");
+                            setSimStatus("idle");
                             // ini belum diset currentHome pindah gitu 
                             tick = 0;
                         }
@@ -346,7 +324,7 @@ public class Sim implements Runnable {
             public void run(){
                 try {
                     if (item != null && item.getPrice() <= getMoney()) {
-                        Thread.sleep(10000); 
+                        Thread.sleep(0); 
                         gainMoney(-item.getPrice());
                         System.out.println("sim membeli" + item.getName() + "dengan harga" + item.getPrice());
                         int deliveryTime = (int) (Math.random() * 5 * 1) * 30;
@@ -420,9 +398,7 @@ public class Sim implements Runnable {
         this.status = "see time";
         System.out.println("Sim sedang melihat waktu");
         //Menu.goToObject(); //ke clock
-        System.out.println("sisa waktu hari ini adalah" + worldClock.getSisaWaktu());
-
-        //kode buat tau sisa tau dari masing masing aksi yang membutuhkan waktu 
+        System.out.println("waktu saat ini adalah...");
     }
 
     //costum action 
