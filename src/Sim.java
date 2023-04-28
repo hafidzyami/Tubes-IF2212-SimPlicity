@@ -16,6 +16,7 @@ public class Sim implements Runnable {
     
     public Clock clock;
     public String useItem;
+    public WorldClock worldClock;
 
     //konstruktor
     public Sim(String nama,Home home) {
@@ -163,6 +164,11 @@ public class Sim implements Runnable {
             t.start(); 
         }
 
+    }
+
+    public void changeJob (Job job) {
+        this.status = "changing job"; 
+        //cara ngitung waktu gimana anjay 
     }
 
     public void sport (int duration){
@@ -334,7 +340,7 @@ public class Sim implements Runnable {
                         } catch (InterruptedException e){
                             e.printStackTrace();
                         }
-                        inventory.addInventory((Item) item);
+                        inventory.addInventory(item);
                     } else {
                         System.out.println("uang sim tidak cukup!");
                     }
@@ -398,7 +404,9 @@ public class Sim implements Runnable {
         this.status = "see time";
         System.out.println("Sim sedang melihat waktu");
         //Menu.goToObject(); //ke clock
-        System.out.println("waktu saat ini adalah...");
+        System.out.println("sisa waktu hari ini adalah" + worldClock.getSisaWaktu());
+
+        //kode buat tau sisa tau dari masing masing aksi yang membutuhkan waktu 
     }
 
     //costum action 
