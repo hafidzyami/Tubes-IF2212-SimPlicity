@@ -7,15 +7,15 @@ public class Inventory < T extends Item> {
     
     public Inventory() {
         itemList = new ArrayList<>();
-        itemList.add(new NonFoodItem("Single Bed"));
-        itemList.add(new NonFoodItem("Toilet"));
-        itemList.add(new NonFoodItem("Gas Stove"));
-        itemList.add(new NonFoodItem("Table and Chair"));
-        itemList.add(new NonFoodItem("Clock"));    
+        itemList.add((T) new NonFoodItem("Single Bed"));
+        itemList.add((T) new NonFoodItem("Toilet"));
+        itemList.add((T) new NonFoodItem("Gas Stove"));
+        itemList.add((T) new NonFoodItem("Table and Chair"));
+        itemList.add((T) new NonFoodItem("Clock"));    
         inventoryCount = itemList.size();
     }
 
-    public ArrayList<Item> getInventory(){
+    public ArrayList<T> getInventory(){
         return itemList;
     }
 
@@ -41,13 +41,8 @@ public class Inventory < T extends Item> {
         return idxhsl;
     }
 
-    public void addInventory(Item items){
-        itemList.add(items);
-        inventoryCount++;
-    }
-
-    public void addInventory(PurchaseAble items){
-        itemList.add((Item) items);
+    public void addInventory(T t){
+        itemList.add(t);
         inventoryCount++;
     }
 

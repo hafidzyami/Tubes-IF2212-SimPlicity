@@ -334,7 +334,7 @@ public class Sim implements Runnable {
                         } catch (InterruptedException e){
                             e.printStackTrace();
                         }
-                        inventory.addInventory(item);
+                        inventory.addInventory((Item) item);
                     } else {
                         System.out.println("uang sim tidak cukup!");
                     }
