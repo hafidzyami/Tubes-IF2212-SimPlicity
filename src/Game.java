@@ -14,7 +14,7 @@ public class Game {
         Home home1 = Home.newHome(world);
         Sim sim1 = new Sim(input.nextLine(),home1);
         home1.setOwner(sim1);
-        sim1.setCurrentRoom(home1.getRoomList().get("ruang01"));
+        sim1.setCurrentRoom(home1.getRoomList().get(0));
         world.addSimList(sim1);
         world.setPlayedSim(sim1);
         //sim1.setCurrentRoom();
@@ -94,7 +94,20 @@ public class Game {
                     break;
 
                 case "13","go to object" :
-                    Menu.goToObject(world, "barang");
+                    Menu.listObject(world);
+                    System.out.println("Silahkan ketikan nama object yang ingin dituju!");
+                    String key13 = input.next();
+                    boolean flag13 = true;
+                    while(flag13){
+                        if(!sim1.currentRoom.getItemList().containsKey(key13)){
+                            System.out.println("Nama object salah/tidak ada! Silahkan ketikan nama object yang benar!");
+                            key13 = input.next();
+                        }
+                        else{
+                            flag13 = false;
+                        }
+                    }
+                    Menu.goToObject(world, key13);
                     break;
 
                 case "14","action" :

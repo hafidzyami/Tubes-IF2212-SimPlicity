@@ -1,5 +1,3 @@
-import java.awt.Point;
-
 public class Sim implements Runnable {
     private String fullName;
     private Job job;
@@ -17,7 +15,7 @@ public class Sim implements Runnable {
     public World currentWorld;
     
     public Clock clock;
-    public Item useItem;
+    public String useItem;
 
     //konstruktor
     public Sim(String nama,Home home) {
@@ -345,20 +343,18 @@ public class Sim implements Runnable {
                 }
             }
         });
+        t.start();
 
     }
 
     //not needed time action 
-    public void moveToRoom(String roomName) {
-        if(this.currentRoom.getRoomName().equals(roomName)){
+    public void moveToRoom(int idx) {
+        if(this.currentHome.getRoomList().get(idx-1).equals(currentRoom)){
             System.out.println("Tidak bisa berpindah ke room yang sama!");
         }
-        else if(this.currentHome.getRoomList().containsKey(roomName)){
-            this.currentRoom = this.currentHome.getRoomList().get(roomName);
-            System.out.println("Anda diteleportasi ke " + roomName);
-        }
-        else{
-            System.out.println("Tidak ada ruang dengan nama tersebut!");
+        else {
+            this.currentRoom = this.currentHome.getRoomList().get(idx-1);
+            System.out.println("Anda diteleportasi ke " + this.currentRoom.getRoomName());
         }
     }
 
@@ -463,52 +459,52 @@ public class Sim implements Runnable {
 
     //driver
     public static void main(String[] args) {
-        World world = World.getInstance();
-        Home home = Home.newHome(world);
-        Sim Bobi = new Sim("Bobi",home);
-        System.out.println(Bobi.getSimInfo());
-        Bobi.currentHome = new Home().newHome(world);
-        Bobi.currentRoom = Bobi.currentHome.getRoomList().get("ruang01");
-        System.out.println(Bobi.currentRoom.getRoomName());
-        System.out.println(Bobi.currentRoom.getItemList());
+        // World world = World.getInstance();
+        // Home home = Home.newHome(world);
+        // Sim Bobi = new Sim("Bobi",home);
+        // System.out.println(Bobi.getSimInfo());
+        // Bobi.currentHome = new Home().newHome(world);
+        // Bobi.currentRoom = Bobi.currentHome.getRoomList().get("ruang01");
+        // System.out.println(Bobi.currentRoom.getRoomName());
+        // System.out.println(Bobi.currentRoom.getItemList());
 
-        // buat ruangan baru di rumah bobi
-        Room ruang02 = new Room("dapur",Bobi.getCurrentHome());
-        Bobi.currentHome.addRoom("ruang02", ruang02);
+        // // buat ruangan baru di rumah bobi
+        // Room ruang02 = new Room("dapur",Bobi.getCurrentHome());
+        // Bobi.currentHome.addRoom("ruang02", ruang02);
 
-        // coba pindah ke dapur atau room02
-        Bobi.moveToRoom("ruang02");
-        System.out.println(Bobi.currentRoom.getRoomName());
-        System.out.println(Bobi.currentRoom.getItemList());
+        // // coba pindah ke dapur atau room02
+        // Bobi.moveToRoom("ruang02");
+        // System.out.println(Bobi.currentRoom.getRoomName());
+        // System.out.println(Bobi.currentRoom.getItemList());
 
-        // pindah ke main room
-        Bobi.moveToRoom("ruang01");
-        System.out.println(Bobi.currentRoom.getRoomName());
-        System.out.println(Bobi.currentRoom.getItemList());
+        // // pindah ke main room
+        // Bobi.moveToRoom("ruang01");
+        // System.out.println(Bobi.currentRoom.getRoomName());
+        // System.out.println(Bobi.currentRoom.getItemList());
 
 
-        // Bobi mencuri ih maling, ternyata bisa ges
-        Bobi.steal("kursi01");
-        System.out.println(Bobi.currentRoom.getItemList());
-        System.out.println(Bobi.inventory.getInventory());
+        // // Bobi mencuri ih maling, ternyata bisa ges
+        // Bobi.steal("kursi01");
+        // System.out.println(Bobi.currentRoom.getItemList());
+        // System.out.println(Bobi.inventory.getInventory());
 
-        // bobi coba mencuri yang gaada barangnya
-        Bobi.steal("kursi01");
+        // // bobi coba mencuri yang gaada barangnya
+        // Bobi.steal("kursi01");
 
-        // bobi coba nangis 
-        Bobi.crying();
+        // // bobi coba nangis 
+        // Bobi.crying();
 
-        // print tile dapur
-        Bobi.currentRoom.getRoomTile().printTile();
+        // // print tile dapur
+        // Bobi.currentRoom.getRoomTile().printTile();
 
-        // pasang barang di dapur
-        NonFoodItem nfi = (NonFoodItem) Bobi.inventory.getItem(0);
-        // Bobi.installItem(Bobi.currentRoom, nfi, 1, 1);
-        Bobi.currentRoom.getRoomTile().printTile();
+        // // pasang barang di dapur
+        // NonFoodItem nfi = (NonFoodItem) Bobi.inventory.getItem(0);
+        // // Bobi.installItem(Bobi.currentRoom, nfi, 1, 1);
+        // Bobi.currentRoom.getRoomTile().printTile();
         
-        //bobi makan
-        FoodCooked makan = new FoodCooked("Nut Milk");
-        Bobi.eat(makan);
+        // //bobi makan
+        // FoodCooked makan = new FoodCooked("Nut Milk");
+        // Bobi.eat(makan);
         
     }
 

@@ -65,6 +65,16 @@ public class Menu {
             sim.seeInventory();
             Scanner input = new Scanner(System.in);
             int idxItem = input.nextInt();
+            boolean flagEditRoom = false;
+            while(!flagEditRoom){
+                if(idxItem > 0 && idxItem <= sim.getSimInventory().getInventoryCount()){
+                    flagEditRoom = true;
+                }
+                else{
+                    System.out.println("Silahkan pilih nomor yang benar!");
+                    idxItem = input.nextInt();
+                }
+            }
             System.out.println("Silahkan pilih posisi upperLeft (X) dari barang yang ingin di pasang : ");
             int wantedX = input.nextInt();
             System.out.println("Silahkan pilih posisi upperLeft (Y) dari barang yang ingin di pasang : ");
@@ -80,7 +90,7 @@ public class Menu {
         Sim sim = new Sim(name,home);
         home.setOwner(sim);
         world.addSimList(sim);
-        sim.setCurrentRoom(home.getRoomList().get("ruang01"));
+        sim.setCurrentRoom(home.getRoomList().get(0));
         System.out.println("Sim berhasil ditambahkan!");
     }
 
@@ -92,14 +102,17 @@ public class Menu {
     public static void listObject(World world) {
         Sim sim = world.getPlayedSim();
         System.out.println("Berikut List Objek dalam ruangan");
+        int idx = 1;
         for(Item i : sim.currentRoom.getItemList().values()){
-            System.out.println(i.getName());
+            System.out.println(idx + ". " + i.getName());
+            idx++;
         }
     }
 
     public static void goToObject(World world, String itemKey) {
         Sim sim = world.getPlayedSim();
-        sim.useItem = sim.currentRoom.getItemList().get(itemKey);
+        sim.useItem = sim.currentRoom.getItemList().get(itemKey).getName();
+        System.out.println("Sim sedang menggunakan " + sim.useItem);
     }
 
     // public static void action(NonFoodItem item) {
