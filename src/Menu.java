@@ -62,7 +62,7 @@ public class Menu {
             Scanner input = new Scanner(System.in);
             System.out.println("Silahkan pilih 1 untuk Non Food");
             System.out.println("Silahkan pilih 2 untuk Food Ingredients");
-            int idxBeli =Integer.parseInt()input.nextLine(null);
+            int idxBeli =Integer.parseInt(input.nextLine());
             System.out.println("Silahkan masukan nama barang : ");
             String name = input.nextLine();
             if(idxBeli == 1){
