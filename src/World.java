@@ -29,7 +29,7 @@ public class World {
             int idX = temp.getLocX();
             int idY = temp.getLocY();
 
-            map.changeTile("H", idX, idY);
+            map.changeTile(temp.getOwner().getSimName(), idX, idY);
         }
     }
 
@@ -52,8 +52,7 @@ public class World {
         this.playedSim = sim; 
     }
     
-    public void addNewHome() {
-        Home home = Home.newHome(this);
+    public void addNewHome(Home home) {
         homeList.add(home);
         updateMap();
     }

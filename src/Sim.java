@@ -248,49 +248,38 @@ public class Sim implements Runnable {
 
     }
 
-    public void visit (int x2, int y2, int duration){
-        this.status = "onTheWay";
-        System.out.println("Sim berkunjung");
-        int x1 = currentHome.getLocX();
-        int y1 = currentHome.getLocY();
-        Thread t = new Thread(new Runnable(){
-            public void run(){
-                double distance = Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
-                int tick = 0;
-                while(getSimStatus().equals("onTheWay")){
-                    try{
-                        System.out.println("Sim sedang dalam perjalanan!");
-                        Thread.sleep(1000);
-                        tick++;
-                        if(tick >= distance){
-                            System.out.println("Sim sudah sampai!");
-                            setSimStatus("idle");
-                            // ini belum diset currentHome pindah gitu 
-                            tick = 0;
-                        }
-                    }
-                    catch (InterruptedException e){
-                        e.printStackTrace();
+    public void visit (int x2, int y2, int idxHome){
+        if(currentWorld.getHomeList().get(idxHome).getOwner().getSimName().equals(currentHome.getOwner().getSimName())){
+            System.out.println("Tidak bisa berkunjung ke rumah yang sama!");
+        }
+        else{
+            this.status = "onTheWay";
+            System.out.println("Sim berkunjung");
+            int x1 = currentHome.getLocX();
+            int y1 = currentHome.getLocY();
+            double distance = Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
+            int tick = 0;
+            while(getSimStatus().equals("onTheWay")){
+                try{
+                    System.out.println("Sim sedang dalam perjalanan!");
+                    Thread.sleep(1000);
+                    tick++;
+                    if(tick >= distance){
+                        System.out.println("Sim sudah sampai!");
+                        setSimStatus("idle");
+                        currentHome = currentWorld.getHomeList().get(idxHome);
+                        tick = 0;
                     }
                 }
-                while(tick <= duration){
-                    try{
-                        System.out.println("Sim sedang berkunjung selama " + tick);
-                        Thread.sleep(1000);
-                        tick++;
-                        if(tick == duration){
-                            System.out.println("waktu kunjungan sudah habis!");
-                        }
-                    }
-                    catch (InterruptedException e){
-                        e.printStackTrace();
-                    }
+                catch (InterruptedException e){
+                    e.printStackTrace();
                 }
-                gainMood(10*(duration/30));
-                gainHunger(-10*(duration/30));
-            } 
-        });
-        t.start();
+
+                // ini gw masih bingung
+                // gainMood(10*(duration/30));
+                // gainHunger(-10*(duration/30));
+            }
+        }
     }
 
     public void pee() {
@@ -364,6 +353,7 @@ public class Sim implements Runnable {
 
     public void installItem(Room room, int idxItem, int wantedX, int wantedY){
         NonFoodItem item = (NonFoodItem) this.inventory.getItem(idxItem);
+        
         if( (wantedX + item.getLength() - 1 > 6) || (wantedY + item.getWidth() - 1 > 6) ){
             System.out.println("Item tidak bisa diletakkan!");
         }

@@ -100,12 +100,14 @@ public class Menu {
 
     }
 
-    public static void addSim(World world, String name) {
-        Home home = Home.newHome(world);
+    public static void addSim(World world, String name, int xHome, int yHome) {
+        Home home = Home.newHome(world, xHome, yHome);
         Sim sim = new Sim(name,home);
         home.setOwner(sim);
         world.addSimList(sim);
+        world.addNewHome(home);
         sim.setCurrentRoom(home.getRoomList().get(0));
+        world.updateMap();
         System.out.println("Sim berhasil ditambahkan!");
     }
 
@@ -130,8 +132,94 @@ public class Menu {
         System.out.println("Sim sedang menggunakan " + sim.useItem);
     }
 
-    public static void action(World world) {
-        
+    public static void action(World world, int idxAction) {
+        Sim sim = world.getPlayedSim();
+        Scanner input = new Scanner(System.in);
+        switch(idxAction){
+            case 1 :
+                System.out.println("Masukkan durasi bekerja :");
+                int durasiKerja = input.nextInt();
+                sim.work(durasiKerja);
+                break;
+            case 2 :
+                System.out.println("Masukkan durasi olahraga :");
+                int durasiOlahraga = input.nextInt();
+                sim.work(durasiOlahraga);
+                break;
+            case 3 :
+                if(sim.useItem.equals("Single Bed") || sim.useItem.equals("Queen Size Bed") || sim.useItem.equals("King Size Bed")){
+                    System.out.println("Masukkan durasi Tidur :");
+                    int durasiTidur = input.nextInt();
+                    sim.work(durasiTidur);
+                }
+                else{
+                    System.out.println("Silahkan pergi ke object 'Bed' untuk tidur!");
+                }
+                break;
+            case 4 :
+                System.out.println("Daftar makanan :");
+                // tunggu code jadi
+                break;
+            case 5 : 
+                if(sim.useItem.equals("Gas Stove") || sim.useItem.equals("Electric Stove")){
+                    System.out.println("Daftar menu untuk dimasak :");
+                    // tunggu code jadi
+                }
+                else{
+                    System.out.println("Silahkan pergi ke object 'Stove' untuk masak!");
+                }
+                break;
+            case 6 :
+                System.out.println("Daftar rumah Sim untuk dikunjungi :");
+                CLI.printHomeAndSim(world);
+                world.printMap();
+                System.out.println("Ketikan nomor Sim untuk dikunjungi :");
+                int idxVisit = input.nextInt();
+                sim.visit(world.getHomeList().get(idxVisit).getLocX(), world.getHomeList().get(idxVisit).getLocY(), idxVisit);
+                break;
+            case 7:
+                if(sim.useItem.equals("Toilet")){
+                    sim.pee();
+                }
+                else{
+                    System.out.println("Silahkan pergi ke object 'Toilet' untuk buang air!");
+                }
+                break;
+            case 8:
+                if(sim.useItem.equals("Clock")){
+                    sim.seeTime();
+                }
+                else{
+                    System.out.println("Silahkan pergi ke object 'Clock' untuk lihat waktu!");
+                }
+                break;
+            case 9:
+                sim.crying();
+                break;
+            case 10:
+                System.out.println("Masukkan durasi untuk mengaji : ");
+                int durasiMengaji = input.nextInt();
+                sim.recitate(durasiMengaji);
+                break;
+            case 11:
+                System.out.println("Daftar barang yang bisa dicuri di ruangan ini : ");
+                listObject(world);
+                System.out.println("Masukkan nama barang yang ingin dicuri");
+                sim.steal(input.nextLine());
+                break;
+            case 12:
+                // tunggu code
+                break;
+            case 13:
+                // tunggu code
+                break;
+            case 14:
+                // tunggu code
+                break;
+            case 15:
+                // tunggu code
+                break;
+        }
     }
 
     public static void changeJob(String nama) {

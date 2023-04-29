@@ -11,13 +11,13 @@ public class Game {
             command = CLI.wrongInput();
         }
         System.out.print("Masukkan nama sim: ");
-        Home home1 = Home.newHome(world);
-        Sim sim1 = new Sim(input.nextLine(),home1);
+        Home home1 = Home.newHome(world, 1, 1);
+        Sim sim1 = new Sim(input.next(),home1);
         home1.setOwner(sim1);
-        sim1.setCurrentRoom(home1.getRoomList().get(0));
         world.addSimList(sim1);
-        world.setPlayedSim(sim1);
-        //sim1.setCurrentRoom();
+        world.addNewHome(home1);
+        sim1.setCurrentRoom(home1.getRoomList().get(0));
+        world.updateMap();
         while(playing) {
             command = CLI.playing();
             switch(command.toLowerCase()) {
@@ -63,8 +63,12 @@ public class Game {
                     break;
                 case "10", "add sim":
                     System.out.print("Masukkan nama Sim :");
-                    String name = input.nextLine();
-                    Menu.addSim(world, name);
+                    String name = input.next();
+                    System.out.print("Masukkan lokasi rumah (X) untuk dibangun : ");
+                    int xHome = input.nextInt();
+                    System.out.print("Masukkan lokasi rumah (Y) untuk dibangun : ");
+                    int yHome = input.nextInt();
+                    Menu.addSim(world, name, xHome, yHome);
                     break;
 
                 case "11", "change sim":
@@ -111,7 +115,10 @@ public class Game {
                     break;
 
                 case "14","action" :
-                    
+                    CLI.printActionList();
+                    System.out.println("Silahkan pilih nomor untuk melakukan aksi yang ingin dilakukan : ");
+                    int idxAction = input.nextInt();
+                    Menu.action(world, idxAction);
                     break;
 
                 case "15","change job" :

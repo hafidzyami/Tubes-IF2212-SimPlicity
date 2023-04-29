@@ -17,8 +17,8 @@ public class Home {
         this.location = location;
     }
     
-    public static Home newHome(World world) {
-        Home retHome = new Home(new Point(3, 4));
+    public static Home newHome(World world, int x, int y) {
+        Home retHome = new Home(new Point(x, y));
         Room ruang01 = Room.firstRoom(retHome);
         retHome.roomList.add(ruang01);
         return retHome;

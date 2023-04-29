@@ -84,7 +84,30 @@ public class CLI {
         System.out.println("13. Spinach  - 3");
         System.out.println("14. Nut - 2");
         System.out.println("15. Milk - 2");
+    }
 
+    public static void printHomeAndSim(World world){
+        for(int i = 0; i < world.getHomeList().size(); i++){
+            System.out.println((i+1) + ". " + world.getHomeList().get(i).getOwner().getSimName());
+        }
+    }
 
+    public static void printActionList(){
+        System.out.println("==== Daftar Action : ====");
+        System.out.println("1. Kerja");
+        System.out.println("2. Olahraga");
+        System.out.println("3. Tidur");
+        System.out.println("4. Makan");
+        System.out.println("5. Memasak");
+        System.out.println("6. Berkunjung");
+        System.out.println("7. Buang Air");
+        System.out.println("8. Melihat Waktu");
+        System.out.println("9. Aksi Custom : Menangis");
+        System.out.println("10. Aksi Custom : Mengaji");
+        System.out.println("11. Aksi Custom : Mencuri");
+        System.out.println("12. Aksi Custom : -");
+        System.out.println("13. Aksi Custom : -");
+        System.out.println("14. Aksi Custom : -");
+        System.out.println("15. Aksi Custom : -");
     }
 }
