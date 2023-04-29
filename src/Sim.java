@@ -407,6 +407,24 @@ public class Sim {
         }
     }
 
+    public void write() {
+        if (this.status.equals("sitting")) {
+            currentWorld.getWorldClock().wait(10);
+            System.out.println(this.fullName + " sedang menulis halaman baru di diary");
+        } else {
+            System.out.println(this.status + "sedang tidak duduk");
+        }
+    }
+
+    public void read() {
+        if (this.status.equals("sitting")) {
+            currentWorld.getWorldClock().wait(5);
+            System.out.println(this.fullName + " sedang membaca diary");
+        } else {
+            System.out.println(this.status + "sedang tidak duduk");
+        }
+    }
+
     //driver
     public static void main(String[] args) {
         // World world = World.getInstance();
