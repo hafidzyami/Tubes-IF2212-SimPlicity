@@ -1,21 +1,20 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Inventory < T extends Item> {
-    private ArrayList <T> itemList;
+    private HashMap <T, Integer> itemList = new HashMap<>();
     private int inventoryCount;
 
     
     public Inventory() {
-        itemList = new ArrayList<>();
-        itemList.add((T) new NonFoodItem("Single Bed"));
-        itemList.add((T) new NonFoodItem("Toilet"));
-        itemList.add((T) new NonFoodItem("Gas Stove"));
-        itemList.add((T) new NonFoodItem("Table and Chair"));
-        itemList.add((T) new NonFoodItem("Clock"));    
+        itemList.put((T) new NonFoodItem("Gas Stove"), 1);
+        itemList.put((T) new NonFoodItem("Single Bed"), 1);
+        itemList.put((T) new NonFoodItem("Toilet"), 1);
+        itemList.put((T) new NonFoodItem("Table and Chair"), 1);
+        itemList.put((T) new NonFoodItem("Clock"), 1);    
         inventoryCount = itemList.size();
     }
 
-    public ArrayList<T> getInventory(){
+    public HashMap <T, Integer> getInventory(){
         return itemList;
     }
 
@@ -23,38 +22,84 @@ public class Inventory < T extends Item> {
         return inventoryCount;
     }
 
-    public Item getItem (int i){
-        return itemList.get(i);
+    public T getItem (int idx){
+        int i = 0;
+        T temp = null;
+        for (T j : itemList.keySet()){
+            if(i == idx){
+                temp = j;
+            }
+            i++;
+        }
+        return temp;
     }
 
-    public int getIndeksItem(Item items){
+    public int getIndeksItem (T items){
         int idx = 0;
         int idxhsl = -1;
-        for (Item i : itemList){
+        for (T i : itemList.keySet()){
             if(i.getName().equals(items.getName())){
                 idxhsl = idx;
-            }
-            else {
+            }else{
                 idx++;
             }
+
         }
         return idxhsl;
     }
 
     public void addInventory(T t){
-        itemList.add(t);
+        if(getIndeksItem(t) != -1){
+            Integer temp = itemList.get(getItem(getIndeksItem(t))) + 1;
+            itemList.put(getItem(getIndeksItem(t)),temp);
+        }
+        else{
+            itemList.put(t,1);
+        }
         inventoryCount++;
     }
 
-    public void deleteInventory(Item items){
-        if(getIndeksItem(items) != -1){
-            itemList.remove(getIndeksItem(items));
+    public void deleteInventory(T t){
+        if (getIndeksItem(t) != -1){
+            Integer temp = itemList.get(getItem(getIndeksItem(t))) - 1;
+            itemList.put(getItem(getIndeksItem(t)),temp);
+            if(itemList.get(getItem(getIndeksItem(t))) == 0){
+                itemList.remove(getItem(getIndeksItem(t)));
+            }
             inventoryCount--;
         }
     }
     public void printInventory(){
-        for (int i = 0; i < itemList.size(); i++){
-            System.out.println((i+1) + ". " + itemList.get(i).getName());
+        int idx = 1;
+        for(T i : itemList.keySet()){
+            System.out.println(idx + ". " + i.getName() + " " + itemList.get(i));
+            idx++;
         }
+    }
+
+    public static void main(String[] args){
+        Inventory<Item> x = new Inventory<>();
+        FoodIngredients item1 = new FoodIngredients("Rice");
+        NonFoodItem item2 = new NonFoodItem("Single Bed");
+        x.printInventory();
+        System.out.println(" ");
+        x.addInventory(item1);
+        x.printInventory();
+        x.addInventory(item2);
+        System.out.println(" ");
+        x.printInventory();
+        x.addInventory(item2);
+        System.out.println(" ");
+        x.printInventory();
+        x.deleteInventory(item1);
+        System.out.println(" ");
+        x.printInventory();
+        x.addInventory(item2);
+        System.out.println(" ");
+        x.printInventory();
+        x.deleteInventory(item2);
+        System.out.println(" ");
+        x.printInventory();
+
     }
 }

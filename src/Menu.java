@@ -194,12 +194,20 @@ public class Menu {
                 }
                 break;
             case 9:
-                sim.crying();
+                if(sim.useItem.equals("Single Bed") || sim.useItem.equals("Queen Size Bed") || sim.useItem.equals("King Size Bed")){
+                    sim.crying();
+                }else{
+                    System.out.println("Anda harus ke 'Bed' untuk menangis");
+                }
                 break;
             case 10:
-                System.out.println("Masukkan durasi untuk mengaji : ");
-                int durasiMengaji = input.nextInt();
-                sim.recitate(durasiMengaji);
+                if(sim.useItem.equals("Table and Chair")){
+                    System.out.println("Masukkan durasi untuk mengaji : ");
+                    int durasiMengaji = input.nextInt();
+                    sim.recitate(durasiMengaji);
+                }else {
+                    System.out.println("Silahkan pergi ke object 'Table and Chair' untuk mengaji");
+                } 
                 break;
             case 11:
                 System.out.println("Daftar barang yang bisa dicuri di ruangan ini : ");
