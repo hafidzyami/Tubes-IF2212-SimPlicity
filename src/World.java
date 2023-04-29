@@ -69,6 +69,21 @@ public class World {
         this.simList.add(sim);
     }
 
+    public Tile getWorldTile(){
+        return this.map;
+    }
+
+    public int getWorldWidth(){
+        return this.WID_CAPACITY;
+    }
+
+    public int getWorldLength(){
+        return this.LEN_CAPACITY;
+    }
+
+
+
+
     public void printSimList(){
         for(int i = 0 ; i < simList.size(); i++){
             System.out.println((i+1) + ". " + simList.get(i).getSimName());

@@ -144,13 +144,13 @@ public class Menu {
             case 2 :
                 System.out.println("Masukkan durasi olahraga :");
                 int durasiOlahraga = input.nextInt();
-                sim.work(durasiOlahraga);
+                sim.sport(durasiOlahraga);
                 break;
             case 3 :
                 if(sim.useItem.equals("Single Bed") || sim.useItem.equals("Queen Size Bed") || sim.useItem.equals("King Size Bed")){
                     System.out.println("Masukkan durasi Tidur :");
                     int durasiTidur = input.nextInt();
-                    sim.work(durasiTidur);
+                    sim.sleep(durasiTidur);
                 }
                 else{
                     System.out.println("Silahkan pergi ke object 'Bed' untuk tidur!");

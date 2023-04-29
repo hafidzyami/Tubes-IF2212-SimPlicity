@@ -31,6 +31,7 @@ public class Sim {
         this.myHome = home;
         this.currentHome = home;
         this.currentWorld = world;
+        this.useItem = "";
         // pada awal di buat status bersifat "idle"
         this.status = "idle";
         
@@ -369,8 +370,6 @@ public class Sim {
         System.out.println("Sim sedang melihat waktu");
         //Menu.goToObject(); //ke clock, nungguin alta our superhero
         System.out.println("waktu hari ini tersisa " + currentWorld.getWorldClock().getSisaWaktu());
-
-
     }
 
     //costum action 

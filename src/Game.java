@@ -69,7 +69,15 @@ public class Game {
                     int xHome = input.nextInt();
                     System.out.print("Masukkan lokasi rumah (Y) untuk dibangun : ");
                     int yHome = input.nextInt();
-                    Menu.addSim(world, name, xHome, yHome);
+                    if(!world.getWorldTile().getTile(xHome, yHome).equals("E")){
+                        System.out.println("Tidak bisa membangun rumah karena lokasi sudah ditempati rumah lain!");
+                    }
+                    else if(xHome >= 1 && xHome <= world.getWorldLength() && yHome >= 1 && yHome <= world.getWorldWidth()){
+                        Menu.addSim(world, name, xHome, yHome);
+                    }
+                    else{
+                        System.out.println("Tidak bisa membangun rumah karena input lokasi di luar jangkauan World!");
+                    }
                     break;
 
                 case "11", "change sim":
@@ -101,18 +109,13 @@ public class Game {
                 case "13","go to object" :
                     Menu.listObject(world);
                     System.out.println("Silahkan ketikan nama object yang ingin dituju!");
-                    String key13 = input.next();
-                    boolean flag13 = true;
-                    while(flag13){
-                        if(!sim1.currentRoom.getItemList().containsKey(key13)){
-                            System.out.println("Nama object salah/tidak ada! Silahkan ketikan nama object yang benar!");
-                            key13 = input.next();
-                        }
-                        else{
-                            flag13 = false;
-                        }
+                    String key13 = input.nextLine();
+                    if(!sim1.currentRoom.getItemList().containsKey(key13)){
+                        System.out.println("Nama object salah/tidak ada! Silahkan ketikan nama object yang benar!");
                     }
-                    Menu.goToObject(world, key13);
+                    else{
+                        Menu.goToObject(world, key13);
+                    }
                     break;
 
                 case "14","action" :
