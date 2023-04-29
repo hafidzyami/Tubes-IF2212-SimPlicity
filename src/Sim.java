@@ -251,7 +251,6 @@ public class Sim implements Runnable {
         this.status = "cooking";
         FoodCooked meal = new FoodCooked(mealName);
         ArrayList<FoodIngredients> ingredients = meal.getIngredientsList();
-        // boolean found = false;
         for (Item ingredient : ingredients) {
             for (Item item : inventory.getInventory()) {
                 if (item.getClass().getName().equals("FoodIngredients")) {
