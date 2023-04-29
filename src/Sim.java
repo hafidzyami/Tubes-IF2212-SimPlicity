@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Sim implements Runnable {
+public class Sim {
     private String fullName;
     private Job job;
     private int money;
@@ -19,7 +19,6 @@ public class Sim implements Runnable {
     
     public Clock clock;
     public String useItem;
-    public WorldClock worldClock;
 
     //konstruktor
     public Sim(String nama,Home home, World world) {
@@ -35,16 +34,6 @@ public class Sim implements Runnable {
         // pada awal di buat status bersifat "idle"
         this.status = "idle";
         
-    }
-
-    public void run() {
-        try {
-            Thread.sleep(5000);
-        }
-        catch (Exception e){
-
-        }
-        System.out.println(fullName + " Sedang beraktivitas");
     }
 
     //getter 
@@ -150,33 +139,23 @@ public class Sim implements Runnable {
         } else {
             this.status = "work"; 
             System.out.println("Sim sedang bekerja sebagai " + getSimJob());
-            Thread t = new Thread(new Runnable(){
-                public void run(){
-                    int temp = duration/30; 
-                    for (int i = 0; i < temp; i++){
-                        try{
-                            System.out.println("work work work");
-                            worldClock.wait(30 * 1000);
-                            gainHunger(-10); 
-                            gainMood(-10); 
-
-                            workTime += 30; 
-                            if (workTime % 240 == 0){
-                                gainMoney(getSimJob().getDaySalary()); 
-                                System.out.println("sim telah selesai bekerja dan mendapatkan "+ getSimJob().getDaySalary()); 
-                                System.out.println("uang sim menjadi : " + getMoney()); 
-                            } else {
-                                System.out.println("sim sudah bekerja selama "+ (float)workTime/60 + " menit.");
-                            }
-                        }
-                        catch (InterruptedException e){
-                            e.printStackTrace();
-                        }
-                    }
-                    currentWorld.getWorldClock().updateTime(duration);
-                }
-            });
-            t.start(); 
+            int temp = duration/30; 
+            for (int i = 0; i < temp; i++){
+            System.out.println("work work work");
+            currentWorld.getWorldClock().wait(30);
+            gainHunger(-10); 
+            gainMood(-10); 
+            workTime += 30; 
+            if (workTime % 240 == 0){
+                gainMoney(getSimJob().getDaySalary()); 
+                System.out.println("sim telah selesai bekerja dan mendapatkan "+ getSimJob().getDaySalary()); 
+                System.out.println("uang sim menjadi : " + getMoney()); 
+            } 
+            else {
+            System.out.println("sim sudah bekerja selama "+ (float)workTime/60 + " menit.");
+            }
+            currentWorld.getWorldClock().updateTime(duration);
+            }
         }
 
     }
@@ -200,79 +179,46 @@ public class Sim implements Runnable {
         if(duration % 20 != 0){
             System.out.println("Durasi olahraga harus kelipatan 20 detik!");
         }
+
         else{
-            this.status = "sport";
-            Thread t = new Thread(new Runnable(){
-                public void run(){
-                    int sportTime = 0;
-                    int temp = duration/20;
-                    while(sportTime != duration){
-                        try{
-                            Thread.sleep(1000); 
-                            sportTime++;
-                            System.out.println("Sedang olahraga selama " + sportTime + " detik");
-                        }
-                        catch (InterruptedException e){
-                            e.printStackTrace();
-                        }
-                    }
-                    setIdle();
-                    gainHealth(5*temp);
-                    gainHunger(-5*temp);
-                    gainMood(10*temp);
-                } 
-            });
-            t.start();
+        this.status = "sport";
+        int sportTime = 0;
+        int temp = duration/20;
+        while(sportTime != duration){
+            currentWorld.getWorldClock().wait(1);
+            sportTime++;
+            System.out.println("Sedang olahraga selama " + sportTime + " detik");
         }
-        
+        setIdle();
+        gainHealth(5*temp);
+        gainHunger(-5*temp);
+        gainMood(10*temp);     
+        }
     }
 
 
     public void sleep (int duration){
         this.status = "sleep";
-        Thread t = new Thread(new Runnable(){
-            public void run(){
-                int sleepTime = 0;
-                while(sleepTime != duration){
-                    try{
-                        Thread.sleep(1000); 
-                        sleepTime++;
-                        System.out.println("Sedang tidur selama " + sleepTime + " detik");
-                    }
-                    catch (InterruptedException e){
-                        e.printStackTrace();
-                    }
-                }
-
-                setIdle();
-                
-                if(sleepTime >= 3){
-                    gainMood(30*(duration/4));
-                    gainHealth(20*(duration/4));
-                }
-            } 
-        });
-
-        t.start();
+        int sleepTime = 0;
+        while(sleepTime != duration){
+            currentWorld.getWorldClock().wait(1);
+            sleepTime++;
+            System.out.println("Sedang tidur selama " + sleepTime + " detik");
+        }
+        setIdle();
+        if(sleepTime >= 4){
+            gainMood(30*(duration/4));
+            gainHealth(20*(duration/4));
+        }
     }
 
     public void eat (Food food){
         this.status = "eat";
         System.out.println("Sim sedang makan " + food.getName());
-        Thread t = new Thread(new Runnable(){
-            public void run(){
-                try{
-                    Thread.sleep(30000); 
-                    gainHunger(food.getSatiation());
-                    System.out.println("Sim telah makan!");
-                    System.out.println("Kekenyagan sim saat ini : " + getSimHunger());
-                }
-                catch (InterruptedException e){
-                    e.printStackTrace();
-                }
-            } 
-        });
-        t.start();
+        currentWorld.getWorldClock().wait(30); 
+        gainHunger(food.getSatiation());
+        System.out.println("Sim telah makan!");
+        System.out.println("Kekenyagan sim saat ini : " + getSimHunger());
     }
 
     public void cook (String mealName) {
@@ -304,10 +250,9 @@ public class Sim implements Runnable {
             double distance = Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
             int tick = 0;
             System.out.println("Sim berkunjung ke rumah " + currentWorld.getHomeList().get(idxHome).getOwner() + "dengan durasi : " + distance + " detik");
-            while(getSimStatus().equals("onTheWay")){
-                try{
+            while(getSimStatus().equals("onTheWay")) {
                     System.out.println("Sim sedang dalam perjalanan!");
-                    Thread.sleep(1000);
+                    currentWorld.getWorldClock().wait(1);
                     tick++;
                     if(tick >= distance){
                         System.out.println("Sim sudah sampai!");
@@ -315,11 +260,6 @@ public class Sim implements Runnable {
                         currentHome = currentWorld.getHomeList().get(idxHome-1);
                         tick = 0;
                     }
-                }
-                catch (InterruptedException e){
-                    e.printStackTrace();
-                }
-
                 // ini gw masih bingung
                 // gainMood(10*(duration/30));
                 // gainHunger(-10*(duration/30));
@@ -330,21 +270,9 @@ public class Sim implements Runnable {
     public void pee() {
         this.status = "pee";
         System.out.println("Sim sedang buang air");
-        Thread t = new Thread(new Runnable(){
-            public void run(){
-                try{
-                    Thread.sleep(10000); 
-                    gainHunger(-20);
-                    gainMood(10);
-                    System.out.println("Sim telah buang air selama 10 detik");
-                }
-                catch (InterruptedException e){
-                    e.printStackTrace();
-                }
-            } 
-        });
-
-        t.start();
+        currentWorld.getWorldClock().wait(10);
+        gainMood(10);
+        System.out.println("Sim telah buang air selama 10 detik");
     }
 
     // needed time action 
@@ -358,7 +286,7 @@ public class Sim implements Runnable {
             public void run(){
                 try {
                     if (item != null && item.getPrice() <= getMoney()) {
-                        worldClock.wait(0);
+                        Thread.sleep(0);
                         gainMoney(-item.getPrice());
                         System.out.println("sim membeli" + item.getName() + "dengan harga" + item.getPrice());
                         int deliveryTime = (int) (Math.random() * 5 * 1) * 30;
@@ -433,7 +361,7 @@ public class Sim implements Runnable {
         this.status = "see time";
         System.out.println("Sim sedang melihat waktu");
         //Menu.goToObject(); //ke clock, nungguin alta our superhero
-        System.out.println("waktu hari ini tersisa " + worldClock.getSisaWaktu());
+        System.out.println("waktu hari ini tersisa " + currentWorld.getWorldClock().getSisaWaktu());
 
 
     }
@@ -442,44 +370,23 @@ public class Sim implements Runnable {
     public void crying() {
         this.status = "crying"; 
         System.out.println("Sim akan menangis karena stress");
-        Thread t = new Thread(new Runnable(){
-            public void run(){
-                try{
-                    worldClock.wait(1000);
-                    gainHunger(-10);
-                    gainMood(10);
-                    System.out.println("Sim sudah selesai menangis :(");
-                }
-                catch (InterruptedException e){
-                    e.printStackTrace();
-                }
-
-            } 
-        });
-        t.start();
+        currentWorld.getWorldClock().wait(1);
+        gainHunger(-10);
+        gainMood(10);
+        System.out.println("Sim sudah selesai menangis :(");
     }
 
     public void recitate(int duration){
         this.status = "recitate";
-        Thread t = new Thread(new Runnable(){
-            public void run(){
-                int recitateTime = 0;
-                int temp = duration/60;
-                while(recitateTime != duration){
-                    try{
-                        Thread.sleep(1000); 
-                        recitateTime++;
-                        System.out.println("Sedang mengaji selama " + recitateTime + " detik");
-                    }
-                    catch (InterruptedException e){
-                        e.printStackTrace();
-                    }
-                }
-                setIdle();
-                gainMood(3*temp);
-            } 
-        });
-        t.start();
+        int recitateTime = 0;
+        int temp = duration/60;
+        while(recitateTime != duration){
+            currentWorld.getWorldClock().wait(1);
+            recitateTime++;
+            System.out.println("Sedang mengaji selama " + recitateTime + " detik");
+        }
+        setIdle();
+        gainMood(3*temp);
     }
 
     public void steal(String itemName){

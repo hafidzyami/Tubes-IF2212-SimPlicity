@@ -22,7 +22,15 @@ public class WorldClock  {
         return gameDay * 720 - totalElapsed;
     }
 
-
+    // Delay dengan duration dalam detik
+    public void wait(int duration) {
+        try {
+            Thread.sleep(duration*1000);
+        }
+        catch(Exception e) {
+            Thread.interrupted();
+        }
+    }
     public static void main(String[] args) {
         WorldClock jam = new WorldClock();
         jam.updateTime(40);
