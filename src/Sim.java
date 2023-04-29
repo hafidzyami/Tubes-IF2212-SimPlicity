@@ -151,7 +151,6 @@ public class Sim implements Runnable {
             this.status = "work"; 
             System.out.println("Sim sedang bekerja sebagai " + getSimJob());
             Thread t = new Thread(new Runnable(){
-                int timeWork = 0;
                 public void run(){
                     int temp = duration/30; 
                     for (int i = 0; i < temp; i++){
@@ -161,13 +160,13 @@ public class Sim implements Runnable {
                             gainHunger(-10); 
                             gainMood(-10); 
 
-                            timeWork += 30; 
-                            if (timeWork == 240){
+                            workTime += 30; 
+                            if (workTime % 240 == 0){
                                 gainMoney(getSimJob().getDaySalary()); 
                                 System.out.println("sim telah selesai bekerja dan mendapatkan "+ getSimJob().getDaySalary()); 
                                 System.out.println("uang sim menjadi : " + getMoney()); 
                             } else {
-                                System.out.println("sim sudah bekerja selama "+ (float)timeWork/60 + "menit");
+                                System.out.println("sim sudah bekerja selama "+ (float)workTime/60 + " menit.");
                             }
                         }
                         catch (InterruptedException e){
