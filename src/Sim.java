@@ -18,6 +18,7 @@ public class Sim implements Runnable {
     
     public Clock clock;
     public String useItem;
+    public WorldClock worldClock;
 
     //konstruktor
     public Sim(String nama,Home home, World world) {
@@ -110,25 +111,36 @@ public class Sim implements Runnable {
         this.status = status;
     }
 
+    public void setCurrentRoom(Room room) {
+        this.currentRoom = room;
+    }
+
+    //gainer
     public void gainMood(int mood){
         this.mood += mood;
+        if (this.mood >= 100){
+            this.mood = 100; 
+        }
     }
 
     public void gainHealth(int health){
         this.health += health;
+        if (this.health >= 100){
+            this.health = 100; 
+        }
     }
 
     public void gainHunger( int hunger){
         this.hunger += hunger;
+        if (this.hunger >= 100){
+            this.hunger = 100; 
+        }
     }
 
     public void gainMoney(int money){
         this.money += money; 
     }
 
-    public void setCurrentRoom(Room room) {
-        this.currentRoom = room;
-    }
 
     // active action 
     public void work (int duration){
@@ -161,6 +173,7 @@ public class Sim implements Runnable {
                             e.printStackTrace();
                         }
                     }
+                    currentWorld.getWorldClock().updateTime(duration);
                 }
             });
             t.start(); 
@@ -404,8 +417,10 @@ public class Sim implements Runnable {
     public void seeTime() {
         this.status = "see time";
         System.out.println("Sim sedang melihat waktu");
-        //Menu.goToObject(); //ke clock
-        System.out.println("waktu saat ini adalah...");
+        //Menu.goToObject(); //ke clock, nungguin alta our superhero
+        System.out.println("waktu hari ini tersisa " + worldClock.getSisaWaktu());
+
+
     }
 
     //costum action 
