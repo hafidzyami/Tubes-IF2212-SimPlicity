@@ -102,7 +102,7 @@ public class Menu {
 
     public static void addSim(World world, String name, int xHome, int yHome) {
         Home home = Home.newHome(world, xHome, yHome);
-        Sim sim = new Sim(name,home);
+        Sim sim = new Sim(name,home, world);
         home.setOwner(sim);
         world.addSimList(sim);
         world.addNewHome(home);
@@ -175,7 +175,7 @@ public class Menu {
                 world.printMap();
                 System.out.println("Ketikan nomor Sim untuk dikunjungi :");
                 int idxVisit = input.nextInt();
-                sim.visit(world.getHomeList().get(idxVisit).getLocX(), world.getHomeList().get(idxVisit).getLocY(), idxVisit);
+                sim.visit(world.getHomeList().get(idxVisit-1).getLocX(), world.getHomeList().get(idxVisit-1).getLocY(), idxVisit-1);
                 break;
             case 7:
                 if(sim.useItem.equals("Toilet")){
