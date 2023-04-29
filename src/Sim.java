@@ -222,20 +222,28 @@ public class Sim {
     }
 
     public void cook (String mealName) {
+        System.out.println(this.fullName + " sedang memasak " + mealName);
         this.status = "cooking";
         FoodCooked meal = new FoodCooked(mealName);
         ArrayList<FoodIngredients> ingredients = meal.getIngredientsList();
+        currentWorld.getWorldClock().wait((int) 1.5*meal.getSatiation());
         for (Item ingredient : ingredients) {
             for (Item item : inventory.getInventory().keySet()) {
                 if (item.getClass().getName().equals("FoodIngredients")) {
                     if (item.equals(ingredient)) {
                         inventory.deleteInventory(item);
+                        ingredients.remove(ingredient);
                     }
                 }
             }
         };
         
-        inventory.addInventory(meal);
+        if (ingredients.isEmpty()) {
+            inventory.addInventory(meal);
+            System.out.println(meal.getName() + " ditambahkan ke inventory!");
+        } else {
+            System.out.println(meal.getName() + " tidak jadi karena bahan kurang!");
+        }
     }
 
     public void visit (int x2, int y2, int idxHome){
