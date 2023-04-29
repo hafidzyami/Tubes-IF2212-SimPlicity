@@ -10,6 +10,7 @@ public class Sim implements Runnable {
     private int health;
     private String status;
     private final Home myHome;
+    private int workTime; 
 
     // ini nyoba
     public Room currentRoom;
@@ -179,6 +180,21 @@ public class Sim implements Runnable {
             t.start(); 
         }
 
+    }
+
+    public void changeJob(Job newJob){
+        this.status = "changing job";
+        if (workTime >= 12 * 60){
+            System.out.println("Sim akan mengubah pekerjaan " + getSimJob() + " menjadi " + newJob.getJobName()); 
+            //sleep 1 detik 
+            gainMoney(- 1/2 * newJob.getDaySalary());
+            System.out.println("..."); 
+            System.out.println("Sim telah mengubah pekerjaanya menjadi " + newJob.getJobName() + "dan membayar sebesar" + 1/2 * newJob.getDaySalary()); 
+            System.out.println("Sisa uang sim sekarang : " + getMoney()); 
+        } else {
+            System.out.println("Sim baru bekerja selama " + workTime);
+            System.out.println("Sim harus bekerja selama 12 menit terlebih dahulu sebelum mengganti pekerjaan!");
+        }
     }
 
     public void sport (int duration){
