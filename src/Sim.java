@@ -1,8 +1,10 @@
+import java.util.ArrayList;
+
 public class Sim implements Runnable {
     private String fullName;
     private Job job;
     private int money;
-    private Inventory inventory = new Inventory();
+    private Inventory<Item> inventory = new Inventory();
     private int hunger;
     private int mood;
     private int health;
@@ -65,7 +67,7 @@ public class Sim implements Runnable {
         return job;
     }
 
-    public Inventory getSimInventory() {
+    public Inventory<Item> getSimInventory() {
         return inventory;
     }
 
@@ -244,8 +246,22 @@ public class Sim implements Runnable {
         t.start();
     }
 
-    public void cook () {
-
+    public void cook (String mealName) {
+        this.status = "cooking";
+        FoodCooked meal = new FoodCooked(mealName);
+        ArrayList<FoodIngredients> ingredients = meal.getIngredientsList();
+        // boolean found = false;
+        for (Item ingredient : ingredients) {
+            for (Item item : inventory.getInventory()) {
+                if (item.getClass().getName().equals("FoodIngredients")) {
+                    if (item.equals(ingredient)) {
+                        inventory.deleteInventory(item);
+                    }
+                }
+            }
+        };
+        
+        inventory.addInventory(meal);
     }
 
     public void visit (int x2, int y2, int idxHome){
