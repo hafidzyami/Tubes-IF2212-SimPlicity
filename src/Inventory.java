@@ -70,8 +70,10 @@ public class Inventory < T extends Item> {
         }
     }
     public void printInventory(){
+        int idx = 1;
         for(T i : itemList.keySet()){
-            System.out.println(i.getName() + " " + itemList.get(i));
+            System.out.println(idx + ". " + i.getName() + " " + itemList.get(i));
+            idx++;
         }
     }
 
