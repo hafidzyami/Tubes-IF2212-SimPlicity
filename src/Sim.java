@@ -141,7 +141,7 @@ public class Sim implements Runnable {
         this.money += money; 
     }
 
-
+ 
     // active action 
     public void work (int duration){
         if (duration % 120 != 0){
@@ -156,7 +156,7 @@ public class Sim implements Runnable {
                     for (int i = 0; i < temp; i++){
                         try{
                             System.out.println("work work work");
-                            Thread.sleep(30 * 1000);
+                            worldClock.wait(30 * 1000);
                             gainHunger(-10); 
                             gainMood(-10); 
 
@@ -343,7 +343,7 @@ public class Sim implements Runnable {
             public void run(){
                 try {
                     if (item != null && item.getPrice() <= getMoney()) {
-                        Thread.sleep(0); 
+                        worldClock.wait(0);
                         gainMoney(-item.getPrice());
                         System.out.println("sim membeli" + item.getName() + "dengan harga" + item.getPrice());
                         int deliveryTime = (int) (Math.random() * 5 * 1) * 30;
@@ -430,7 +430,7 @@ public class Sim implements Runnable {
         Thread t = new Thread(new Runnable(){
             public void run(){
                 try{
-                    Thread.sleep(1000); 
+                    worldClock.wait(1000);
                     gainHunger(-10);
                     gainMood(10);
                     System.out.println("Sim sudah selesai menangis :(");
@@ -441,7 +441,6 @@ public class Sim implements Runnable {
 
             } 
         });
-
         t.start();
     }
 
