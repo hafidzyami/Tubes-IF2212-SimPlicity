@@ -34,20 +34,24 @@ public class Inventory < T extends Item> {
         return temp;
     }
 
-    public boolean checkItem(T items){
-        boolean ada = false;
+    public int getIndeksItem (T items){
+        int idx = 0;
+        int idxhsl = -1;
         for (T i : itemList.keySet()){
             if(i.getName().equals(items.getName())){
-                ada = true;
+                idxhsl = idx;
+            }else{
+                idx++;
             }
+
         }
-        return ada;
+        return idxhsl;
     }
 
     public void addInventory(T t){
-        if(checkItem(t)){
-            T temp = t;
-            itemList.put(temp,itemList.get(t)+1);
+        if(getIndeksItem(t) != -1){
+            Integer temp = itemList.get(getItem(getIndeksItem(t))) + 1;
+            itemList.put(getItem(getIndeksItem(t)),temp);
         }
         else{
             itemList.put(t,1);
@@ -56,25 +60,44 @@ public class Inventory < T extends Item> {
     }
 
     public void deleteInventory(T t){
-        if (checkItem(t)){
-            T temp = t;
-            itemList.put(temp,itemList.get(t)-1);
-            if(itemList.get(t) == 0){
-                itemList.remove(t);
+        if (getIndeksItem(t) != -1){
+            Integer temp = itemList.get(getItem(getIndeksItem(t))) - 1;
+            itemList.put(getItem(getIndeksItem(t)),temp);
+            if(itemList.get(getItem(getIndeksItem(t))) == 0){
+                itemList.remove(getItem(getIndeksItem(t)));
             }
             inventoryCount--;
         }
     }
     public void printInventory(){
         for(T i : itemList.keySet()){
-            System.out.println(i.getName());
+            System.out.println(i.getName() + " " + itemList.get(i));
         }
     }
 
     public static void main(String[] args){
         Inventory<Item> x = new Inventory<>();
+        FoodIngredients item1 = new FoodIngredients("Rice");
+        NonFoodItem item2 = new NonFoodItem("Single Bed");
         x.printInventory();
-        x.addInventory(new NonFoodItem("Toilet"));
+        System.out.println(" ");
+        x.addInventory(item1);
         x.printInventory();
+        x.addInventory(item2);
+        System.out.println(" ");
+        x.printInventory();
+        x.addInventory(item2);
+        System.out.println(" ");
+        x.printInventory();
+        x.deleteInventory(item1);
+        System.out.println(" ");
+        x.printInventory();
+        x.addInventory(item2);
+        System.out.println(" ");
+        x.printInventory();
+        x.deleteInventory(item2);
+        System.out.println(" ");
+        x.printInventory();
+
     }
 }
