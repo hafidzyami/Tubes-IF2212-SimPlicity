@@ -16,6 +16,7 @@ public class Game {
         home1.setOwner(sim1);
         world.addSimList(sim1);
         world.addNewHome(home1);
+        world.setPlayedSim(sim1);
         sim1.setCurrentRoom(home1.getRoomList().get(0));
         world.updateMap();
         while(playing) {
