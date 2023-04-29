@@ -13,6 +13,6 @@ public class Clock extends NonFoodItem {
 
     public static void main(String[] args){
         Clock c = new Clock();
-        System.out.println(c.getTime());
+        System.out.println(c.getName());
     }
 }
