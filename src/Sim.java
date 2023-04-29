@@ -227,7 +227,7 @@ public class Sim {
         ArrayList<FoodIngredients> ingredients = meal.getIngredientsList();
         // boolean found = false;
         for (Item ingredient : ingredients) {
-            for (Item item : inventory.getInventory()) {
+            for (Item item : inventory.getInventory().keySet()) {
                 if (item.getClass().getName().equals("FoodIngredients")) {
                     if (item.equals(ingredient)) {
                         inventory.deleteInventory(item);
