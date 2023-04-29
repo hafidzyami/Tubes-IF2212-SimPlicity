@@ -12,7 +12,7 @@ public class Game {
         }
         System.out.print("Masukkan nama sim: ");
         Home home1 = Home.newHome(world, 1, 1);
-        Sim sim1 = new Sim(input.next(),home1);
+        Sim sim1 = new Sim(input.next(),home1, world);
         home1.setOwner(sim1);
         world.addSimList(sim1);
         world.addNewHome(home1);

@@ -18,7 +18,7 @@ public class Sim implements Runnable {
     public String useItem;
 
     //konstruktor
-    public Sim(String nama,Home home) {
+    public Sim(String nama,Home home, World world) {
         this.fullName = nama;
         this.hunger = 80;
         this.mood = 80;
@@ -27,6 +27,7 @@ public class Sim implements Runnable {
         this.job = Job.firstJob();
         this.myHome = home;
         this.currentHome = home;
+        this.currentWorld = world;
         // pada awal di buat status bersifat "idle"
         this.status = "idle";
         
@@ -254,11 +255,11 @@ public class Sim implements Runnable {
         }
         else{
             this.status = "onTheWay";
-            System.out.println("Sim berkunjung");
             int x1 = currentHome.getLocX();
             int y1 = currentHome.getLocY();
             double distance = Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
             int tick = 0;
+            System.out.println("Sim berkunjung ke rumah " + currentWorld.getHomeList().get(idxHome).getOwner() + "dengan durasi : " + distance + " detik");
             while(getSimStatus().equals("onTheWay")){
                 try{
                     System.out.println("Sim sedang dalam perjalanan!");
@@ -267,7 +268,7 @@ public class Sim implements Runnable {
                     if(tick >= distance){
                         System.out.println("Sim sudah sampai!");
                         setSimStatus("idle");
-                        currentHome = currentWorld.getHomeList().get(idxHome);
+                        currentHome = currentWorld.getHomeList().get(idxHome-1);
                         tick = 0;
                     }
                 }
