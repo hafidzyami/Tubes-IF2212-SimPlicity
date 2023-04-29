@@ -10,7 +10,7 @@ public class Inventory < T extends Item> {
         itemList.put((T) new NonFoodItem("Single Bed"), 1);
         itemList.put((T) new NonFoodItem("Toilet"), 1);
         itemList.put((T) new NonFoodItem("Table and Chair"), 1);
-        itemList.put((T) new NonFoodItem("Clock"), 1);    
+        itemList.put((T) new Clock(), 1);    
         inventoryCount = itemList.size();
     }
 

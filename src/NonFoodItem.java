@@ -56,11 +56,11 @@ public class NonFoodItem extends Item implements PurchaseAble {
             this.length = 3;
             this.width = 3;
         }
-        else if(name.equals("Clock")){
-            this.price = 10;
-            this.length = 1;
-            this.width = 1;
-        }
+        // else if(name.equals("Clock")){
+        //     this.price = 10;
+        //     this.length = 1;
+        //     this.width = 1;
+        // }
     }
 
     // getter
