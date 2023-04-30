@@ -10,7 +10,9 @@ public class Inventory < T extends Item> {
         itemList.put((T) new NonFoodItem("Single Bed"), 1);
         itemList.put((T) new NonFoodItem("Toilet"), 1);
         itemList.put((T) new NonFoodItem("Table and Chair"), 1);
-        itemList.put((T) new Clock(), 1);    
+        itemList.put((T) new Clock(), 1);
+        itemList.put((T) new FoodIngredients("Rice"), 1);  
+        itemList.put((T) new FoodIngredients("Potato"), 1);  
         inventoryCount = itemList.size();
     }
 
@@ -28,6 +30,18 @@ public class Inventory < T extends Item> {
         for (T j : itemList.keySet()){
             if(i == idx){
                 temp = j;
+            }
+            i++;
+        }
+        return temp;
+    }
+
+    public NonFoodItem getOneNFI(int idx){
+        int i = 0;
+        NonFoodItem temp = null;
+        for(T j : getNonFoodItem().keySet()){
+            if(i == idx){
+                temp = (NonFoodItem) j;
             }
             i++;
         }
@@ -78,6 +92,11 @@ public class Inventory < T extends Item> {
             }
         }
         return temp;
+    }
+
+    public int getNonFoodCount(){
+        HashMap<T,Integer> temp = getNonFoodItem();
+        return temp.size();
     }
 
     public HashMap<T,Integer> getFoodItem () {

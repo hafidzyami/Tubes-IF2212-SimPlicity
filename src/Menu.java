@@ -75,27 +75,32 @@ public class Menu {
             }
         }
         else if(idx == 2){
-            sim.currentRoom.getRoomTile().printTile();
-            System.out.println("Silahkan pilih nomor barang yang ingin dipasang dari inventory kamu : ");
-            sim.getSimInventory().printInventory(sim.getSimInventory().getNonFoodItem());
-            Scanner input = new Scanner(System.in);
-            int idxItem = input.nextInt();
-            boolean flagEditRoom = false;
-            while(!flagEditRoom){
-                if(idxItem > 0 && idxItem <= sim.getSimInventory().getInventoryCount()){
-                    flagEditRoom = true;
+            if( sim.getSimInventory().getNonFoodCount() > 0){
+                sim.currentRoom.getRoomTile().printTile();
+                System.out.println("Silahkan pilih nomor barang yang ingin dipasang dari inventory kamu : ");
+                sim.getSimInventory().printInventory(sim.getSimInventory().getNonFoodItem());
+                Scanner input = new Scanner(System.in);
+                int idxItem = input.nextInt();
+                boolean flagEditRoom = false;
+                while(!flagEditRoom){
+                    if(idxItem > 0 && idxItem <= sim.getSimInventory().getNonFoodCount()){
+                        flagEditRoom = true;
+                    }
+                    else{
+                        System.out.println("Silahkan pilih nomor yang benar!");
+                        idxItem = input.nextInt();
+                    }
                 }
-                else{
-                    System.out.println("Silahkan pilih nomor yang benar!");
-                    idxItem = input.nextInt();
-                }
+                System.out.println("Silahkan pilih posisi upperLeft (X) dari barang yang ingin di pasang : ");
+                int wantedX = input.nextInt();
+                System.out.println("Silahkan pilih posisi upperLeft (Y) dari barang yang ingin di pasang : ");
+                int wantedY = input.nextInt();
+                sim.installItem(sim.currentRoom, idxItem-1, wantedX, wantedY);
+                sim.currentRoom.getRoomTile().printTile();
             }
-            System.out.println("Silahkan pilih posisi upperLeft (X) dari barang yang ingin di pasang : ");
-            int wantedX = input.nextInt();
-            System.out.println("Silahkan pilih posisi upperLeft (Y) dari barang yang ingin di pasang : ");
-            int wantedY = input.nextInt();
-            sim.installItem(sim.currentRoom, idxItem-1, wantedX, wantedY);
-            sim.currentRoom.getRoomTile().printTile();
+            else{
+                System.out.println("Tidak bisa memasang barang karena inventory kamu kosong!");
+            }
         }
 
     }
