@@ -15,6 +15,10 @@ public class WorldClock  {
         return gameDay;
     }
 
+    public int getTotalElapsed(){
+        return totalElapsed; 
+    }
+
     public int getSisaWaktu() {
         getDay();
         /* System.out.println(totalElapsed);

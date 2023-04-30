@@ -17,6 +17,7 @@ public class World {
         Tile matrix = new Tile(LEN_CAPACITY,WID_CAPACITY);
         this.map = matrix;
         this.homeList = new ArrayList<>();
+        this.worldClock = new WorldClock();
         
     }
 

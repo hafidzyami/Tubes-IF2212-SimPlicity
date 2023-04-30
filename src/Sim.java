@@ -15,7 +15,7 @@ public class Sim {
     // ini nyoba
     public Room currentRoom;
     public Home currentHome;
-    public World currentWorld;
+    public static World currentWorld;
     
     public Clock clock;
     public String useItem;
@@ -290,16 +290,26 @@ public class Sim {
 
     public void buyItem(PurchaseAble item) {
         this.status = "buying item"; 
-        if (item != null && item.getPrice() <= getMoney()) {
-            gainMoney(-item.getPrice());
-            System.out.println("sim membeli '" + item.getName() + "'' dengan harga : " + item.getPrice());
-            int deliveryTime = (int) (Math.random() * 5 * 1) * 30;
-            System.out.println("barang akan tersedia dalam waktu "+ deliveryTime + " detik, silahkan menunggu");
-            currentWorld.getWorldClock().wait(deliveryTime);
-            inventory.addInventory((Item) item);
-        } else {
-            System.out.println("uang sim tidak cukup!");
-        }
+        Thread t = new Thread(new Runnable(){
+            public void run(){
+                int now = currentWorld.getWorldClock().getTotalElapsed();
+                if (item != null && item.getPrice() <= getMoney()) {
+                    int deliveryTime = (int) (Math.random() * 5 * 1) * 30;
+                    while (true) {
+                        if (now >= now + deliveryTime){
+                            gainMoney(-item.getPrice());
+                            System.out.println("sim membeli '" + item.getName() + "'' dengan harga : " + item.getPrice());
+                            System.out.println("barang akan tersedia dalam waktu "+ deliveryTime + " detik, silahkan menunggu");
+                            inventory.addInventory((Item) item);
+                            break;
+                        }
+                    }
+                } else {
+                    System.out.println("uang sim tidak cukup!");
+                }
+            }
+        });
+        t.start();
     }
 
     //not needed time action 
@@ -353,7 +363,6 @@ public class Sim {
     public void seeTime() {
         this.status = "see time";
         System.out.println("Sim sedang melihat waktu");
-        //Menu.goToObject(); //ke clock, nungguin alta our superhero
         System.out.println("waktu hari ini tersisa " + currentWorld.getWorldClock().getSisaWaktu());
     }
 
