@@ -107,14 +107,19 @@ public class Game {
                     break;
 
                 case "13","go to object" :
-                    Menu.listObject(world);
-                    System.out.println("Silahkan ketikan nama object yang ingin dituju!");
-                    String key13 = input.nextLine();
-                    if(!sim1.currentRoom.getItemList().containsKey(key13)){
-                        System.out.println("Nama object salah/tidak ada! Silahkan ketikan nama object yang benar!");
+                    if(world.getPlayedSim().currentRoom.getItemList().size() > 0){
+                        Menu.listObject(world);
+                        System.out.println("Silahkan ketikan nama object yang ingin dituju!");
+                        String key13 = input.nextLine();
+                        if(!sim1.currentRoom.getItemList().containsKey(key13)){
+                            System.out.println("Nama object salah/tidak ada! Silahkan ketikan nama object yang benar!");
+                        }
+                        else{
+                            Menu.goToObject(world, key13);
+                        }
                     }
                     else{
-                        Menu.goToObject(world, key13);
+                        System.out.println("Tidak ada object yang bisa dituju karena current room kosong!");
                     }
                     break;
 

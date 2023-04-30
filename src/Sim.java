@@ -26,7 +26,7 @@ public class Sim {
         this.hunger = 80;
         this.mood = 80;
         this.health = 80;
-        this.money = 100;
+        this.money = 10000;
         this.job = Job.firstJob();
         this.myHome = home;
         this.currentHome = home;
@@ -296,7 +296,7 @@ public class Sim {
                     if (item != null && item.getPrice() <= getMoney()) {
                         Thread.sleep(0);
                         gainMoney(-item.getPrice());
-                        System.out.println("sim membeli" + item.getName() + "dengan harga" + item.getPrice());
+                        System.out.println("sim membeli '" + item.getName() + "'' dengan harga : " + item.getPrice());
                         int deliveryTime = (int) (Math.random() * 5 * 1) * 30;
                         System.out.println("barang akan tersedia dalam waktu "+ deliveryTime + " detik, silahkan menunggu");
                         try{

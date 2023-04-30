@@ -63,15 +63,20 @@ public class Menu {
             System.out.println("Silahkan pilih 1 untuk Non Food");
             System.out.println("Silahkan pilih 2 untuk Food Ingredients");
             int idxBeli =Integer.parseInt(input.nextLine());
-            System.out.println("Silahkan masukan nama barang : ");
-            String name = input.nextLine();
             if(idxBeli == 1){
+                System.out.println("Silahkan masukan nama barang : ");
+                String name = input.nextLine();
                 PurchaseAble item = new NonFoodItem(name);
                 sim.buyItem(item);
             }
-            else{
+            else if(idxBeli == 2){
+                System.out.println("Silahkan masukan nama barang : ");
+                String name = input.nextLine();
                 PurchaseAble item = new FoodIngredients(name);
                 sim.buyItem(item);
+            }
+            else{
+                System.out.println("Masukkan input yang benar!");
             }
         }
         else if(idx == 2){
