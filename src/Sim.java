@@ -290,31 +290,16 @@ public class Sim {
 
     public void buyItem(PurchaseAble item) {
         this.status = "buying item"; 
-        Thread t = new Thread(new Runnable(){
-            public void run(){
-                try {
-                    if (item != null && item.getPrice() <= getMoney()) {
-                        Thread.sleep(0);
-                        gainMoney(-item.getPrice());
-                        System.out.println("sim membeli '" + item.getName() + "'' dengan harga : " + item.getPrice());
-                        int deliveryTime = (int) (Math.random() * 5 * 1) * 30;
-                        System.out.println("barang akan tersedia dalam waktu "+ deliveryTime + " detik, silahkan menunggu");
-                        try{
-                            Thread.sleep(deliveryTime);
-                        } catch (InterruptedException e){
-                            e.printStackTrace();
-                        }
-                        inventory.addInventory((Item) item);
-                    } else {
-                        System.out.println("uang sim tidak cukup!");
-                    }
-                } catch (InterruptedException e){
-                    e.printStackTrace();
-                }
-            }
-        });
-        t.start();
-
+        if (item != null && item.getPrice() <= getMoney()) {
+            gainMoney(-item.getPrice());
+            System.out.println("sim membeli '" + item.getName() + "'' dengan harga : " + item.getPrice());
+            int deliveryTime = (int) (Math.random() * 5 * 1) * 30;
+            System.out.println("barang akan tersedia dalam waktu "+ deliveryTime + " detik, silahkan menunggu");
+            currentWorld.getWorldClock().wait(deliveryTime);
+            inventory.addInventory((Item) item);
+        } else {
+            System.out.println("uang sim tidak cukup!");
+        }
     }
 
     //not needed time action 
