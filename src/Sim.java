@@ -442,6 +442,18 @@ public class Sim {
         currentWorld.getWorldClock().updateTime(5);
     }
 
+    public void bath() {
+        this.status = "bath"; 
+        System.out.println("Sim sedang mandi");
+        currentWorld.getWorldClock().wait(20);
+        gainMood(10);
+        gainHealth(15);
+        System.out.println("Sim telah wangi selesai mandi");
+        currentWorld.getWorldClock().updateTime(20);
+    }
+
+    
+
     //driver
     public static void main(String[] args) {
         // World world = World.getInstance();

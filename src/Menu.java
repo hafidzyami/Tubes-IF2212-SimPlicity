@@ -256,7 +256,12 @@ public class Menu {
                 } 
                 break;
             case 15:
-                // tunggu code
+                if(sim.useItem.equals("Toilet")){
+                    sim.bath();
+                }
+                else{
+                    System.out.println("Silahkan pergi ke object 'Toilet' untuk mandi!");
+                }
                 break;
         }
     }
