@@ -215,14 +215,30 @@ public class Menu {
                 System.out.println("Masukkan nama barang yang ingin dicuri");
                 sim.steal(input.nextLine());
                 break;
+
             case 12:
-                // tunggu code
+                if(sim.useItem.equals("Table and Chair")){
+                    sim.write();
+                }else {
+                    System.out.println("Silahkan pergi ke object 'Table and Chair' untuk menulis");
+                } 
                 break;
             case 13:
+                if(sim.useItem.equals("Table and Chair")){
+                    sim.read();
+                }else {
+                    System.out.println("Silahkan pergi ke object 'Table and Chair' untuk membaca");
+                } 
                 // tunggu code
                 break;
             case 14:
-                // tunggu code
+                if(sim.useItem.equals("Table and Chair") || sim.useItem.equals("Toilet") || sim.useItem.equals("Single Bed") || sim.useItem.equals("Queen Size Bed") || sim.useItem.equals("King Size Bed")){
+                    System.out.println("Masukkan durasi untuk melamun : ");
+                    int durasiMelamun = input.nextInt();
+                    sim.daydream(durasiMelamun);
+                }else {
+                    System.out.println("Silahkan pergi ke object 'Table and Chair' atau 'Toilet' atau 'Bed' untuk melamun");
+                } 
                 break;
             case 15:
                 // tunggu code

@@ -406,6 +406,21 @@ public class Sim {
         }
     }
 
+    public void daydream(int duration){
+        this.status = "dayDream";
+        int dayDreamTime = 0;
+        int temp = duration/30;
+        while(dayDreamTime != duration){
+            currentWorld.getWorldClock().wait(1);
+            dayDreamTime++;
+            System.out.println("Sedang melamun selama " + dayDreamTime + " detik");
+        }
+        setIdle();
+        gainMood(3*temp);
+        gainHunger(-3*temp);
+
+    }
+
     public void write() {
         if (this.status.equals("sitting")) {
             currentWorld.getWorldClock().wait(10);

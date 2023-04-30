@@ -96,18 +96,18 @@ public class CLI {
         System.out.println("==== Daftar Action : ====");
         System.out.println("1. Kerja");
         System.out.println("2. Olahraga");
-        System.out.println("3. Tidur");
-        System.out.println("4. Makan");
-        System.out.println("5. Memasak");
+        System.out.println("3. Tidur - Bed");
+        System.out.println("4. Makan - Table and Chair");
+        System.out.println("5. Memasak - Stove");
         System.out.println("6. Berkunjung");
-        System.out.println("7. Buang Air");
-        System.out.println("8. Melihat Waktu");
-        System.out.println("9. Aksi Custom : Menangis");
-        System.out.println("10. Aksi Custom : Mengaji");
+        System.out.println("7. Buang Air - Toilet");
+        System.out.println("8. Melihat Waktu - Clock");
+        System.out.println("9. Aksi Custom : Menangis - Bed");
+        System.out.println("10. Aksi Custom : Mengaji - Table and Chair");
         System.out.println("11. Aksi Custom : Mencuri");
-        System.out.println("12. Aksi Custom : -");
-        System.out.println("13. Aksi Custom : -");
-        System.out.println("14. Aksi Custom : -");
+        System.out.println("12. Aksi Custom : Menulis - Table and Chair");
+        System.out.println("13. Aksi Custom : Membaca - Table and Chair");
+        System.out.println("14. Aksi Custom : Melamun - Table and Chair, Toilet, Bed");
         System.out.println("15. Aksi Custom : -");
     }
 }
