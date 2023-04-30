@@ -172,7 +172,10 @@ public class Menu {
                 break;
             case 5 : 
                 if(sim.useItem.equals("Gas Stove") || sim.useItem.equals("Electric Stove")){
-                    System.out.println("Daftar menu untuk dimasak :");
+                    CLI.printFoodMenu();
+                    System.out.println("Silahkan pilih menu yang akan dimasak");
+                    String meal = input.nextLine();
+                    sim.cook(meal);
                     // tunggu code jadi
                 }
                 else{

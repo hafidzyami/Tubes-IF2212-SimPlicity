@@ -92,6 +92,15 @@ public class CLI {
         }
     }
 
+    public static void printFoodMenu(){
+        System.out.println("Berikut daftar menu: ");
+        System.out.println("1. Chicken Rice");
+        System.out.println("2. Curry Rice");
+        System.out.println("3. Nut Milk");
+        System.out.println("4. Stir Fry Vegetable");
+        System.out.println("5. Steak");
+    }
+
     public static void printActionList(){
         System.out.println("==== Daftar Action : ====");
         System.out.println("1. Kerja");
