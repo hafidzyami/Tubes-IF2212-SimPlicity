@@ -69,9 +69,30 @@ public class Inventory < T extends Item> {
             inventoryCount--;
         }
     }
-    public void printInventory(){
-        int idx = 1;
+
+    public HashMap<T,Integer> getNonFoodItem () {
+        HashMap<T,Integer> temp = new HashMap <>();
         for(T i : itemList.keySet()){
+            if(i instanceof NonFoodItem){
+                temp.put(i, temp.get(i));
+            }
+        }
+        return temp;
+    }
+
+    public HashMap<T,Integer> getFoodItem () {
+        HashMap<T,Integer> temp = new HashMap <>();
+        for(T i : itemList.keySet()){
+            if(i instanceof Food){
+                temp.put(i, temp.get(i));
+            }
+        }
+        return temp;
+    }
+
+    public void printInventory(HashMap <T,Integer> list){
+        int idx = 1;
+        for(T i : list.keySet()){
             System.out.println(idx + ". " + i.getName() + " " + itemList.get(i));
             idx++;
         }
@@ -81,25 +102,25 @@ public class Inventory < T extends Item> {
         Inventory<Item> x = new Inventory<>();
         FoodIngredients item1 = new FoodIngredients("Rice");
         NonFoodItem item2 = new NonFoodItem("Single Bed");
-        x.printInventory();
+        x.printInventory(x.getInventory());
         System.out.println(" ");
         x.addInventory(item1);
-        x.printInventory();
+        x.printInventory(x.getInventory());
         x.addInventory(item2);
         System.out.println(" ");
-        x.printInventory();
+        x.printInventory(x.getInventory());
         x.addInventory(item2);
         System.out.println(" ");
-        x.printInventory();
-        x.deleteInventory(item1);
+        x.printInventory(x.getInventory());
         System.out.println(" ");
-        x.printInventory();
+        x.printInventory(x.getInventory());
         x.addInventory(item2);
         System.out.println(" ");
-        x.printInventory();
-        x.deleteInventory(item2);
+        x.printInventory(x.getInventory());
         System.out.println(" ");
-        x.printInventory();
-
+        x.printInventory(x.getInventory());
+        System.out.println(" ");
+        HashMap <Item,Integer> cek = x.getFoodItem();
+        x.printInventory(cek);
     }
 }

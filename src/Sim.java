@@ -329,7 +329,7 @@ public class Sim {
     }
 
     public void seeInventory() {
-        inventory.printInventory();
+        inventory.printInventory(inventory.getInventory());
     }
 
     public void installItem(Room room, int idxItem, int wantedX, int wantedY){

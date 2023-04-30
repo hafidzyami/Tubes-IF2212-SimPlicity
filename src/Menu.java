@@ -77,7 +77,7 @@ public class Menu {
         else if(idx == 2){
             sim.currentRoom.getRoomTile().printTile();
             System.out.println("Silahkan pilih nomor barang yang ingin dipasang dari inventory kamu : ");
-            sim.seeInventory();
+            sim.getSimInventory().printInventory(sim.getSimInventory().getNonFoodItem());
             Scanner input = new Scanner(System.in);
             int idxItem = input.nextInt();
             boolean flagEditRoom = false;
