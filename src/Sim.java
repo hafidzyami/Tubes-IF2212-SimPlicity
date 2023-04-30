@@ -139,23 +139,23 @@ public class Sim {
             System.out.println("durasi bekerja yang dimasukan harus berupa kelipatan 120!");
         } else {
             this.status = "work"; 
-            System.out.println("Sim sedang bekerja sebagai " + getSimJob());
+            System.out.println("Sim sedang bekerja sebagai " + getSimJob().getJobName());
             int temp = duration/30; 
             for (int i = 0; i < temp; i++){
-            System.out.println("work work work");
-            currentWorld.getWorldClock().wait(30);
-            gainHunger(-10); 
-            gainMood(-10); 
-            workTime += 30; 
-            if (workTime % 240 == 0){
-                gainMoney(getSimJob().getDaySalary()); 
-                System.out.println("sim telah selesai bekerja dan mendapatkan "+ getSimJob().getDaySalary()); 
-                System.out.println("uang sim menjadi : " + getMoney()); 
-            } 
-            else {
-            System.out.println("sim sudah bekerja selama "+ (float)workTime/60 + " menit.");
-            }
-            currentWorld.getWorldClock().updateTime(duration);
+                System.out.println("work work work");
+                currentWorld.getWorldClock().wait(30);
+                gainHunger(-10); 
+                gainMood(-10); 
+                workTime += 30; 
+                if (workTime % 240 == 0){
+                    gainMoney(getSimJob().getDaySalary()); 
+                    System.out.println("sim telah selesai bekerja dan mendapatkan "+ getSimJob().getDaySalary()); 
+                    System.out.println("uang sim menjadi : " + getMoney()); 
+                } 
+                else {
+                    System.out.println("sim sudah bekerja selama "+ (float)workTime/60 + " menit.");
+                }
+                currentWorld.getWorldClock().updateTime(duration);
             }
         }
 
@@ -195,6 +195,7 @@ public class Sim {
         gainHunger(-5*temp);
         gainMood(10*temp);     
         }
+        currentWorld.getWorldClock().updateTime(duration); 
     }
 
 
@@ -211,6 +212,7 @@ public class Sim {
             gainMood(30*(duration/4));
             gainHealth(20*(duration/4));
         }
+        currentWorld.getWorldClock().updateTime(duration); 
     }
 
     public void eat (Food food){
@@ -220,6 +222,7 @@ public class Sim {
         gainHunger(food.getSatiation());
         System.out.println("Sim telah makan!");
         System.out.println("Kekenyagan sim saat ini : " + getSimHunger());
+        currentWorld.getWorldClock().updateTime(30); 
     }
 
     public void cook (String mealName) {
@@ -242,6 +245,7 @@ public class Sim {
         if (ingredients.isEmpty()) {
             inventory.addInventory(meal);
             System.out.println(meal.getName() + " ditambahkan ke inventory!");
+            currentWorld.getWorldClock().updateTime((int) 1.5*meal.getSatiation()); 
         } else {
             System.out.println(meal.getName() + " tidak jadi karena bahan kurang!");
         }
@@ -281,6 +285,7 @@ public class Sim {
         currentWorld.getWorldClock().wait(10);
         gainMood(10);
         System.out.println("Sim telah buang air selama 10 detik");
+        currentWorld.getWorldClock().updateTime(10);
     }
 
     // needed time action 
@@ -367,13 +372,14 @@ public class Sim {
     }
 
     //costum action 
-    public void crying() {
+    public void crying(int duration) {
         this.status = "crying"; 
         System.out.println("Sim akan menangis karena stress");
-        currentWorld.getWorldClock().wait(1);
+        currentWorld.getWorldClock().wait(duration);
         gainHunger(-10);
         gainMood(10);
         System.out.println("Sim sudah selesai menangis :(");
+        currentWorld.getWorldClock().updateTime(duration);
     }
 
     public void recitate(int duration){
@@ -387,6 +393,7 @@ public class Sim {
         }
         setIdle();
         gainMood(3*temp);
+        currentWorld.getWorldClock().updateTime(duration);
     }
 
     public void steal(String itemName){
@@ -412,7 +419,7 @@ public class Sim {
         setIdle();
         gainMood(3*temp);
         gainHunger(-3*temp);
-
+        currentWorld.getWorldClock().updateTime(duration);
     }
 
     public void write() {
@@ -422,6 +429,7 @@ public class Sim {
         } else {
             System.out.println(this.status + "sedang tidak duduk");
         }
+        currentWorld.getWorldClock().updateTime(10);
     }
 
     public void read() {
@@ -431,6 +439,7 @@ public class Sim {
         } else {
             System.out.println(this.status + "sedang tidak duduk");
         }
+        currentWorld.getWorldClock().updateTime(5);
     }
 
     //driver

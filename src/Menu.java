@@ -208,7 +208,9 @@ public class Menu {
                 break;
             case 9:
                 if(sim.useItem.equals("Single Bed") || sim.useItem.equals("Queen Size Bed") || sim.useItem.equals("King Size Bed")){
-                    sim.crying();
+                    System.out.println("Seberapa lama anda ingin menangis");
+                    int duration = Integer.parseInt(input.nextLine());
+                    sim.crying(duration);
                 }else{
                     System.out.println("Anda harus ke 'Bed' untuk menangis");
                 }

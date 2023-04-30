@@ -12,7 +12,7 @@ public class Game {
         }
         System.out.print("Masukkan nama sim: ");
         Home home1 = Home.newHome(world, 1, 1);
-        Sim sim1 = new Sim(input.next(),home1, world);
+        Sim sim1 = new Sim(input.nextLine(),home1, world);
         home1.setOwner(sim1);
         world.addSimList(sim1);
         world.addNewHome(home1);
@@ -59,7 +59,7 @@ public class Game {
                     System.out.println("Silahkan pilih aksi berikut :");
                     System.out.println("1. Membeli barang");
                     System.out.println("2. Install barang");
-                    int idx = input.nextInt();
+                    int idx = Integer.parseInt(input.nextLine());
                     Menu.editRoom(idx, world.getPlayedSim());
                     break;
                 case "10", "add sim":
@@ -87,7 +87,7 @@ public class Game {
                         System.out.println("Silahkan pilih sim berdasarkan nomor di atas : ");
                         boolean flag = true;
                         while(flag){
-                            int cmd11 = input.nextInt();
+                            int cmd11 = Integer.parseInt(input.nextLine());
                             if(cmd11 > 0 && cmd11 <= world.getSimList().size()){
                                 flag = false;
                                 Menu.changeSim(world, cmd11);
