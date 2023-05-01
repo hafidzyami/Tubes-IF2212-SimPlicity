@@ -140,7 +140,7 @@ public class Sim {
     // active action 
     public void work (int duration){
         if (duration % 120 != 0){
-            System.out.println("durasi bekerja yang dimasukan harus berupa kelipatan 120!");
+            System.out.println("durasi bekerja yang dimasukan harus berupa kelipatan 120 detik!");
         } else {
             this.status = "work"; 
             System.out.println("Sim sedang bekerja sebagai " + getSimJob().getJobName());
@@ -157,7 +157,7 @@ public class Sim {
                     System.out.println("uang sim menjadi : " + getMoney()); 
                 } 
                 else {
-                    System.out.println("sim sudah bekerja selama "+ workTime + " menit.");
+                    System.out.println("sim sudah bekerja selama "+ workTime + " detik.");
                 }
                 currentWorld.getWorldClock().updateTime(duration);
             }

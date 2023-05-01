@@ -161,7 +161,11 @@ public class Menu {
                 System.out.println("Masukan nama pekerjaan baru :"); 
                 String newJobString = input.nextLine();
                 Job newJob = new Job(newJobString);
-                sim.changeJob(newJob);
+                if (newJob.getJobName().equals("not valid")) {
+                    System.out.println("Nama job tidak valid!");
+                } else {
+                    sim.changeJob(newJob);
+                }
                 break;
             case 3 :
                 System.out.println("Masukkan durasi olahraga :");

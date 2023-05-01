@@ -4,25 +4,29 @@ public class Job {
 
     //konstruktor 
     public Job(String name){
-        this.name = name;
         switch (name) {
             case "Badut Sulap":
+                this.name = "Badut Sulap";
                 setDaySalary(15);
                 break;
             case "Koki":
+                this.name = "Koki";
                 setDaySalary(30);
                 break;
             case "Polisi":
+                this.name = "Polisi";
                 setDaySalary(35);
                 break;
             case "Programmer":
+                this.name = "Programmer";
                 setDaySalary(45);
                 break;
             case "Dokter":
+                this.name = "Dokter";
                 setDaySalary(50);
                 break;
             default:
-                name = null;
+                this.name = "not valid";
                 break;
         }
     }
