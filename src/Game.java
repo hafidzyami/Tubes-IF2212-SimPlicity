@@ -129,10 +129,6 @@ public class Game {
                     int idxAction = input.nextInt();
                     Menu.action(world, idxAction);
                     break;
-
-                case "15","change job" :
-                    Menu.changeJob("Badut");
-                    break;
                 default :
             }
         }

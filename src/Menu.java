@@ -151,12 +151,24 @@ public class Menu {
                 int durasiKerja = input.nextInt();
                 sim.work(durasiKerja);
                 break;
-            case 2 :
+            case 2 : 
+                System.out.println("List pekerjaan dan biaya yang harus dibayarkan untuk mengganti pekerjaan : "); 
+                System.out.println("1. Badut Sulap - 7.5"); 
+                System.out.println("2. Koki - 15"); 
+                System.out.println("3. Polisi - 17.5"); 
+                System.out.println("4. Programmer - 22.5"); 
+                System.out.println("5. Dokter - 25"); 
+                System.out.println("Masukan nama pekerjaan baru :"); 
+                String newJobString = input.nextLine();
+                Job newJob = new Job(newJobString);
+                sim.changeJob(newJob);
+                break;
+            case 3 :
                 System.out.println("Masukkan durasi olahraga :");
                 int durasiOlahraga = input.nextInt();
                 sim.sport(durasiOlahraga);
                 break;
-            case 3 :
+            case 4 :
                 if(sim.useItem.equals("Single Bed") || sim.useItem.equals("Queen Size Bed") || sim.useItem.equals("King Size Bed")){
                     System.out.println("Masukkan durasi Tidur :");
                     int durasiTidur = input.nextInt();
@@ -166,11 +178,11 @@ public class Menu {
                     System.out.println("Silahkan pergi ke object 'Bed' untuk tidur!");
                 }
                 break;
-            case 4 :
+            case 5 :
                 System.out.println("Daftar makanan :");
                 // tunggu code jadi
                 break;
-            case 5 : 
+            case 6 : 
                 if(sim.useItem.equals("Gas Stove") || sim.useItem.equals("Electric Stove")){
                     CLI.printFoodMenu();
                     System.out.println("Silahkan pilih menu yang akan dimasak");
@@ -182,7 +194,7 @@ public class Menu {
                     System.out.println("Silahkan pergi ke object 'Stove' untuk masak!");
                 }
                 break;
-            case 6 :
+            case 7 :
                 System.out.println("Daftar rumah Sim untuk dikunjungi :");
                 CLI.printHomeAndSim(world);
                 world.printMap();
@@ -190,7 +202,7 @@ public class Menu {
                 int idxVisit = input.nextInt();
                 sim.visit(world.getHomeList().get(idxVisit-1).getLocX(), world.getHomeList().get(idxVisit-1).getLocY(), idxVisit-1);
                 break;
-            case 7:
+            case 8:
                 if(sim.useItem.equals("Toilet")){
                     sim.pee();
                 }
@@ -198,7 +210,7 @@ public class Menu {
                     System.out.println("Silahkan pergi ke object 'Toilet' untuk buang air!");
                 }
                 break;
-            case 8:
+            case 9:
                 if(sim.useItem.equals("Clock")){
                     sim.seeTime();
                 }
@@ -206,7 +218,7 @@ public class Menu {
                     System.out.println("Silahkan pergi ke object 'Clock' untuk lihat waktu!");
                 }
                 break;
-            case 9:
+            case 10:
                 if(sim.useItem.equals("Single Bed") || sim.useItem.equals("Queen Size Bed") || sim.useItem.equals("King Size Bed")){
                     System.out.println("Seberapa lama anda ingin menangis");
                     int duration = Integer.parseInt(input.nextLine());
@@ -215,7 +227,7 @@ public class Menu {
                     System.out.println("Anda harus ke 'Bed' untuk menangis");
                 }
                 break;
-            case 10:
+            case 11:
                 if(sim.useItem.equals("Table and Chair")){
                     System.out.println("Masukkan durasi untuk mengaji : ");
                     int durasiMengaji = input.nextInt();
@@ -224,21 +236,21 @@ public class Menu {
                     System.out.println("Silahkan pergi ke object 'Table and Chair' untuk mengaji");
                 } 
                 break;
-            case 11:
+            case 12:
                 System.out.println("Daftar barang yang bisa dicuri di ruangan ini : ");
                 listObject(world);
                 System.out.println("Masukkan nama barang yang ingin dicuri");
                 sim.steal(input.nextLine());
                 break;
 
-            case 12:
+            case 13:
                 if(sim.useItem.equals("Table and Chair")){
                     sim.write();
                 }else {
                     System.out.println("Silahkan pergi ke object 'Table and Chair' untuk menulis");
                 } 
                 break;
-            case 13:
+            case 14:
                 if(sim.useItem.equals("Table and Chair")){
                     sim.read();
                 }else {
@@ -246,7 +258,7 @@ public class Menu {
                 } 
                 // tunggu code
                 break;
-            case 14:
+            case 15:
                 if(sim.useItem.equals("Table and Chair") || sim.useItem.equals("Toilet") || sim.useItem.equals("Single Bed") || sim.useItem.equals("Queen Size Bed") || sim.useItem.equals("King Size Bed")){
                     System.out.println("Masukkan durasi untuk melamun : ");
                     int durasiMelamun = input.nextInt();
@@ -255,7 +267,7 @@ public class Menu {
                     System.out.println("Silahkan pergi ke object 'Table and Chair' atau 'Toilet' atau 'Bed' untuk melamun");
                 } 
                 break;
-            case 15:
+            case 16:
                 if(sim.useItem.equals("Toilet")){
                     sim.bath();
                 }
@@ -264,9 +276,5 @@ public class Menu {
                 }
                 break;
         }
-    }
-
-    public static void changeJob(String nama) {
-
     }
 }

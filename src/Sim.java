@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Sim {
     private String fullName;
     private Job job;
-    private int money;
+    private double money;
     private Inventory<Item> inventory = new Inventory();
     private int hunger;
     private int mood;
@@ -80,7 +80,7 @@ public class Sim {
         return status;
     }
 
-    public int getMoney(){
+    public double getMoney(){
         return money; 
     }
 
@@ -106,6 +106,10 @@ public class Sim {
         this.currentRoom = room;
     }
 
+    public void setSimJob( Job newJob){
+        this.job = newJob; 
+    }
+
     //gainer
     public void gainMood(int mood){
         this.mood += mood;
@@ -128,7 +132,7 @@ public class Sim {
         }
     }
 
-    public void gainMoney(int money){
+    public void gainMoney(double money){
         this.money += money; 
     }
 
@@ -153,7 +157,7 @@ public class Sim {
                     System.out.println("uang sim menjadi : " + getMoney()); 
                 } 
                 else {
-                    System.out.println("sim sudah bekerja selama "+ (float)workTime/60 + " menit.");
+                    System.out.println("sim sudah bekerja selama "+ workTime + " menit.");
                 }
                 currentWorld.getWorldClock().updateTime(duration);
             }
@@ -163,16 +167,24 @@ public class Sim {
 
     public void changeJob(Job newJob){
         this.status = "changing job";
-        if (workTime >= 12 * 60){
-            System.out.println("Sim akan mengubah pekerjaan " + getSimJob() + " menjadi " + newJob.getJobName()); 
-            //sleep 1 detik 
-            gainMoney(- 1/2 * newJob.getDaySalary());
-            System.out.println("..."); 
-            System.out.println("Sim telah mengubah pekerjaanya menjadi " + newJob.getJobName() + "dan membayar sebesar" + 1/2 * newJob.getDaySalary()); 
-            System.out.println("Sisa uang sim sekarang : " + getMoney()); 
+        if (newJob.getJobName().equals(getSimJob().getJobName())){
+            System.out.println("Pekerjaan sim sudah sama!"); 
         } else {
-            System.out.println("Sim baru bekerja selama " + workTime);
-            System.out.println("Sim harus bekerja selama 12 menit terlebih dahulu sebelum mengganti pekerjaan!");
+            if (workTime >= 0){
+                System.out.println("Sim akan mengubah pekerjaan " + getSimJob().getJobName() + " menjadi " + newJob.getJobName()); 
+                setSimJob(newJob);
+                System.out.println(getSimJob().getJobName()); 
+                System.out.println(getSimJob().getDaySalary());
+                double cost = 0.5 * getSimJob().getDaySalary();
+                System.out.println(cost);
+                gainMoney(-cost);
+                System.out.println("..."); 
+                System.out.println("Sim telah mengubah pekerjaanya menjadi " + getSimJob().getJobName() + " dan membayar sebesar " + cost); 
+                System.out.println("Sisa uang sim sekarang : " + getMoney()); 
+            } else {
+                System.out.println("Sim baru bekerja selama " + workTime);
+                System.out.println("Sim harus bekerja selama 12 menit terlebih dahulu sebelum mengganti pekerjaan!");
+            }
         }
     }
 
