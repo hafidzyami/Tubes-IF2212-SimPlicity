@@ -242,7 +242,7 @@ public class Sim {
         this.status = "cooking";
         FoodCooked meal = new FoodCooked(mealName);
         ArrayList<FoodIngredients> ingredients = meal.getIngredientsList();
-        currentWorld.getWorldClock().wait((int) 1.5*meal.getSatiation());
+        currentWorld.getWorldClock().wait((int) (1.5*meal.getSatiation()));
         for (Item ingredient : ingredients) {
             for (Item item : inventory.getInventory().keySet()) {
                 if (item.getClass().getName().equals("FoodIngredients")) {
@@ -257,7 +257,7 @@ public class Sim {
         if (ingredients.isEmpty()) {
             inventory.addInventory(meal);
             System.out.println(meal.getName() + " ditambahkan ke inventory!");
-            currentWorld.getWorldClock().updateTime((int) 1.5*meal.getSatiation()); 
+            currentWorld.getWorldClock().updateTime((int) (1.5*meal.getSatiation())); 
         } else {
             System.out.println(meal.getName() + " tidak jadi karena bahan kurang!");
         }
