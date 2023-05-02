@@ -301,9 +301,6 @@ public class Sim {
     }
 
     // needed time action 
-    public void upgradeHome() {
-
-    }
 
     public void buyItem(PurchaseAble item) {
         this.status = "buying item"; 

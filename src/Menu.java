@@ -41,10 +41,10 @@ public class Menu {
         sim.seeInventory();
     }
 
-    public static void upgradeHouse(Sim sim, String roomName, Home home) {
+    public static void upgradeHouse(Sim sim, String roomName) {
         System.out.println("rumah sedang diupgrade");
 
-        Room room = new Room(roomName, home);
+        Room room = new Room(roomName, sim.getMyHome());
         Scanner input = new Scanner(System.in);
         System.out.println("Pilih letak ruangan dari " + sim.currentRoom.getRoomName());
         // Roomloc roomLoc input.nextLine(); (input lokasi ruangan akan berada)
@@ -78,6 +78,7 @@ public class Menu {
             else{
                 System.out.println("Masukkan input yang benar!");
             }
+            input.close();
         }
         else if(idx == 2){
             if( sim.getSimInventory().getNonFoodCount() > 0){
@@ -102,12 +103,13 @@ public class Menu {
                 int wantedY = input.nextInt();
                 sim.installItem(sim.currentRoom, idxItem-1, wantedX, wantedY);
                 sim.currentRoom.getRoomTile().printTile();
+                input.close();
             }
             else{
                 System.out.println("Tidak bisa memasang barang karena inventory kamu kosong!");
             }
+            
         }
-
     }
 
     public static void addSim(World world, String name, int xHome, int yHome) {
