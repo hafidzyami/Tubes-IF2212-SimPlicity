@@ -48,7 +48,6 @@ public class Menu {
         Scanner input = new Scanner(System.in);
         System.out.println("Pilih letak ruangan dari " + sim.currentRoom.getRoomName());
         // Roomloc roomLoc input.nextLine(); (input lokasi ruangan akan berada)
-        input.close(); 
     }
 
     public static void moveRoom() {
@@ -58,27 +57,80 @@ public class Menu {
     public static void editRoom(int idx, Sim sim) {
         if(idx == 1){
             System.out.println("Silahkan pilih barang yang ingin dibeli : ");
-            CLI.printPurchaseAble();
             Scanner input = new Scanner(System.in);
             System.out.println("Silahkan pilih 1 untuk Non Food");
             System.out.println("Silahkan pilih 2 untuk Food Ingredients");
             int idxBeli =Integer.parseInt(input.nextLine());
             if(idxBeli == 1){
-                System.out.println("Silahkan masukan nama barang : ");
-                String name = input.nextLine();
-                PurchaseAble item = new NonFoodItem(name);
+                CLI.printNonFoodItem();
+                System.out.println("Silahkan masukan nomor barang : ");
+                String idxNonFood = input.nextLine();
+                PurchaseAble item;
+                switch (idxNonFood) {
+                    case "1" :
+                        item = new NonFoodItem("Single Bed");
+                        break;
+                    case "2" :
+                        item = new NonFoodItem("Queen Size Bed");
+                        break;
+                    case "3" :
+                        item = new NonFoodItem("King Size Bed");
+                        break;
+                    case "4" :
+                        item = new NonFoodItem("Toilet");
+                        break;
+                    case "5" :
+                        item = new NonFoodItem("Gas Stove");
+                        break;
+                    case "6" :
+                        item = new NonFoodItem("Electric Stove");
+                        break;
+                    case "7" :
+                        item = new NonFoodItem("Table And Chair");
+                        break;
+                    default :
+                        item = null;
+                }
                 sim.buyItem(item);
             }
             else if(idxBeli == 2){
-                System.out.println("Silahkan masukan nama barang : ");
-                String name = input.nextLine();
-                PurchaseAble item = new FoodIngredients(name);
+                CLI.printFoodIngredient();
+                System.out.println("Silahkan masukan nomor barang : ");
+                String idxIngredient = input.nextLine();
+                PurchaseAble item;
+                switch (idxIngredient) {
+                    case "1" :
+                        item = new FoodIngredients("Rice");
+                        break;
+                    case "2" :
+                        item = new FoodIngredients("Potato");
+                        break;
+                    case "3" :
+                        item = new FoodIngredients("Chicken");
+                        break;
+                    case "4" :
+                        item = new FoodIngredients("Beef");
+                        break;
+                    case "5" :
+                        item = new FoodIngredients("Carrot");
+                        break;
+                    case "6" :
+                        item = new FoodIngredients("Spinach");
+                        break;
+                    case "7" :
+                        item = new FoodIngredients("Nut");
+                        break;
+                    case "8" :
+                        item = new FoodIngredients("Milk");
+                        break;
+                    default :
+                        item = null;
+                }
                 sim.buyItem(item);
             }
             else{
                 System.out.println("Masukkan input yang benar!");
             }
-            input.close();
         }
         else if(idx == 2){
             if( sim.getSimInventory().getNonFoodCount() > 0){
@@ -103,7 +155,6 @@ public class Menu {
                 int wantedY = input.nextInt();
                 sim.installItem(sim.currentRoom, idxItem-1, wantedX, wantedY);
                 sim.currentRoom.getRoomTile().printTile();
-                input.close();
             }
             else{
                 System.out.println("Tidak bisa memasang barang karena inventory kamu kosong!");
@@ -282,6 +333,5 @@ public class Menu {
                 }
                 break;
         }
-        input.close();
     }
 }

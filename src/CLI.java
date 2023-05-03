@@ -66,7 +66,7 @@ public class CLI {
         }
     }
 
-    public static void printPurchaseAble(){
+    public static void printNonFoodItem(){
         System.out.println("==== Non Food Item : ====");
         System.out.println("1. Single Bed - 50");
         System.out.println("2. Queen Size Bed - 100");
@@ -75,17 +75,20 @@ public class CLI {
         System.out.println("5. Gas Stove - 100");
         System.out.println("6. Electric Stove - 200");
         System.out.println("7. Table And Chair - 50");
-        System.out.println("==== Food Item : ====");
-        System.out.println("8. Rice - 5");
-        System.out.println("9. Potato - 3");
-        System.out.println("10. Chicken - 10");
-        System.out.println("11. Beef - 12");
-        System.out.println("12. Carrot - 3");
-        System.out.println("13. Spinach  - 3");
-        System.out.println("14. Nut - 2");
-        System.out.println("15. Milk - 2");
     }
 
+    public static void printFoodIngredient() {
+        System.out.println("==== Food Item : ====");
+        System.out.println("1. Rice - 5");
+        System.out.println("2. Potato - 3");
+        System.out.println("3. Chicken - 10");
+        System.out.println("4. Beef - 12");
+        System.out.println("5. Carrot - 3");
+        System.out.println("6. Spinach  - 3");
+        System.out.println("7. Nut - 2");
+        System.out.println("8. Milk - 2");
+    }
+    
     public static void printHouseAndSim(World world){
         for(int i = 0; i < world.getHouseList().size(); i++){
             System.out.println((i+1) + ". " + world.getHouseList().get(i).getOwner().getSimName());
