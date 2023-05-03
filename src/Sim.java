@@ -242,7 +242,7 @@ public class Sim {
         this.status = "cooking";
         FoodCooked meal = new FoodCooked(mealName);
         ArrayList<FoodIngredients> ingredients = meal.getIngredientsList();
-        currentWorld.getWorldClock().wait((int) (1.5*meal.getSatiation()));
+        currentWorld.getWorldClock().wait((int) Math.round(1.5*meal.getSatiation()));
         for (Item ingredient : ingredients) {
             for (Item item : inventory.getInventory().keySet()) {
                 if (item.getClass().getName().equals("FoodIngredients")) {
@@ -257,7 +257,7 @@ public class Sim {
         if (ingredients.isEmpty()) {
             inventory.addInventory(meal);
             System.out.println(meal.getName() + " ditambahkan ke inventory!");
-            currentWorld.getWorldClock().updateTime((int) (1.5*meal.getSatiation())); 
+            currentWorld.getWorldClock().updateTime((int) Math.round(1.5*meal.getSatiation())); 
         } else {
             System.out.println(meal.getName() + " tidak jadi karena bahan kurang!");
         }
@@ -432,23 +432,21 @@ public class Sim {
     }
 
     public void write() {
-        if (this.status.equals("sitting")) {
-            currentWorld.getWorldClock().wait(10);
-            System.out.println(this.fullName + " sedang menulis halaman baru di diary");
-        } else {
-            System.out.println(this.status + "sedang tidak duduk");
-        }
+        this.status = "sitting";
+        currentWorld.getWorldClock().wait(10);
+        System.out.println(this.fullName + " sedang menulis halaman baru di diary");
         currentWorld.getWorldClock().updateTime(10);
+        setIdle();
+        gainMood(5);
     }
 
     public void read() {
-        if (this.status.equals("sitting")) {
-            currentWorld.getWorldClock().wait(5);
-            System.out.println(this.fullName + " sedang membaca diary");
-        } else {
-            System.out.println(this.status + "sedang tidak duduk");
-        }
+        this.status = "sitting";
+        currentWorld.getWorldClock().wait(5);
+        System.out.println(this.fullName + " sedang membaca diary");
         currentWorld.getWorldClock().updateTime(5);
+        setIdle();
+        gainMood(5);
     }
 
     public void bath() {
