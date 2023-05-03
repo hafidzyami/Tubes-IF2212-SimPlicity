@@ -60,6 +60,10 @@ public class WorldClock  {
         this.notSleep = status;
     }
 
+    public void setNowSleep() {
+        lastSleepTime = totalElapsed;
+    }
+
     // Delay dengan duration dalam detik
     public void wait(int duration) {
         try {

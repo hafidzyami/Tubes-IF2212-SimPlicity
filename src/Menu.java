@@ -32,7 +32,7 @@ public class Menu {
     }
 
     public static void viewCurrentLocation(Sim sim) {
-        String owner = sim.currentHome.getOwner().getSimName();
+        String owner = sim.currentHouse.getOwner().getSimName();
         System.out.println(sim.getSimName() + " berada di rumah milik " + owner + " di dalam " + sim.currentRoom.getRoomName());
     }
 
@@ -44,7 +44,7 @@ public class Menu {
     public static void upgradeHouse(Sim sim, String roomName) {
         System.out.println("rumah sedang diupgrade");
 
-        Room room = new Room(roomName, sim.getMyHome());
+        Room room = new Room(roomName, sim.getMyHouse());
         Scanner input = new Scanner(System.in);
         System.out.println("Pilih letak ruangan dari " + sim.currentRoom.getRoomName());
         // Roomloc roomLoc input.nextLine(); (input lokasi ruangan akan berada)
@@ -112,13 +112,13 @@ public class Menu {
         }
     }
 
-    public static void addSim(World world, String name, int xHome, int yHome) {
-        Home home = Home.newHome(world, xHome, yHome);
-        Sim sim = new Sim(name,home, world);
-        home.setOwner(sim);
+    public static void addSim(World world, String name, int xHouse, int yHouse) {
+        House house = House.newHouse(world, xHouse, yHouse);
+        Sim sim = new Sim(name,house, world);
+        house.setOwner(sim);
         world.addSimList(sim);
-        world.addNewHome(home);
-        sim.setCurrentRoom(home.getRoomList().get(0));
+        world.addNewHouse(house);
+        sim.setCurrentRoom(house.getRoomList().get(0));
         world.updateMap();
         System.out.println("Sim berhasil ditambahkan!");
     }
@@ -202,11 +202,11 @@ public class Menu {
                 break;
             case 7 :
                 System.out.println("Daftar rumah Sim untuk dikunjungi :");
-                CLI.printHomeAndSim(world);
+                CLI.printHouseAndSim(world);
                 world.printMap();
                 System.out.println("Ketikan nomor Sim untuk dikunjungi :");
                 int idxVisit = input.nextInt();
-                sim.visit(world.getHomeList().get(idxVisit-1).getLocX(), world.getHomeList().get(idxVisit-1).getLocY(), idxVisit-1);
+                sim.visit(world.getHouseList().get(idxVisit-1).getLocX(), world.getHouseList().get(idxVisit-1).getLocY(), idxVisit-1);
                 break;
             case 8:
                 if(sim.useItem.equals("Toilet")){

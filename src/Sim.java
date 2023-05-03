@@ -9,27 +9,27 @@ public class Sim {
     private int mood;
     private int health;
     private String status;
-    private final Home myHome;
+    private final House myHouse;
     private int workTime; 
 
     // ini nyoba
     public Room currentRoom;
-    public Home currentHome;
+    public House currentHouse;
     public static World currentWorld;
     
     public Clock clock;
     public String useItem;
 
     //konstruktor
-    public Sim(String nama,Home home, World world) {
+    public Sim(String nama,House house, World world) {
         this.fullName = nama;
         this.hunger = 80;
         this.mood = 80;
         this.health = 80;
         this.money = 10000;
         this.job = Job.firstJob();
-        this.myHome = home;
-        this.currentHome = home;
+        this.myHouse = house;
+        this.currentHouse = house;
         this.currentWorld = world;
         this.useItem = "";
         // pada awal di buat status bersifat "idle"
@@ -38,8 +38,8 @@ public class Sim {
     }
 
     //getter 
-    public Home getMyHome(){
-        return this.myHome;
+    public House getMyHouse(){
+        return this.myHouse;
     }
 
     public String getSimName(){
@@ -88,8 +88,8 @@ public class Sim {
         return currentRoom;
     }
 
-    public Home getCurrentHome() {
-        return currentHome;
+    public House getCurrentHouse() {
+        return currentHouse;
     }
         
 
@@ -263,17 +263,17 @@ public class Sim {
         }
     }
 
-    public void visit (int x2, int y2, int idxHome){
-        if(currentWorld.getHomeList().get(idxHome).getOwner().getSimName().equals(currentHome.getOwner().getSimName())){
+    public void visit (int x2, int y2, int idxHouse){
+        if(currentWorld.getHouseList().get(idxHouse).getOwner().getSimName().equals(currentHouse.getOwner().getSimName())){
             System.out.println("Tidak bisa berkunjung ke rumah yang sama!");
         }
         else{
             this.status = "onTheWay";
-            int x1 = currentHome.getLocX();
-            int y1 = currentHome.getLocY();
+            int x1 = currentHouse.getLocX();
+            int y1 = currentHouse.getLocY();
             double distance = Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
             int tick = 0;
-            System.out.println("Sim berkunjung ke rumah " + currentWorld.getHomeList().get(idxHome).getOwner() + "dengan durasi : " + distance + " detik");
+            System.out.println("Sim berkunjung ke rumah " + currentWorld.getHouseList().get(idxHouse).getOwner() + "dengan durasi : " + distance + " detik");
             while(getSimStatus().equals("onTheWay")) {
                     System.out.println("Sim sedang dalam perjalanan!");
                     currentWorld.getWorldClock().wait(1);
@@ -281,7 +281,7 @@ public class Sim {
                     if(tick >= distance){
                         System.out.println("Sim sudah sampai!");
                         setSimStatus("idle");
-                        currentHome = currentWorld.getHomeList().get(idxHome-1);
+                        currentHouse = currentWorld.getHouseList().get(idxHouse-1);
                         tick = 0;
                     }
                 // ini gw masih bingung
@@ -328,11 +328,11 @@ public class Sim {
 
     //not needed time action 
     public void moveToRoom(int idx) {
-        if(this.currentHome.getRoomList().get(idx-1).equals(currentRoom)){
+        if(this.currentHouse.getRoomList().get(idx-1).equals(currentRoom)){
             System.out.println("Tidak bisa berpindah ke room yang sama!");
         }
         else {
-            this.currentRoom = this.currentHome.getRoomList().get(idx-1);
+            this.currentRoom = this.currentHouse.getRoomList().get(idx-1);
             System.out.println("Anda diteleportasi ke " + this.currentRoom.getRoomName());
         }
     }
@@ -464,17 +464,17 @@ public class Sim {
     //driver
     public static void main(String[] args) {
         // World world = World.getInstance();
-        // Home home = Home.newHome(world);
-        // Sim Bobi = new Sim("Bobi",home);
+        // House house = House.newHouse(world);
+        // Sim Bobi = new Sim("Bobi",house);
         // System.out.println(Bobi.getSimInfo());
-        // Bobi.currentHome = new Home().newHome(world);
-        // Bobi.currentRoom = Bobi.currentHome.getRoomList().get("ruang01");
+        // Bobi.currentHouse = new House().newHouse(world);
+        // Bobi.currentRoom = Bobi.currentHouse.getRoomList().get("ruang01");
         // System.out.println(Bobi.currentRoom.getRoomName());
         // System.out.println(Bobi.currentRoom.getItemList());
 
         // // buat ruangan baru di rumah bobi
-        // Room ruang02 = new Room("dapur",Bobi.getCurrentHome());
-        // Bobi.currentHome.addRoom("ruang02", ruang02);
+        // Room ruang02 = new Room("dapur",Bobi.getCurrentHouse());
+        // Bobi.currentHouse.addRoom("ruang02", ruang02);
 
         // // coba pindah ke dapur atau room02
         // Bobi.moveToRoom("ruang02");

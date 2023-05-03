@@ -86,9 +86,9 @@ public class CLI {
         System.out.println("15. Milk - 2");
     }
 
-    public static void printHomeAndSim(World world){
-        for(int i = 0; i < world.getHomeList().size(); i++){
-            System.out.println((i+1) + ". " + world.getHomeList().get(i).getOwner().getSimName());
+    public static void printHouseAndSim(World world){
+        for(int i = 0; i < world.getHouseList().size(); i++){
+            System.out.println((i+1) + ". " + world.getHouseList().get(i).getOwner().getSimName());
         }
     }
 

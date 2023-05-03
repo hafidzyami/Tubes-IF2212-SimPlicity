@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class World {
     private static World instance = new World();
     private Tile map;
-    private ArrayList<Home> homeList;
+    private ArrayList<House> houseList;
     private WorldClock worldClock;
 
     private Sim playedSim;
@@ -16,7 +16,7 @@ public class World {
     private World() {
         Tile matrix = new Tile(LEN_CAPACITY,WID_CAPACITY);
         this.map = matrix;
-        this.homeList = new ArrayList<>();
+        this.houseList = new ArrayList<>();
         this.worldClock = new WorldClock();
         
     }
@@ -26,7 +26,7 @@ public class World {
     }
 
     public void updateMap() {
-        for(Home temp : homeList) {
+        for(House temp : houseList) {
             int idX = temp.getLocX();
             int idY = temp.getLocY();
 
@@ -45,7 +45,7 @@ public class World {
     public WorldClock getWorldClock() {
         return worldClock;
     }
-    public void printHomeList() {
+    public void printHouseList() {
         System.out.println("ini list rumah");
     }
 
@@ -53,13 +53,13 @@ public class World {
         this.playedSim = sim; 
     }
     
-    public void addNewHome(Home home) {
-        homeList.add(home);
+    public void addNewHouse(House house) {
+        houseList.add(house);
         updateMap();
     }
 
-    public ArrayList<Home> getHomeList(){
-        return this.homeList;
+    public ArrayList<House> getHouseList(){
+        return this.houseList;
     }
 
     public ArrayList<Sim> getSimList(){
@@ -93,6 +93,6 @@ public class World {
     public static void main(String[] args) {
         World world = World.getInstance();
         world.printMap();
-        System.out.println(world.getHomeList());
+        System.out.println(world.getHouseList());
     }
 }

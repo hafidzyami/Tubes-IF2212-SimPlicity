@@ -3,15 +3,15 @@ import java.util.HashMap;
 public class Room {
     private HashMap <String,Item> itemList = new HashMap<>();
     private String roomName;
-    private Home RoomLoc;
+    private House RoomLoc;
     /* Game akan men-generate rumah dengan 
     1 ruangan yang dimensi 6x6 dengan objek basic 
     berupa kasur, toilet, kompor, kursi, meja, dan jam */
     private Tile roomTile = new Tile(6, 6);
 
-    public Room(String roomName,Home home) {
+    public Room(String roomName,House house) {
         this.roomName = roomName;
-        this.RoomLoc = home;
+        this.RoomLoc = house;
     }
 
     public Tile getRoomTile(){
@@ -35,8 +35,8 @@ public class Room {
         this.itemList.put(key, item);
     }
 
-    public static Room firstRoom(Home home) {
-        Room retRoom = new Room("Ruang utama",home);
+    public static Room firstRoom(House house) {
+        Room retRoom = new Room("Ruang utama",house);
         return retRoom;
     }
 

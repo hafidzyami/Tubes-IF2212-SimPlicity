@@ -11,13 +11,13 @@ public class Game {
             command = CLI.wrongInput();
         }
         System.out.print("Masukkan nama sim: ");
-        Home home1 = Home.newHome(world, 1, 1);
-        Sim sim1 = new Sim(input.nextLine(),home1, world);
-        home1.setOwner(sim1);
+        House house1 = House.newHouse(world, 1, 1);
+        Sim sim1 = new Sim(input.nextLine(),house1, world);
+        house1.setOwner(sim1);
         world.addSimList(sim1);
-        world.addNewHome(home1);
+        world.addNewHouse(house1);
         world.setPlayedSim(sim1);
-        sim1.setCurrentRoom(home1.getRoomList().get(0));
+        sim1.setCurrentRoom(house1.getRoomList().get(0));
         world.updateMap();
         while(playing) {
             command = CLI.playing();
@@ -68,14 +68,14 @@ public class Game {
                     System.out.print("Masukkan nama Sim :");
                     String name = input.nextLine();
                     System.out.print("Masukkan lokasi rumah (X) untuk dibangun : ");
-                    int xHome = input.nextInt();
+                    int xHouse = input.nextInt();
                     System.out.print("Masukkan lokasi rumah (Y) untuk dibangun : ");
-                    int yHome = input.nextInt();
-                    if(!world.getWorldTile().getTile(xHome, yHome).equals("E")){
+                    int yHouse = input.nextInt();
+                    if(!world.getWorldTile().getTile(xHouse, yHouse).equals("E")){
                         System.out.println("Tidak bisa membangun rumah karena lokasi sudah ditempati rumah lain!");
                     }
-                    else if(xHome >= 1 && xHome <= world.getWorldLength() && yHome >= 1 && yHome <= world.getWorldWidth()){
-                        Menu.addSim(world, name, xHome, yHome);
+                    else if(xHouse >= 1 && xHouse <= world.getWorldLength() && yHouse >= 1 && yHouse <= world.getWorldWidth()){
+                        Menu.addSim(world, name, xHouse, yHouse);
                     }
                     else{
                         System.out.println("Tidak bisa membangun rumah karena input lokasi di luar jangkauan World!");
