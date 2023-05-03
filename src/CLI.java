@@ -94,11 +94,11 @@ public class CLI {
 
     public static void printFoodMenu(){
         System.out.println("Berikut daftar menu: ");
-        System.out.println("1. Chicken Rice");
-        System.out.println("2. Curry Rice");
-        System.out.println("3. Nut Milk");
-        System.out.println("4. Stir Fry Vegetable");
-        System.out.println("5. Steak");
+        System.out.println("1. Chicken Rice (Rice + Chicken)");
+        System.out.println("2. Curry Rice (Rice + Potato + Carrot + Beef)");
+        System.out.println("3. Nut Milk (Milk + Nut)");
+        System.out.println("4. Stir Fry Vegetable (Carrot + Spinach)");
+        System.out.println("5. Steak (Beef + Potato)");
     }
 
     public static void printActionList(){
