@@ -60,32 +60,32 @@ public class Menu {
             Scanner input = new Scanner(System.in);
             System.out.println("Silahkan pilih 1 untuk Non Food");
             System.out.println("Silahkan pilih 2 untuk Food Ingredients");
-            int idxBeli =Integer.parseInt(input.nextLine());
+            int idxBeli = input.nextInt();
             if(idxBeli == 1){
                 CLI.printNonFoodItem();
                 System.out.println("Silahkan masukan nomor barang : ");
-                String idxNonFood = input.nextLine();
+                int idxNonFood = input.nextInt();
                 PurchaseAble item;
                 switch (idxNonFood) {
-                    case "1" :
+                    case 1 :
                         item = new NonFoodItem("Single Bed");
                         break;
-                    case "2" :
+                    case 2 :
                         item = new NonFoodItem("Queen Size Bed");
                         break;
-                    case "3" :
+                    case 3 :
                         item = new NonFoodItem("King Size Bed");
                         break;
-                    case "4" :
+                    case 4 :
                         item = new NonFoodItem("Toilet");
                         break;
-                    case "5" :
+                    case 5 :
                         item = new NonFoodItem("Gas Stove");
                         break;
-                    case "6" :
+                    case 6 :
                         item = new NonFoodItem("Electric Stove");
                         break;
-                    case "7" :
+                    case 7 :
                         item = new NonFoodItem("Table And Chair");
                         break;
                     default :
@@ -96,31 +96,31 @@ public class Menu {
             else if(idxBeli == 2){
                 CLI.printFoodIngredient();
                 System.out.println("Silahkan masukan nomor barang : ");
-                String idxIngredient = input.nextLine();
+                int idxIngredient = input.nextInt();
                 PurchaseAble item;
                 switch (idxIngredient) {
-                    case "1" :
+                    case 1 :
                         item = new FoodIngredients("Rice");
                         break;
-                    case "2" :
+                    case 2 :
                         item = new FoodIngredients("Potato");
                         break;
-                    case "3" :
+                    case 3 :
                         item = new FoodIngredients("Chicken");
                         break;
-                    case "4" :
+                    case 4 :
                         item = new FoodIngredients("Beef");
                         break;
-                    case "5" :
+                    case 5 :
                         item = new FoodIngredients("Carrot");
                         break;
-                    case "6" :
+                    case 6 :
                         item = new FoodIngredients("Spinach");
                         break;
-                    case "7" :
+                    case 7 :
                         item = new FoodIngredients("Nut");
                         break;
-                    case "8" :
+                    case 8 :
                         item = new FoodIngredients("Milk");
                         break;
                     default :
