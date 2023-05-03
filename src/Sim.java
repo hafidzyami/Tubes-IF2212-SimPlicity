@@ -225,6 +225,7 @@ public class Sim {
             gainHealth(20*(duration/4));
         }
         currentWorld.getWorldClock().updateTime(duration); 
+        currentWorld.getWorldClock().setNotSleep(true);
     }
 
     public void eat (Food food){
@@ -235,6 +236,7 @@ public class Sim {
         System.out.println("Sim telah makan!");
         System.out.println("Kekenyagan sim saat ini : " + getSimHunger());
         currentWorld.getWorldClock().updateTime(30); 
+        currentWorld.getWorldClock().setNotPoop(true);
     }
 
     public void cook (String mealName) {

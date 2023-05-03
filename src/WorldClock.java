@@ -60,7 +60,7 @@ public class WorldClock  {
         this.notSleep = status;
     }
 
-    public void setNowSleep() {
+    public void setSleepTime() {
         lastSleepTime = totalElapsed;
     }
 
