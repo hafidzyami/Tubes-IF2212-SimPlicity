@@ -68,9 +68,9 @@ public class Game {
                     System.out.print("Masukkan nama Sim :");
                     String name = input.nextLine();
                     System.out.print("Masukkan lokasi rumah (X) untuk dibangun : ");
-                    int xHouse = input.nextInt();
+                    int xHouse = Integer.parseInt(input.nextLine());
                     System.out.print("Masukkan lokasi rumah (Y) untuk dibangun : ");
-                    int yHouse = input.nextInt();
+                    int yHouse = Integer.parseInt(input.nextLine());
                     if(!world.getWorldTile().getTile(xHouse, yHouse).equals("E")){
                         System.out.println("Tidak bisa membangun rumah karena lokasi sudah ditempati rumah lain!");
                     }
@@ -128,7 +128,7 @@ public class Game {
                 case "14","action" :
                     CLI.printActionList();
                     System.out.println("Silahkan pilih nomor untuk melakukan aksi yang ingin dilakukan : ");
-                    int idxAction = input.nextInt();
+                    int idxAction = Integer.parseInt(input.nextLine());
                     Menu.action(world, idxAction);
                     break;
                 default :

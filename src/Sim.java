@@ -218,13 +218,13 @@ public class Sim {
             currentWorld.getWorldClock().wait(1);
             sleepTime++;
             System.out.println("Sedang tidur selama " + sleepTime + " detik");
+            currentWorld.getWorldClock().updateTime(1); 
         }
         setIdle();
         if(sleepTime >= 4){
             gainMood(30*(duration/4));
             gainHealth(20*(duration/4));
         }
-        currentWorld.getWorldClock().updateTime(duration); 
         currentWorld.getWorldClock().setNotSleep(true);
     }
 
@@ -318,7 +318,7 @@ public class Sim {
                     while (true) {
                         now = currentWorld.getWorldClock().getTotalElapsed();
                         if (now >= start + deliveryTime){
-                            
+                            System.out.println(item.getName() + " sudah masuk ke inventory");
                             inventory.addInventory((Item) item);
                             break;
                         }
