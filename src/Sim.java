@@ -4,7 +4,7 @@ public class Sim {
     private String fullName;
     private Job job;
     private double money;
-    private Inventory<Item> inventory = new Inventory();
+    private Inventory<Item> inventory = new Inventory<Item>();
     private int hunger;
     private int mood;
     private int health;
