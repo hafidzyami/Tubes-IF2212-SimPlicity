@@ -11,8 +11,6 @@ public class Inventory < T extends Item> {
         itemList.put((T) new NonFoodItem("Toilet"), 1);
         itemList.put((T) new NonFoodItem("Table and Chair"), 1);
         itemList.put((T) new Clock(), 1);
-        itemList.put((T) new FoodIngredients("Rice"), 2); 
-        itemList.put((T) new FoodIngredients("Chicken"), 2); 
         inventoryCount = itemList.size();
     }
 

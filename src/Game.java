@@ -48,7 +48,9 @@ public class Game {
                     break;
 
                 case "7", "upgrade house":
-                    Menu.upgradeHouse(world.getPlayedSim(), "blabla", world.getPlayedSim().getMyHome());
+                    System.out.println("Masukkan nama ruangan : ");
+                    String roomName = input.nextLine();
+                    Menu.upgradeHouse(world.getPlayedSim(), roomName);
                     break;
 
                 case "8", "move room":
@@ -64,7 +66,7 @@ public class Game {
                     break;
                 case "10", "add sim":
                     System.out.print("Masukkan nama Sim :");
-                    String name = input.next();
+                    String name = input.nextLine();
                     System.out.print("Masukkan lokasi rumah (X) untuk dibangun : ");
                     int xHome = input.nextInt();
                     System.out.print("Masukkan lokasi rumah (Y) untuk dibangun : ");

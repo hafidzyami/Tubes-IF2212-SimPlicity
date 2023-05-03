@@ -282,5 +282,6 @@ public class Menu {
                 }
                 break;
         }
+        input.close();
     }
 }

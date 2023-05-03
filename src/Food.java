@@ -10,5 +10,5 @@ public abstract class Food extends Item {
         return satiation; 
     }
 
-    // public (Type waktu) increaseTime(){
+   
 }
