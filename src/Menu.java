@@ -88,9 +88,13 @@ public class Menu {
                     case 7 :
                         item = new NonFoodItem("Table And Chair");
                         break;
+                    case 8 :
+                        item = new Clock();
+                        break;
                     default :
                         item = null;
                 }
+                System.out.println(item.getName());
                 sim.buyItem(item);
             }
             else if(idxBeli == 2){

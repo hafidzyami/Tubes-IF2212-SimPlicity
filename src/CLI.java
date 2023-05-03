@@ -75,6 +75,7 @@ public class CLI {
         System.out.println("5. Gas Stove - 100");
         System.out.println("6. Electric Stove - 200");
         System.out.println("7. Table And Chair - 50");
+        System.out.println("8. Clock - 10");
     }
 
     public static void printFoodIngredient() {
@@ -88,7 +89,7 @@ public class CLI {
         System.out.println("7. Nut - 2");
         System.out.println("8. Milk - 2");
     }
-    
+
     public static void printHouseAndSim(World world){
         for(int i = 0; i < world.getHouseList().size(); i++){
             System.out.println((i+1) + ". " + world.getHouseList().get(i).getOwner().getSimName());

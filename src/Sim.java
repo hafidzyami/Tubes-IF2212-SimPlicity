@@ -170,7 +170,7 @@ public class Sim {
         if (newJob.getJobName().equals(getSimJob().getJobName())){
             System.out.println("Pekerjaan sim sudah sama!"); 
         } else {
-            if (workTime >= 0){
+            if (workTime >= 720){
                 System.out.println("Sim akan mengubah pekerjaan " + getSimJob().getJobName() + " menjadi " + newJob.getJobName()); 
                 setSimJob(newJob);
                 System.out.println(getSimJob().getJobName()); 
@@ -308,16 +308,25 @@ public class Sim {
         this.status = "buying item"; 
         Thread t = new Thread(new Runnable(){
             public void run(){
-                int now = currentWorld.getWorldClock().getTotalElapsed();
+                int start = currentWorld.getWorldClock().getTotalElapsed();
+                int now;
                 if (item != null && item.getPrice() <= getMoney()) {
-                    int deliveryTime = (int) (Math.random() * 5 * 1) * 30;
+                    gainMoney(-item.getPrice());
+                    System.out.println("sim membeli '" + item.getName() + "'' dengan harga : " + item.getPrice());
+                    int deliveryTime = ((int) (Math.random() * 5 * 1) + 1) * 30;
+                    System.out.println("barang akan tersedia dalam waktu "+ deliveryTime + " detik, silahkan menunggu");
                     while (true) {
-                        if (now <= now + deliveryTime){
-                            gainMoney(-item.getPrice());
-                            System.out.println("sim membeli '" + item.getName() + "'' dengan harga : " + item.getPrice());
-                            System.out.println("barang akan tersedia dalam waktu "+ deliveryTime + " detik, silahkan menunggu");
+                        now = currentWorld.getWorldClock().getTotalElapsed();
+                        if (now >= start + deliveryTime){
+                            
                             inventory.addInventory((Item) item);
                             break;
+                        }
+                        try {
+                            Thread.sleep(1000);
+                        }
+                        catch (Exception e) {
+
                         }
                     }
                 } else {

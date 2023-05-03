@@ -7,12 +7,13 @@ public class Clock extends NonFoodItem {
         this.width = 1;
     }
 
-    public int getTime(){
-        return 0;
+    public int getTime(World world){
+        int time = world.getWorldClock().getTotalElapsed();
+        return time;
     }
 
     public static void main(String[] args){
-        Clock c = new Clock();
+        PurchaseAble c = new Clock();
         System.out.println(c.getName());
     }
 }
