@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class House {
-    private int houseNumber;
+    //private int houseNumber;
     private Point location;
     private ArrayList<Room> roomList = new ArrayList<>(); 
     private Sim owner;

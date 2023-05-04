@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Game {
     private static World world = World.getInstance();
     private static Scanner input = new Scanner(System.in);
-    private static String command;
+    //private static String command;
     private static Boolean playing = true;
     public static void start() {
         String command = CLI.opening();

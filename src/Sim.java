@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Map.Entry;
 
 public class Sim {
     private String fullName;
@@ -31,7 +30,7 @@ public class Sim {
         this.job = Job.firstJob();
         this.myHouse = house;
         this.currentHouse = house;
-        this.currentWorld = world;
+        Sim.currentWorld = world;
         this.useItem = "";
         // pada awal di buat status bersifat "idle"
         this.status = "idle";
@@ -227,7 +226,6 @@ public class Sim {
             gainMood(30*(duration/4));
             gainHealth(20*(duration/4));
         }
-        currentWorld.getWorldClock().setNotSleep(true);
     }
 
     public void eat (Food food){
@@ -238,7 +236,6 @@ public class Sim {
         System.out.println("Sim telah makan!");
         System.out.println("Kekenyagan sim saat ini : " + getSimHunger());
         currentWorld.getWorldClock().updateTime(30); 
-        currentWorld.getWorldClock().setNotPoop(true);
     }
 
     public void cook (String mealName) {
