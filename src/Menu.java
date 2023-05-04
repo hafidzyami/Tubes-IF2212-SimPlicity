@@ -41,17 +41,18 @@ public class Menu {
         sim.seeInventory();
     }
 
-    public static void upgradeHouse(Sim sim, String roomName) {
-        System.out.println("rumah sedang diupgrade");
-
-        Room room = new Room(roomName, sim.getMyHouse());
+    public static void upgradeHouse(int xNew, int yNew, House house) {
+        System.out.println("Masukkan nama ruangan yang Anda inginkan : ");
         Scanner input = new Scanner(System.in);
-        System.out.println("Pilih letak ruangan dari " + sim.currentRoom.getRoomName());
-        // Roomloc roomLoc input.nextLine(); (input lokasi ruangan akan berada)
+        String name = input.nextLine();
+        Room newRoom = new Room(name, house);
+        newRoom.setRoomCoordinate(xNew, yNew);
+        house.addRoom(newRoom);
+        house.getHouseTile().changeTile(newRoom.getRoomName(), xNew, yNew);
     }
 
-    public static void moveRoom() {
-        System.out.println("pindah ruang");
+    public static void moveRoom(Sim sim, int idx) {
+        sim.moveToRoom(idx);
     }
 
     public static void editRoom(int idx, Sim sim) {

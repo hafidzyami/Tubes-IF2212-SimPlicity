@@ -4,6 +4,7 @@ public class Room {
     private HashMap <String,Item> itemList = new HashMap<>();
     private String roomName;
     private House RoomLoc;
+    private Point roomCoordinate = new Point(0, 0);
     /* Game akan men-generate rumah dengan 
     1 ruangan yang dimensi 6x6 dengan objek basic 
     berupa kasur, toilet, kompor, kursi, meja, dan jam */
@@ -37,7 +38,17 @@ public class Room {
 
     public static Room firstRoom(House house) {
         Room retRoom = new Room("Ruang utama",house);
+        retRoom.setRoomCoordinate(3, 3);
         return retRoom;
+    }
+
+    public Point getRoomCoordinate(){
+        return this.roomCoordinate;
+    }
+
+    public void setRoomCoordinate(int x, int y){
+        this.roomCoordinate.setX(x);
+        this.roomCoordinate.setY(y);
     }
 
     public static void main(String[] args){

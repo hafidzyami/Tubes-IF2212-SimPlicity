@@ -39,4 +39,16 @@ public class Tile  {
         return tile[Y-1][X-1];
     }
 
+    public int getCountNonEmpty(){
+        int count = 0;
+        for(int i = 0; i < width; i++) {
+            for(int j = 0; j < length; j++) {
+                if(tile[i][j] != "E"){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
 }
