@@ -12,7 +12,17 @@ public class Game {
         }
         System.out.print("Masukkan nama sim: ");
         House house1 = House.newHouse(world, 1, 1);
-        Sim sim1 = new Sim(input.nextLine(),house1, world);
+        String simName;
+        while(true){
+            simName = input.nextLine();
+            if(simName.split(" ").length > 0 && simName.length() > 0){
+                break;
+            }else {
+                System.out.println("Silahkan masukkan nama sim dengan benar");
+                System.out.print("Masukkan nama sim: ");
+            }
+        }
+        Sim sim1 = new Sim(simName,house1, world);
         house1.setOwner(sim1);
         world.addSimList(sim1);
         world.addNewHouse(house1);

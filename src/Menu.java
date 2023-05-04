@@ -187,10 +187,8 @@ public class Menu {
     public static void listObject(World world) {
         Sim sim = world.getPlayedSim();
         System.out.println("Berikut List Objek dalam ruangan");
-        int idx = 1;
         for(Item i : sim.currentRoom.getItemList().values()){
-            System.out.println(idx + ". " + i.getName());
-            idx++;
+            System.out.println("- " + i.getName());
         }
     }
 
