@@ -8,6 +8,10 @@ public class CLI {
         System.out.println();
     }
     public static String opening() {
+        System.out.println("\u001B[35m" + "  ________   __  _______  _____________   ___  ______" );
+        System.out.println(" / ___/ _ | /  |/  / __/ / __/_  __/ _ | / _ \\/_  __/");
+        System.out.println("/ (_ / __ |/ /|_/ / _/  _\\ \\  / / / __ |/ , _/ / /   ");
+        System.out.println("\\___/_/ |_/_/  /_/___/ /___/ /_/ /_/ |_/_/|_| /_/    \n"+ "\u001B[0m");
         System.out.println("Selamat datang di Sim-Plicity");
         System.out.println("Silakan ketik startgame atau 1 untuk memulai permainan");
         retS = input.nextLine();
