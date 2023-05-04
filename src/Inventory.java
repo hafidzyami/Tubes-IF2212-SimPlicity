@@ -11,6 +11,12 @@ public class Inventory < T extends Item> {
         itemList.put((T) new NonFoodItem("Toilet"), 1);
         itemList.put((T) new NonFoodItem("Table and Chair"), 1);
         itemList.put((T) new Clock(), 1);
+        itemList.put((T) new FoodIngredients("Rice"), 1);
+        itemList.put((T) new FoodIngredients("Chicken"), 1);
+        itemList.put((T) new FoodIngredients("Beef"), 1);
+        itemList.put((T) new FoodIngredients("Nut"), 1);
+        itemList.put((T) new FoodIngredients("Milk"), 1);
+        itemList.put((T) new FoodIngredients("Potato"), 1);
         inventoryCount = itemList.size();
     }
 
@@ -100,7 +106,7 @@ public class Inventory < T extends Item> {
     public HashMap<T,Integer> getFoodItem () {
         HashMap<T,Integer> temp = new HashMap <>();
         for(T i : itemList.keySet()){
-            if(i instanceof Food){
+            if(i instanceof FoodCooked){
                 temp.put(i, temp.get(i));
             }
         }

@@ -247,8 +247,34 @@ public class Menu {
                 }
                 break;
             case 5 :
-                System.out.println("Daftar makanan :");
-                // tunggu code jadi
+                if(sim.useItem.equals("Table and Chair")){
+                    sim.getSimInventory().printInventory(sim.getSimInventory().getFoodItem());
+                    while (true){
+                        try{
+                            System.out.println("Silahkan pilih makanan yang akan dimakan");
+                            int idxFood = input.nextInt();
+                            if(idxFood > sim.getSimInventory().getFoodItem().size()){
+                                System.out.println("Indeks tersebut tidak ada, masukkan indeks dengan benar");
+                            }else{
+                                int idx = 0;
+                                for (Item foodCooked : sim.getSimInventory().getFoodItem().keySet()){
+                                    if (idx != idxFood - 1){
+                                        idx++;
+                                    }else{
+                                        sim.eat((Food) foodCooked);
+                                        sim.getSimInventory().deleteInventory(foodCooked);
+                                        break;
+                                    }
+                                }
+                                
+                            }
+                        }catch(Exception e){
+                            System.out.println("Masukkan input berupa angka ya bang");
+                        }
+                        }
+                }else {
+                    System.out.println("Silahkan ke 'Table and Chair' untuk makan");
+                }
                 break;
             case 6 : 
                 if(sim.useItem.equals("Gas Stove") || sim.useItem.equals("Electric Stove")){

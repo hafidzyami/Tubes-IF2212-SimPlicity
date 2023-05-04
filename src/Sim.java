@@ -245,31 +245,21 @@ public class Sim {
         this.status = "cooking";
         FoodCooked meal = new FoodCooked(mealName);
         ArrayList<FoodIngredients> ingredients = meal.getIngredientsList();
-        // boolean cook = false;
-        // for (Item ingredient : ingredients) {
-        //     for (Item item : inventory.getInventory().keySet()) {
-        //         if (item.getClass().getName().equals("FoodIngredients")) {
-        //             if (item.equals(ingredient)) {
-        //                 inventory.deleteInventory(item);
-        //                 ingredients.remove(ingredient);
-        //                 cook = true;
-        //             }
-        //         }
-        //     }
-        // }
-            ArrayList<String> listCek = new ArrayList<>();
-            for (int i = 0; i < ingredients.size(); i++) {
-                listCek.add(ingredients.get(i).getName());
+        ArrayList<String> listCek = new ArrayList<>();
+        ArrayList<String> listTemp = new ArrayList<>();
+        for (int i = 0; i < ingredients.size(); i++) {
+            listCek.add(ingredients.get(i).getName());
+            listTemp.add(ingredients.get(i).getName());
+        }
+        for (int i = 0; i < inventory.getInventory().size(); i++) {
+            if (listCek.contains(inventory.getItem(i).getName())) {
+                listCek.remove(inventory.getItem(i).getName());
             }
-            for (int i = 0; i < inventory.getInventory().size(); i++) {
-                if (listCek.contains(inventory.getItem(i).getName())) {
-                    listCek.remove(inventory.getItem(i).getName());
-                }
-            }
-        
+        }
+    
         if (listCek.size() == 0) {
             for (int i = 0; i < inventory.getInventory().size(); i++) {
-                if (ingredients.contains(inventory.getItem(i))) {
+                if (listTemp.contains(inventory.getItem(i).getName())) {
                     inventory.deleteInventory(inventory.getItem(i));
                 }
             }
