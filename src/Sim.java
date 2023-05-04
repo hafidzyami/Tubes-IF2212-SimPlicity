@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Map.Entry;
 
 public class Sim {
     private String fullName;
@@ -214,6 +215,7 @@ public class Sim {
     public void sleep (int duration){
         this.status = "sleep";
         int sleepTime = 0;
+        System.out.println("Sim mulai tidur");
         while(sleepTime != duration){
             currentWorld.getWorldClock().wait(60);
             sleepTime++;
@@ -240,23 +242,40 @@ public class Sim {
     }
 
     public void cook (String mealName) {
-        System.out.println(this.fullName + " sedang memasak " + mealName);
         this.status = "cooking";
         FoodCooked meal = new FoodCooked(mealName);
         ArrayList<FoodIngredients> ingredients = meal.getIngredientsList();
-        currentWorld.getWorldClock().wait((int) Math.round(1.5*meal.getSatiation()));
-        for (Item ingredient : ingredients) {
-            for (Item item : inventory.getInventory().keySet()) {
-                if (item.getClass().getName().equals("FoodIngredients")) {
-                    if (item.equals(ingredient)) {
-                        inventory.deleteInventory(item);
-                        ingredients.remove(ingredient);
-                    }
+        // boolean cook = false;
+        // for (Item ingredient : ingredients) {
+        //     for (Item item : inventory.getInventory().keySet()) {
+        //         if (item.getClass().getName().equals("FoodIngredients")) {
+        //             if (item.equals(ingredient)) {
+        //                 inventory.deleteInventory(item);
+        //                 ingredients.remove(ingredient);
+        //                 cook = true;
+        //             }
+        //         }
+        //     }
+        // }
+            ArrayList<String> listCek = new ArrayList<>();
+            for (int i = 0; i < ingredients.size(); i++) {
+                listCek.add(ingredients.get(i).getName());
+            }
+            for (int i = 0; i < inventory.getInventory().size(); i++) {
+                if (listCek.contains(inventory.getItem(i).getName())) {
+                    listCek.remove(inventory.getItem(i).getName());
                 }
             }
-        };
         
-        if (ingredients.isEmpty()) {
+        if (listCek.size() == 0) {
+            for (int i = 0; i < inventory.getInventory().size(); i++) {
+                if (ingredients.contains(inventory.getItem(i))) {
+                    inventory.deleteInventory(inventory.getItem(i));
+                }
+            }
+            int duration = (int) Math.round(1.5*meal.getSatiation());
+            System.out.println(this.fullName + " sedang memasak " + mealName + " dalam waktu " + duration + " detik");
+            currentWorld.getWorldClock().wait(duration);
             inventory.addInventory(meal);
             System.out.println(meal.getName() + " ditambahkan ke inventory!");
             currentWorld.getWorldClock().updateTime((int) Math.round(1.5*meal.getSatiation())); 
