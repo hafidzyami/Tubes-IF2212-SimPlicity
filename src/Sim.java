@@ -215,10 +215,10 @@ public class Sim {
         this.status = "sleep";
         int sleepTime = 0;
         while(sleepTime != duration){
-            currentWorld.getWorldClock().wait(1);
+            currentWorld.getWorldClock().wait(60);
             sleepTime++;
-            System.out.println("Sedang tidur selama " + sleepTime + " detik");
-            currentWorld.getWorldClock().updateTime(1); 
+            System.out.println("Sedang tidur selama " + sleepTime + " menit");
+            currentWorld.getWorldClock().updateTime(60); 
         }
         setIdle();
         if(sleepTime >= 4){

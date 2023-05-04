@@ -230,8 +230,13 @@ public class Menu {
                 break;
             case 4 :
                 if(sim.useItem.equals("Single Bed") || sim.useItem.equals("Queen Size Bed") || sim.useItem.equals("King Size Bed")){
-                    System.out.println("Masukkan durasi Tidur :");
-                    int durasiTidur = Integer.parseInt(input.nextLine());
+                    while (true){
+                        System.out.print("Masukkan durasi Tidur (dalam menit):");
+                        int durasiTidur = Integer.parseInt(input.nextLine());
+                        if(durasiTidur >= 3) {
+                            break;
+                        }
+                    }
                     sim.sleep(durasiTidur);
                 }
                 else{
