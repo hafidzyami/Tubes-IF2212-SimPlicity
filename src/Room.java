@@ -29,6 +29,13 @@ public class Room {
     }
 
     public void removeItem(String name){
+        for(int i = 1; i <= 6; i++){
+            for(int j = 1; j <= 6; j++){
+                if(roomTile.getTile(i, j).equals(name)){
+                    roomTile.changeTile("E", i, j);
+                }
+            }
+        }
         this.itemList.remove(name);
     }
 
@@ -50,6 +57,8 @@ public class Room {
         this.roomCoordinate.setX(x);
         this.roomCoordinate.setY(y);
     }
+
+    
 
     public static void main(String[] args){
         //Room room = new Room("dapur").firstRoom();

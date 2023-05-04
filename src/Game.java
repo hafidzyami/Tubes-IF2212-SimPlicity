@@ -106,7 +106,7 @@ public class Game {
                     break;
 
                 case "8", "move room":
-                    System.out.println("Anda sekarang berada di ruangan : " + world.getPlayedSim().currentRoom);
+                    System.out.println("Anda sekarang berada di ruangan " + world.getPlayedSim().currentRoom.getRoomName() + " di rumah " + world.getPlayedSim().currentHouse.getOwner().getSimName());
                     System.out.println("Daftar ruangan yang bisa Anda kunjungi : ");
                     world.getPlayedSim().currentHouse.printRoomList();
                     System.out.println("Silahkan pilih nomor ruangan yang ingin dituju : ");
@@ -128,7 +128,7 @@ public class Game {
                     break;
                 case "10", "add sim":
                     System.out.print("Masukkan nama Sim :");
-                    String name = input.nextLine();
+                    String name = input.next();
                     System.out.print("Masukkan lokasi rumah (X) untuk dibangun : ");
                     int xHouse = input.nextInt();
                     System.out.print("Masukkan lokasi rumah (Y) untuk dibangun : ");

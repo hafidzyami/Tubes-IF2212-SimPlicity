@@ -275,7 +275,7 @@ public class Sim {
             int y1 = currentHouse.getLocY();
             double distance = Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
             int tick = 0;
-            System.out.println("Sim berkunjung ke rumah " + currentWorld.getHouseList().get(idxHouse).getOwner() + "dengan durasi : " + distance + " detik");
+            System.out.println("Sim berkunjung ke rumah " + currentWorld.getHouseList().get(idxHouse).getOwner().getSimName() + " dengan durasi : " + distance + " detik");
             while(getSimStatus().equals("onTheWay")) {
                     System.out.println("Sim sedang dalam perjalanan!");
                     currentWorld.getWorldClock().wait(1);
@@ -283,7 +283,8 @@ public class Sim {
                     if(tick >= distance){
                         System.out.println("Sim sudah sampai!");
                         setSimStatus("idle");
-                        currentHouse = currentWorld.getHouseList().get(idxHouse-1);
+                        currentHouse = currentWorld.getHouseList().get(idxHouse);
+                        currentRoom = currentHouse.getRoomList().get(0);
                         tick = 0;
                     }
                 // ini gw masih bingung
@@ -371,7 +372,6 @@ public class Sim {
                 System.out.println("Terdapat item lain!");
             }
             else{
-                // ini harus dihapus item dari inventory tapi error
                 this.inventory.deleteInventory(item);
                 currentRoom.addItem(item.getName(), item);
                 item.setUpperLeft(wantedX, wantedY);
@@ -418,7 +418,7 @@ public class Sim {
 
     public void steal(String itemName){
         if(currentRoom.getItemList().containsKey(itemName)){
-            this.inventory.addInventory(currentRoom.getItemList().get(itemName));
+            this.inventory.addInventory((Item) currentRoom.getItemList().get(itemName));
             currentRoom.removeItem(itemName);
             System.out.println("Kamu berhasil mencuri barang " + itemName + ", silahkan lihat di inventory kamu!");
         }
