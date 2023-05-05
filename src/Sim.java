@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Sim {
     private String fullName;
@@ -21,6 +20,11 @@ public class Sim {
     private boolean haveEat;
     private int notSleepTime;
     private int notPeeTime;
+    //Passive time tracker
+    private boolean onDelivery;
+    private int deliveryTime;
+    private boolean onUpgrade;
+    private int upgradeTime;
 
     //konstruktor
     public Sim(String nama,House house, World world) {
@@ -39,6 +43,10 @@ public class Sim {
         this.haveEat = false;
         this.notSleepTime = 0;
         this.notPeeTime = 0;
+        this.upgradeTime = 0;
+        this.deliveryTime = 0;
+        this.onDelivery = false;
+        this.onUpgrade = false;
     }
 
     //getter 
@@ -115,6 +123,14 @@ public class Sim {
     public World getCurrentWorld(){
         return currentWorld;
     }
+
+    public int getDeliveryTime() {
+        return deliveryTime;
+    }
+
+    public int getUpgradeTime() {
+        return deliveryTime;
+    }
         
 
     //setter 
@@ -178,7 +194,17 @@ public class Sim {
             }
         }
     }
- 
+
+    // Passive Action Time Up
+    public void nextPassiveTime(int duration) {
+        if(onDelivery) {
+            deliveryTime += duration;
+        }
+        if(onUpgrade) {
+            upgradeTime += duration;
+        }
+    }
+
     // active action 
     public void work (int duration){
         if (duration % 120 != 0){
@@ -207,6 +233,7 @@ public class Sim {
                     notPeeTime += duration;
                 }
                 gainNegativeEffect();
+                nextPassiveTime(duration);
             }
         }
         setIdle();
@@ -261,6 +288,7 @@ public class Sim {
             notPeeTime += duration;
         }
         gainNegativeEffect();
+        nextPassiveTime(duration);
         setIdle();
     }
 
@@ -285,6 +313,7 @@ public class Sim {
             notPeeTime += duration;
         }
         gainNegativeEffect();
+        nextPassiveTime(duration);
         setIdle();
     }
 
@@ -299,6 +328,7 @@ public class Sim {
         notSleepTime += 30;
         haveEat = true;
         gainNegativeEffect();
+        nextPassiveTime(30);
         setIdle();
     }
 
@@ -336,6 +366,7 @@ public class Sim {
                     notPeeTime += duration;
                 }
                 gainNegativeEffect();
+                nextPassiveTime(duration);
             } else {
                 System.out.println(meal.getName() + " tidak jadi karena bahan kurang!");
             }
@@ -386,6 +417,7 @@ public class Sim {
         haveEat = false;
         notPeeTime = 0;
         gainNegativeEffect();
+        nextPassiveTime(10);
         setIdle();
     }
 
@@ -499,6 +531,7 @@ public class Sim {
             notPeeTime += duration;
         }
         gainNegativeEffect();
+        nextPassiveTime(duration);
         setIdle();
     }
 
@@ -519,6 +552,7 @@ public class Sim {
             notPeeTime += duration;
         }
         gainNegativeEffect();
+        nextPassiveTime(duration);
     }
 
     public void steal(int idx){
@@ -560,6 +594,7 @@ public class Sim {
             notPeeTime += duration;
         }
         gainNegativeEffect();
+        nextPassiveTime(duration);
     }
 
     public void write() {
@@ -574,6 +609,7 @@ public class Sim {
             notPeeTime += 10;
         }
         gainNegativeEffect();
+        nextPassiveTime(duration);
     }
 
     public void read() {
@@ -588,6 +624,7 @@ public class Sim {
         }
         gainNegativeEffect();
         gainMood(5);
+        nextPassiveTime(5);
     }
 
     public void bath() {
@@ -603,6 +640,7 @@ public class Sim {
             notPeeTime += 20;
         }
         gainNegativeEffect();
+        nextPassiveTime(20);
         setIdle();
     }
 
