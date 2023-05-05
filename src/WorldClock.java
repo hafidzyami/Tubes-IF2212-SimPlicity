@@ -10,7 +10,7 @@ public class WorldClock  {
         this.totalElapsed += duration;
     }
 
-   
+
 
     public int getDay() {
         gameDay = (totalElapsed / 720 ) + 1;

@@ -221,17 +221,17 @@ public class Menu {
         Scanner input = new Scanner(System.in);
         switch(idxAction){
             case 1 :
-                System.out.println("Masukkan durasi bekerja :");
+                System.out.println("Masukkan durasi bekerja (dalam detik) :");
                 int durasiKerja = Integer.parseInt(input.nextLine());
                 sim.work(durasiKerja);
                 break;
             case 2 : 
                 System.out.println("List pekerjaan dan biaya yang harus dibayarkan untuk mengganti pekerjaan : "); 
-                System.out.println("1. Badut Sulap - 7.5"); 
-                System.out.println("2. Koki - 15"); 
-                System.out.println("3. Polisi - 17.5"); 
-                System.out.println("4. Programmer - 22.5"); 
-                System.out.println("5. Dokter - 25"); 
+                System.out.println("-- Badut Sulap - 7.5"); 
+                System.out.println("-- Koki - 15"); 
+                System.out.println("-- Polisi - 17.5"); 
+                System.out.println("-- Programmer - 22.5"); 
+                System.out.println("-- Dokter - 25"); 
                 System.out.println("Masukan nama pekerjaan baru :"); 
                 String newJobString = input.nextLine();
                 Job newJob = new Job(newJobString);
