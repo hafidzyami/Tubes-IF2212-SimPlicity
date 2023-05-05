@@ -229,28 +229,22 @@ public class CLI {
     }
 
     public static void printActionList(){
-        CLI st = new CLI();
-
-        //st.setRightAlign(true);//if true then cell text is right aligned
-        st.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
-        st.setHeaders("No.", "Aksi", "Syarat Object yang digunakan");
-        System.out.println("Berikut daftar Action:");
-        st.addRow("1.", "Kerja", "-");
-        st.addRow("2.", "Ganti Pekerjaan", "-");
-        st.addRow("3.", "Olahraga", "-");
-        st.addRow("4.", "Tidur", "Bed");
-        st.addRow("5.", "Makan","Table and Chair");
-        st.addRow("6.", "Memasak","Stove");
-        st.addRow("7.", "Berkunjung", "-");
-        st.addRow("8.", "Buang Air","Toilet");
-        st.addRow("9.", "Melihat Waktu","Clock");
-        st.addRow("10.","Menangis","Bed");
-        st.addRow("11.","Mengaji","Table and Chair");
-        st.addRow("12.","Mencuri", "Any");
-        st.addRow("13.","Menulis","Table and Chair");
-        st.addRow("14.","Membaca","Table and Chair");
-        st.addRow("15.","Melamun","Table and Chair or Toilet or Bed");
-        st.addRow("16.","-", "-");
-        st.print();
+        System.out.println("==== Daftar Action : ====");
+        System.out.println("1. Kerja");
+        System.out.println("2. Ganti Pekerjaan");
+        System.out.println("3. Olahraga");
+        System.out.println("4. Tidur - Bed");
+        System.out.println("5. Makan - Table and Chair");
+        System.out.println("6. Memasak - Stove");
+        System.out.println("7. Berkunjung");
+        System.out.println("8. Buang Air - Toilet");
+        System.out.println("9. Melihat Waktu - Clock");
+        System.out.println("10. Aksi Custom : Menangis - Bed");
+        System.out.println("11. Aksi Custom : Mengaji - Table and Chair");
+        System.out.println("12. Aksi Custom : Mencuri");
+        System.out.println("13. Aksi Custom : Menulis - Table and Chair");
+        System.out.println("14. Aksi Custom : Membaca - Table and Chair");
+        System.out.println("15. Aksi Custom : Melamun - Table and Chair, Toilet, Bed");
+        System.out.println("16. Aksi Custom : -");
     }
 }
