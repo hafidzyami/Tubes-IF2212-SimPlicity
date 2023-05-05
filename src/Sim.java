@@ -323,7 +323,7 @@ public class Sim {
         currentWorld.getWorldClock().wait(30); 
         gainHunger(food.getSatiation());
         System.out.println("Sim telah makan!");
-        System.out.println("Kekenyagan sim saat ini : " + getSimHunger());
+        System.out.println("Kekenyangan sim saat ini : " + getSimHunger());
         currentWorld.getWorldClock().updateTime(30); 
         notSleepTime += 30;
         haveEat = true;
