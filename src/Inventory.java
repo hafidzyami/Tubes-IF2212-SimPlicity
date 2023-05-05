@@ -114,11 +114,16 @@ public class Inventory < T extends Item> {
     }
 
     public void printInventory(HashMap <T,Integer> list){
+        CLI st = new CLI();
+        //st.setRightAlign(true);//if true then cell text is right aligned
+        st.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
+        st.setHeaders("No.", "Nama", "Kuantitas");
         int idx = 1;
         for(T i : list.keySet()){
-            System.out.println(idx + ". " + i.getName() + " " + itemList.get(i));
+            st.addRow(Integer.toString(idx), i.getName(), Integer.toString(itemList.get(i)));
             idx++;
         }
+        st.print();
     }
 
     public static void main(String[] args){

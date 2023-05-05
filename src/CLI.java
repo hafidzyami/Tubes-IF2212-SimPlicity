@@ -250,7 +250,7 @@ public class CLI {
         st.addRow("13.","Menulis","Table and Chair");
         st.addRow("14.","Membaca","Table and Chair");
         st.addRow("15.","Melamun","Table and Chair or Toilet or Bed");
-        st.addRow("16.","-", "-");
+        st.addRow("16.","Mandi", "Toilet");
         st.print();
     }
 }

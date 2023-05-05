@@ -368,7 +368,6 @@ public class Menu {
                 }else {
                     System.out.println("Silahkan pergi ke object 'Table and Chair' untuk membaca");
                 } 
-                // tunggu code
                 break;
             case 15:
                 if(sim.useItem.equals("Table and Chair") || sim.useItem.equals("Toilet") || sim.useItem.equals("Single Bed") || sim.useItem.equals("Queen Size Bed") || sim.useItem.equals("King Size Bed")){

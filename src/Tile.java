@@ -22,13 +22,14 @@ public class Tile  {
         /* System.out.print("\033[H\033[2J");  
         System.out.flush(); */ 
         //System.out.println();
-        
+        System.out.println();
         for(String[] temp1 : tile) {
             for(String temp2 : temp1) {
                 System.out.print(temp2 +" ");
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     public void changeTile(String S,int X,int Y) {
