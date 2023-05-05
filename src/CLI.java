@@ -145,6 +145,12 @@ public class CLI {
         return retS;
     }
     public static String playing() {
+        try {
+            Thread.sleep(200);
+        }
+        catch(Exception e) {
+            Thread.interrupted();
+        }
         System.out.println("Masukkan command");
         System.out.println("Tekan 2 atau ketik help untuk memanggil bantuan");
         retS = input.nextLine();
