@@ -242,32 +242,36 @@ public class Sim {
         this.status = "cooking";
         FoodCooked meal = new FoodCooked(mealName);
         ArrayList<FoodIngredients> ingredients = meal.getIngredientsList();
-        ArrayList<String> listCek = new ArrayList<>();
-        ArrayList<String> listTemp = new ArrayList<>();
-        for (int i = 0; i < ingredients.size(); i++) {
-            listCek.add(ingredients.get(i).getName());
-            listTemp.add(ingredients.get(i).getName());
-        }
-        for (int i = 0; i < inventory.getInventory().size(); i++) {
-            if (listCek.contains(inventory.getItem(i).getName())) {
-                listCek.remove(inventory.getItem(i).getName());
+        if(ingredients.size() > 0){
+            ArrayList<String> listCek = new ArrayList<>();
+            ArrayList<String> listTemp = new ArrayList<>();
+            for (int i = 0; i < ingredients.size(); i++) {
+                listCek.add(ingredients.get(i).getName());
+                listTemp.add(ingredients.get(i).getName());
             }
-        }
-    
-        if (listCek.size() == 0) {
             for (int i = 0; i < inventory.getInventory().size(); i++) {
-                if (listTemp.contains(inventory.getItem(i).getName())) {
-                    inventory.deleteInventory(inventory.getItem(i));
+                if (listCek.contains(inventory.getItem(i).getName())) {
+                    listCek.remove(inventory.getItem(i).getName());
                 }
             }
-            int duration = (int) Math.round(1.5*meal.getSatiation());
-            System.out.println(this.fullName + " sedang memasak " + mealName + " dalam waktu " + duration + " detik");
-            currentWorld.getWorldClock().wait(duration);
-            inventory.addInventory(meal);
-            System.out.println(meal.getName() + " ditambahkan ke inventory!");
-            currentWorld.getWorldClock().updateTime((int) Math.round(1.5*meal.getSatiation())); 
-        } else {
-            System.out.println(meal.getName() + " tidak jadi karena bahan kurang!");
+        
+            if (listCek.size() == 0 && ingredients.size() > 0) {
+                for (int i = 0; i < inventory.getInventory().size(); i++) {
+                    if (listTemp.contains(inventory.getItem(i).getName())) {
+                        inventory.deleteInventory(inventory.getItem(i));
+                    }
+                }
+                int duration = (int) Math.round(1.5*meal.getSatiation());
+                System.out.println(this.fullName + " sedang memasak " + mealName + " dalam waktu " + duration + " detik");
+                currentWorld.getWorldClock().wait(duration);
+                inventory.addInventory(meal);
+                System.out.println(meal.getName() + " ditambahkan ke inventory!");
+                currentWorld.getWorldClock().updateTime((int) Math.round(1.5*meal.getSatiation())); 
+            } else {
+                System.out.println(meal.getName() + " tidak jadi karena bahan kurang!");
+            }
+        }else{
+            System.out.println("Makanan tidak ada di menu. Silahkan pilih makanan yang ada di menu");
         }
     }
 

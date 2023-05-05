@@ -126,6 +126,6 @@ public class CLI {
         System.out.println("13. Aksi Custom : Menulis - Table and Chair");
         System.out.println("14. Aksi Custom : Membaca - Table and Chair");
         System.out.println("15. Aksi Custom : Melamun - Table and Chair, Toilet, Bed");
-        System.out.println("16. Aksi Custom : -");
+        System.out.println("16. Aksi Custom : Mandi - Toilet");
     }
 }
