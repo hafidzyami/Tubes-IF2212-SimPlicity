@@ -243,9 +243,14 @@ public class Menu {
     }
 
     public static void changeSim(World world, int idx) {
-        world.setPlayedSim(world.getSimList().get(idx-1));
-        System.out.println("Berhasil mengganti Sim ke " + world.getSimList().get(idx-1).getSimName());
+        if(world.getPlayedSim().equals(world.getSimList().get(idx-1))){
+            System.out.println("Anda saat ini sedang memainkan sim " + world.getPlayedSim().getSimName());
+        }else{
+            world.setPlayedSim(world.getSimList().get(idx-1));
+            System.out.println("Berhasil mengganti Sim ke " + world.getSimList().get(idx-1).getSimName());
+        }
     }
+        
 
     public static void listObject(World world) {
         Sim sim = world.getPlayedSim();
