@@ -80,7 +80,7 @@ public class Sim {
         return status;
     }
 
-    public double getMoney(){
+    public double getSimMoney(){
         return money; 
     }
 
@@ -154,7 +154,7 @@ public class Sim {
                 if (workTime % 240 == 0){
                     gainMoney(getSimJob().getDaySalary()); 
                     System.out.println("sim telah selesai bekerja dan mendapatkan "+ getSimJob().getDaySalary()); 
-                    System.out.println("uang sim menjadi : " + getMoney()); 
+                    System.out.println("uang sim menjadi : " + getSimMoney()); 
                 } 
                 else {
                     System.out.println("sim sudah bekerja selama "+ workTime + " detik.");
@@ -180,7 +180,7 @@ public class Sim {
                 gainMoney(-cost);
                 System.out.println("..."); 
                 System.out.println("Sim telah mengubah pekerjaanya menjadi " + getSimJob().getJobName() + " dan membayar sebesar " + cost); 
-                System.out.println("Sisa uang sim sekarang : " + getMoney()); 
+                System.out.println("Sisa uang sim sekarang : " + getSimMoney()); 
             } else {
                 System.out.println("Sim baru bekerja selama " + workTime);
                 System.out.println("Sim harus bekerja selama 12 menit terlebih dahulu sebelum mengganti pekerjaan!");
@@ -321,7 +321,7 @@ public class Sim {
             public void run(){
                 int start = currentWorld.getWorldClock().getTotalElapsed();
                 int now;
-                if (item != null && item.getPrice() <= getMoney()) {
+                if (item != null && item.getPrice() <= getSimMoney()) {
                     gainMoney(-item.getPrice());
                     System.out.println("sim membeli '" + item.getName() + "'' dengan harga : " + item.getPrice());
                     int deliveryTime = ((int) (Math.random() * 5 * 1) + 1) * 30;
