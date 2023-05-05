@@ -2,24 +2,29 @@ import java.util.Scanner;
 
 public class Menu {
     public static void help() {
+        CLI st = new CLI();
+        //st.setRightAlign(true);//if true then cell text is right aligned
+        st.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
+        st.setHeaders("No.", "Menu");
         System.out.println("⋅˚₊‧ ୨ Selamat datang di Sim-Plicity ୧ ‧₊˚ ⋅");
         System.out.println("Sim-Plicity adalah game berbasis Command Line Interface. Pada game ini kamu akan berperan sebagai karakter virtual yaitu sim.");
         System.out.println(" ");
         System.out.println("Untuk memainkan game ini, kamu bisa memasukan command sebagai berikut :");
-        System.out.println("1 : untuk memulai game");
-        System.out.println("2 : untuk melihat panduan game");
-        System.out.println("3 : untuk keluar");
-        System.out.println("4 : untuk melihat info yang dimiliki sim");
-        System.out.println("5 : untuk melihat lokasi sim saat ini");
-        System.out.println("6 : untuk melihat barang yang dimiliki sim");
-        System.out.println("7 : untuk melakukan proses upgrade house");
-        System.out.println("8 : untuk berpindah ruangan");
-        System.out.println("9 : untuk mengedit rumah");
-        System.out.println("10 : untuk menambah sim baru");
-        System.out.println("11 : untuk mengganti karakter sim");
-        System.out.println("12 : untuk melihat daftar objek di dalam ruangan");
-        System.out.println("13 : untuk membuat sim jalan menuju sebuah objek");
-        System.out.println("14 : untuk melakukan aksi pada suatu objek");
+        st.addRow("1.", "untuk memulai game");
+        st.addRow("2.", "untuk melihat panduan game");
+        st.addRow("3.", "untuk keluar");
+        st.addRow("4.", "untuk melihat info yang dimiliki sim");
+        st.addRow("5.", "untuk melihat lokasi sim saat ini");
+        st.addRow("6.", "untuk melihat barang yang dimiliki sim");
+        st.addRow("7.", "untuk melakukan proses upgrade house");
+        st.addRow("8.", "untuk berpindah ruangan");
+        st.addRow("9.", "untuk mengedit rumah");
+        st.addRow("10.", "untuk menambah sim baru");
+        st.addRow("11.", "untuk mengganti karakter sim");
+        st.addRow("12.", "untuk melihat daftar objek di dalam ruangan");
+        st.addRow("13.", "untuk membuat sim jalan menuju sebuah objek");
+        st.addRow("14.", "untuk melakukan aksi pada suatu objek");
+        st.print();
     }
 
     public static void exit() {
@@ -186,15 +191,28 @@ public class Menu {
 
     public static void listObject(World world) {
         Sim sim = world.getPlayedSim();
-        System.out.println("Berikut List Objek dalam ruangan");
+        System.out.println("Berikut List Objek dalam ruangan : ");
+        CLI st = new CLI();
+        //st.setRightAlign(true);//if true then cell text is right aligned
+        st.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
+        st.setHeaders("No.", "Nama Object");
+        int idx = 1;
         for(Item i : sim.currentRoom.getItemList().values()){
-            System.out.println("- " + i.getName());
+            st.addRow(String.valueOf(idx), i.getName());
+            idx++;
         }
+        st.print();
     }
 
-    public static void goToObject(World world, String itemKey) {
+    public static void goToObject(World world, int itemKey) {
         Sim sim = world.getPlayedSim();
-        sim.useItem = sim.currentRoom.getItemList().get(itemKey).getName();
+        int idx = 0;
+        for(Item i : sim.currentRoom.getItemList().values()){
+            if(idx == itemKey-1){
+                sim.useItem = i.getName();
+            }
+            idx++;
+        }
         System.out.println("Sim sedang menggunakan " + sim.useItem);
     }
 

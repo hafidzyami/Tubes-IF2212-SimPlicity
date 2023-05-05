@@ -204,10 +204,10 @@ public class Game {
                 case "13","go to object" :
                     if(world.getPlayedSim().currentRoom.getItemList().size() > 0){
                         Menu.listObject(world);
-                        System.out.println("Silahkan ketikan nama object yang ingin dituju!");
-                        String key13 = input.nextLine();
-                        if(!sim1.currentRoom.getItemList().containsKey(key13)){
-                            System.out.println("Nama object salah/tidak ada! Silahkan ketikan nama object yang benar!");
+                        System.out.println("Silahkan pilih nomor object yang ingin dituju!");
+                        int key13 = input.nextInt();
+                        if(key13 < 0 || key13 > sim1.currentRoom.getItemList().size()){
+                            System.out.println("Input salah!");
                         }
                         else{
                             Menu.goToObject(world, key13);
