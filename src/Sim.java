@@ -16,6 +16,10 @@ public class Sim {
     private House currentHouse;
     private static World currentWorld;
     private String useItem;
+    //Negative Effect Tracker
+    private boolean haveEat;
+    private int notSleepTime;
+    private int notPeeTime;
 
     //konstruktor
     public Sim(String nama,House house, World world) {
@@ -31,7 +35,9 @@ public class Sim {
         this.useItem = "";
         // pada awal di buat status bersifat "idle"
         this.status = "idle";
-        
+        this.haveEat = false;
+        this.notSleepTime = 0;
+        this.notPeeTime = 0;
     }
 
     //getter 
@@ -92,7 +98,18 @@ public class Sim {
     public String getUseItem() {
         return useItem;
     }
-        
+
+    public boolean getHaveEat() {
+        return haveEat;
+    }
+
+    public int getNotPeeTime() {
+        return notPeeTime;
+    }       
+
+    public int getNotSleepTime() {
+        return notSleepTime;
+    }
 
     //setter 
     public void setIdle(){
@@ -141,6 +158,20 @@ public class Sim {
         this.money += money; 
     }
 
+    public void gainNegativeEffect() {
+        if (notSleepTime >= 600) {
+            notSleepTime -= 600;
+            gainMood(-5);
+            gainHunger(-5);
+        } 
+        if (haveEat) {
+            if (notPeeTime >= 240) {
+                notPeeTime -= 240;
+                gainMood(-5);
+                gainHunger(-5);
+            }
+        }
+    }
  
     // active action 
     public void work (int duration){
@@ -165,6 +196,11 @@ public class Sim {
                     System.out.println("sim sudah bekerja selama "+ workTime + " detik.");
                 }
                 currentWorld.getWorldClock().updateTime(duration);
+                notSleepTime += duration;
+                if (haveEat) {
+                    notPeeTime += duration;
+                }
+                gainNegativeEffect();
             }
         }
         setIdle();
@@ -214,6 +250,11 @@ public class Sim {
         gainMood(10*temp);     
         }
         currentWorld.getWorldClock().updateTime(duration); 
+        notSleepTime += duration;
+        if (haveEat) {
+            notPeeTime += duration;
+        }
+        gainNegativeEffect();
         setIdle();
     }
 
@@ -233,6 +274,11 @@ public class Sim {
             gainMood(30*(duration/4));
             gainHealth(20*(duration/4));
         }
+        notSleepTime = 0;
+        if (haveEat) {
+            notPeeTime += duration;
+        }
+        gainNegativeEffect();
         setIdle();
     }
 
@@ -244,6 +290,9 @@ public class Sim {
         System.out.println("Sim telah makan!");
         System.out.println("Kekenyagan sim saat ini : " + getSimHunger());
         currentWorld.getWorldClock().updateTime(30); 
+        notSleepTime += 30;
+        haveEat = true;
+        gainNegativeEffect();
         setIdle();
     }
 
@@ -275,7 +324,12 @@ public class Sim {
                 currentWorld.getWorldClock().wait(duration);
                 inventory.addInventory(meal);
                 System.out.println(meal.getName() + " ditambahkan ke inventory!");
-                currentWorld.getWorldClock().updateTime((int) Math.round(1.5*meal.getSatiation())); 
+                currentWorld.getWorldClock().updateTime(duration); 
+                notSleepTime += duration;
+                if (haveEat) {
+                    notPeeTime += duration;
+                }
+                gainNegativeEffect();
             } else {
                 System.out.println(meal.getName() + " tidak jadi karena bahan kurang!");
             }
@@ -322,6 +376,10 @@ public class Sim {
         gainMood(10);
         System.out.println("Sim telah buang air selama 10 detik");
         currentWorld.getWorldClock().updateTime(10);
+        notSleepTime += 10;
+        haveEat = false;
+        notPeeTime = 0;
+        gainNegativeEffect();
         setIdle();
     }
 
@@ -430,6 +488,11 @@ public class Sim {
         gainMood(10);
         System.out.println("Sim sudah selesai menangis :(");
         currentWorld.getWorldClock().updateTime(duration);
+        notSleepTime += duration;
+        if (haveEat) {
+            notPeeTime += duration;
+        }
+        gainNegativeEffect();
         setIdle();
     }
 
@@ -445,6 +508,11 @@ public class Sim {
         setIdle();
         gainMood(3*temp);
         currentWorld.getWorldClock().updateTime(duration);
+        notSleepTime += duration;
+        if (haveEat) {
+            notPeeTime += duration;
+        }
+        gainNegativeEffect();
     }
 
     public void steal(String itemName){
@@ -473,6 +541,11 @@ public class Sim {
         gainMood(3*temp);
         gainHunger(-3*temp);
         currentWorld.getWorldClock().updateTime(duration);
+        notSleepTime += duration;
+        if (haveEat) {
+            notPeeTime += duration;
+        }
+        gainNegativeEffect();
     }
 
     public void write() {
@@ -482,6 +555,11 @@ public class Sim {
         currentWorld.getWorldClock().updateTime(10);
         setIdle();
         gainMood(5);
+        notSleepTime += 10;
+        if (haveEat) {
+            notPeeTime += 10;
+        }
+        gainNegativeEffect();
     }
 
     public void read() {
@@ -490,6 +568,11 @@ public class Sim {
         System.out.println(this.fullName + " sedang membaca diary");
         currentWorld.getWorldClock().updateTime(5);
         setIdle();
+        notSleepTime += 5;
+        if (haveEat) {
+            notPeeTime += 5;
+        }
+        gainNegativeEffect();
         gainMood(5);
     }
 
@@ -501,6 +584,11 @@ public class Sim {
         gainHealth(15);
         System.out.println("Sim telah wangi selesai mandi");
         currentWorld.getWorldClock().updateTime(20);
+        notSleepTime += 20;
+        if (haveEat) {
+            notPeeTime += 20;
+        }
+        gainNegativeEffect();
         setIdle();
     }
 
