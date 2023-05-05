@@ -381,23 +381,19 @@ public class Sim {
             System.out.println("Tidak bisa berkunjung ke rumah yang sama!");
         }
         else{
-            setSimStatus("on the way");
+            setSimStatus("onTheWay");
             int x1 = currentHouse.getLocX();
             int y1 = currentHouse.getLocY();
-            double distance = Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
-            int tick = 0;
+            int distance = (int) Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
             System.out.println("Sim berkunjung ke rumah " + currentWorld.getHouseList().get(idxHouse).getOwner().getSimName() + " dengan durasi : " + distance + " detik");
             while(getSimStatus().equals("onTheWay")) {
                     System.out.println("Sim sedang dalam perjalanan!");
-                    currentWorld.getWorldClock().wait(1);
-                    tick++;
-                    if(tick >= distance){
-                        System.out.println("Sim sudah sampai!");
-                        setSimStatus("idle");
-                        currentHouse = currentWorld.getHouseList().get(idxHouse);
-                        currentRoom = currentHouse.getRoomList().get(0);
-                        tick = 0;
-                    }
+                    currentWorld.getWorldClock().wait(distance);
+                    currentWorld.getWorldClock().updateTime(distance);
+                    System.out.println("Sim sudah sampai!");
+                    setSimStatus("idle");
+                    currentHouse = currentWorld.getHouseList().get(idxHouse);
+                    currentRoom = currentHouse.getRoomList().get(0);
                 // ini gw masih bingung
                 // gainMood(10*(duration/30));
                 // gainHunger(-10*(duration/30));
@@ -514,6 +510,7 @@ public class Sim {
         setSimStatus("see time");
         System.out.println("Sim sedang melihat waktu");
         System.out.println("waktu hari ini tersisa " + currentWorld.getWorldClock().getSisaWaktu());
+
         setIdle();
     }
 

@@ -217,7 +217,7 @@ public class Game {
                         Menu.listObject(world);
                         System.out.println("Silahkan pilih nomor object yang ingin dituju!");
                         int key13 = input.nextInt();
-                        if(key13 < 0 || key13 > sim1.getCurrentRoom().getItemList().size()){
+                        if(key13 < 0 || key13 > world.getPlayedSim().getCurrentRoom().getItemList().size()){
                             System.out.println("Input salah!");
                         }
                         else{

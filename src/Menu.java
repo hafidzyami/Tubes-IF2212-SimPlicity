@@ -50,7 +50,7 @@ public class Menu {
     public static void upgradeHouse(int xNew, int yNew, House house, World world) {
         house.getHouseTile().changeTile("UC", xNew, yNew);
         System.out.println("Masukkan nama ruangan yang Anda inginkan : ");
-        String name = input.nextLine();
+        String name = input.next();
         Thread t = new Thread(new Runnable(){
             public void run(){
                 int start = world.getWorldClock().getTotalElapsed();
@@ -59,7 +59,7 @@ public class Menu {
                 System.out.println("Ruangan " + name + " akan selesai dibangun dalam 18 menit");
                 while (true) {
                     now = world.getWorldClock().getTotalElapsed();
-                    if (now >= start + 60*18){
+                    if (now >= start + 10){
                         Room newRoom = new Room(name, house);
                         newRoom.setRoomCoordinate(xNew, yNew);
                         house.addRoom(newRoom);
@@ -167,7 +167,7 @@ public class Menu {
         }
         else if(idx == 2){
             if( sim.getSimInventory().getNonFoodCount() > 0){
-                System.out.println("Berikut merupakan denah ruangan Anda : ");
+                System.out.println("Berikut merupakan denah " + sim.getCurrentRoom() + " di rumah " + sim.getCurrentHouse());
                 sim.getCurrentRoom().getRoomTile().printTile();
                 sim.getSimInventory().printInventory(sim.getSimInventory().getNonFoodItem());
                 System.out.println("Silahkan pilih nomor barang yang ingin dipasang dari inventory kamu : ");
@@ -445,7 +445,7 @@ public class Menu {
                     if(flag == 1){
                         System.out.println("Daftar barang yang bisa dicuri di ruangan ini : ");
                         listObject(world);
-                        System.out.println("Masukkan nama barang yang ingin dicuri");
+                        System.out.println("Masukkan nomor barang yang ingin dicuri");
                         sim.steal(input.nextInt());
                     }
                 }
