@@ -181,7 +181,7 @@ public class Menu {
         world.addNewHouse(house);
         sim.setCurrentRoom(house.getRoomList().get(0));
         world.updateMap();
-        System.out.println("Sim berhasil ditambahkan!");
+        System.out.println("Sim berhasil ditambahkan!"); 
     }
 
     public static void changeSim(World world, int idx) {
