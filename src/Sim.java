@@ -142,7 +142,7 @@ public class Sim {
         if (duration % 120 != 0){
             System.out.println("durasi bekerja yang dimasukan harus berupa kelipatan 120 detik!");
         } else {
-            this.status = "work"; 
+            setSimStatus("work"); 
             System.out.println("Sim sedang bekerja sebagai " + getSimJob().getJobName());
             int temp = duration/30; 
             for (int i = 0; i < temp; i++){
@@ -162,11 +162,11 @@ public class Sim {
                 currentWorld.getWorldClock().updateTime(duration);
             }
         }
-
+        setIdle();
     }
 
     public void changeJob(Job newJob){
-        this.status = "changing job";
+        setSimStatus("changing job");
         if (newJob.getJobName().equals(getSimJob().getJobName())){
             System.out.println("Pekerjaan sim sudah sama!"); 
         } else {
@@ -186,6 +186,7 @@ public class Sim {
                 System.out.println("Sim harus bekerja selama 12 menit terlebih dahulu sebelum mengganti pekerjaan!");
             }
         }
+        setIdle();
     }
 
     public void sport (int duration){
@@ -194,7 +195,7 @@ public class Sim {
         }
 
         else{
-        this.status = "sport";
+        setSimStatus("sport");
         int sportTime = 0;
         int temp = duration/20;
         while(sportTime != duration){
@@ -208,11 +209,12 @@ public class Sim {
         gainMood(10*temp);     
         }
         currentWorld.getWorldClock().updateTime(duration); 
+        setIdle();
     }
 
 
     public void sleep (int duration){
-        this.status = "sleep";
+        setSimStatus("sleep");
         int sleepTime = 0;
         System.out.println("Sim mulai tidur");
         while(sleepTime != duration){
@@ -226,20 +228,22 @@ public class Sim {
             gainMood(30*(duration/4));
             gainHealth(20*(duration/4));
         }
+        setIdle();
     }
 
     public void eat (Food food){
-        this.status = "eat";
+        setSimStatus("eating");
         System.out.println("Sim sedang makan " + food.getName());
         currentWorld.getWorldClock().wait(30); 
         gainHunger(food.getSatiation());
         System.out.println("Sim telah makan!");
         System.out.println("Kekenyagan sim saat ini : " + getSimHunger());
         currentWorld.getWorldClock().updateTime(30); 
+        setIdle();
     }
 
     public void cook (String mealName) {
-        this.status = "cooking";
+        setSimStatus("cooking");
         FoodCooked meal = new FoodCooked(mealName);
         ArrayList<FoodIngredients> ingredients = meal.getIngredientsList();
         if(ingredients.size() > 0){
@@ -273,6 +277,7 @@ public class Sim {
         }else{
             System.out.println("Makanan tidak ada di menu. Silahkan pilih makanan yang ada di menu");
         }
+        setIdle();
     }
 
     public void visit (int x2, int y2, int idxHouse){
@@ -280,7 +285,7 @@ public class Sim {
             System.out.println("Tidak bisa berkunjung ke rumah yang sama!");
         }
         else{
-            this.status = "onTheWay";
+            setSimStatus("on the way");
             int x1 = currentHouse.getLocX();
             int y1 = currentHouse.getLocY();
             double distance = Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
@@ -301,22 +306,24 @@ public class Sim {
                 // gainMood(10*(duration/30));
                 // gainHunger(-10*(duration/30));
             }
+            setIdle();
         }
     }
 
     public void pee() {
-        this.status = "pee";
+        setSimStatus("pee");
         System.out.println("Sim sedang buang air");
         currentWorld.getWorldClock().wait(10);
         gainMood(10);
         System.out.println("Sim telah buang air selama 10 detik");
         currentWorld.getWorldClock().updateTime(10);
+        setIdle();
     }
 
     // needed time action 
 
     public void buyItem(PurchaseAble item) {
-        this.status = "buying item"; 
+        setSimStatus("buying item");
         Thread t = new Thread(new Runnable(){
             public void run(){
                 int start = currentWorld.getWorldClock().getTotalElapsed();
@@ -346,6 +353,7 @@ public class Sim {
             }
         });
         t.start();
+        setIdle();
     }
 
     //not needed time action 
@@ -354,13 +362,17 @@ public class Sim {
             System.out.println("Tidak bisa berpindah ke room yang sama!");
         }
         else {
+            setSimStatus("moving");
             this.currentRoom = this.currentHouse.getRoomList().get(idx-1);
             System.out.println("Anda diteleportasi ke " + this.currentRoom.getRoomName());
+            setIdle();
         }
     }
 
     public void seeInventory() {
+        setSimStatus("see invenroty");
         inventory.printInventory(inventory.getInventory());
+        setIdle();
     }
 
     public void installItem(Room room, int idxItem, int wantedX, int wantedY){
@@ -370,6 +382,7 @@ public class Sim {
             System.out.println("Item tidak bisa diletakkan!");
         }
         else{
+            setSimStatus("installing item");
             boolean flag = false;
             for(int i = wantedX; i < item.getLength() + wantedX; i++){
                 for(int j = wantedY; j < item.getWidth() + wantedY; j++){
@@ -391,29 +404,32 @@ public class Sim {
                     }
                 };
             }
+            setIdle();
         }
 
     }
 
     public void seeTime() {
-        this.status = "see time";
+        setSimStatus("see time");
         System.out.println("Sim sedang melihat waktu");
         System.out.println("waktu hari ini tersisa " + currentWorld.getWorldClock().getSisaWaktu());
+        setIdle();
     }
 
     //costum action 
     public void crying(int duration) {
-        this.status = "crying"; 
+        setSimStatus("crying");
         System.out.println("Sim akan menangis karena stress");
         currentWorld.getWorldClock().wait(duration);
         gainHunger(-10);
         gainMood(10);
         System.out.println("Sim sudah selesai menangis :(");
         currentWorld.getWorldClock().updateTime(duration);
+        setIdle();
     }
 
     public void recitate(int duration){
-        this.status = "recitate";
+        setSimStatus("recitate");
         int recitateTime = 0;
         int temp = duration/60;
         while(recitateTime != duration){
@@ -427,6 +443,7 @@ public class Sim {
     }
 
     public void steal(String itemName){
+        setSimStatus("stealing");
         if(currentRoom.getItemList().containsKey(itemName)){
             this.inventory.addInventory((Item) currentRoom.getItemList().get(itemName));
             currentRoom.removeItem(itemName);
@@ -435,10 +452,11 @@ public class Sim {
         else{
             System.out.println("Tidak bisa mencuri barang tersebut karena barang tidak ada!");
         }
+        setIdle();
     }
 
     public void daydream(int duration){
-        this.status = "dayDream";
+        setSimStatus("day dreaming");
         int dayDreamTime = 0;
         int temp = duration/30;
         while(dayDreamTime != duration){
@@ -453,7 +471,7 @@ public class Sim {
     }
 
     public void write() {
-        this.status = "sitting";
+        setSimStatus("writting");
         currentWorld.getWorldClock().wait(10);
         System.out.println(this.fullName + " sedang menulis halaman baru di diary");
         currentWorld.getWorldClock().updateTime(10);
@@ -462,7 +480,7 @@ public class Sim {
     }
 
     public void read() {
-        this.status = "sitting";
+        setSimStatus("reading");
         currentWorld.getWorldClock().wait(5);
         System.out.println(this.fullName + " sedang membaca diary");
         currentWorld.getWorldClock().updateTime(5);
@@ -471,13 +489,14 @@ public class Sim {
     }
 
     public void bath() {
-        this.status = "bath"; 
+        setSimStatus("bath");
         System.out.println("Sim sedang mandi");
         currentWorld.getWorldClock().wait(20);
         gainMood(10);
         gainHealth(15);
         System.out.println("Sim telah wangi selesai mandi");
         currentWorld.getWorldClock().updateTime(20);
+        setIdle();
     }
 
     
