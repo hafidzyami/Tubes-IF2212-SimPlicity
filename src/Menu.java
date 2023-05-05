@@ -144,6 +144,7 @@ public class Menu {
         }
         else if(idx == 2){
             if( sim.getSimInventory().getNonFoodCount() > 0){
+                System.out.println("Berikut merupakan denah ruangan Anda : ");
                 sim.getCurrentRoom().getRoomTile().printTile();
                 sim.getSimInventory().printInventory(sim.getSimInventory().getNonFoodItem());
                 System.out.println("Silahkan pilih nomor barang yang ingin dipasang dari inventory kamu : ");

@@ -65,7 +65,7 @@ public class Game {
                         int xNew = house.getRoomList().get(0).getRoomCoordinate().getX();
                         int yNew = house.getRoomList().get(0).getRoomCoordinate().getY();
                         if(house.getHouseTile().getCountNonEmpty() > 1){
-                            System.out.println();
+                            System.out.println("Daftar ruangan : ");
                             house.printRoomList();
                             System.out.println("Pilih acuan ruangan untuk penambahan ruangan : ");
                             int idxRuangan = input.nextInt();
