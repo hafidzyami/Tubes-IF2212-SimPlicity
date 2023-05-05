@@ -285,7 +285,7 @@ public class Menu {
         switch(idxAction){
             case 1 :
                 System.out.println("Masukkan durasi bekerja (dalam detik) :");
-                int durasiKerja = Integer.parseInt(input.nextLine());
+                int durasiKerja = input.nextInt();
                 sim.work(durasiKerja);
                 break;
             case 2 : 
@@ -306,7 +306,7 @@ public class Menu {
                 break;
             case 3 :
                 System.out.println("Masukkan durasi olahraga :");
-                int durasiOlahraga = Integer.parseInt(input.nextLine());
+                int durasiOlahraga = input.nextInt();
                 sim.sport(durasiOlahraga);
                 break;
             case 4 :
@@ -314,7 +314,7 @@ public class Menu {
                     int durasiTidur;
                     while (true){
                         System.out.print("Masukkan durasi Tidur (dalam menit): ");
-                        durasiTidur = Integer.parseInt(input.nextLine());
+                        durasiTidur = input.nextInt();
                         if(durasiTidur >= 3) {
                             break;
                         }else {
@@ -397,7 +397,7 @@ public class Menu {
             case 10:
                 if(sim.getUseItem().equals("Single Bed") || sim.getUseItem().equals("Queen Size Bed") || sim.getUseItem().equals("King Size Bed")){
                     System.out.println("Seberapa lama anda ingin menangis");
-                    int duration = Integer.parseInt(input.nextLine());
+                    int duration = input.nextInt();
                     sim.crying(duration);
                 }else{
                     System.out.println("Anda harus ke 'Bed' untuk menangis");
@@ -406,7 +406,7 @@ public class Menu {
             case 11:
                 if(sim.getUseItem().equals("Table and Chair")){
                     System.out.println("Masukkan durasi untuk mengaji : ");
-                    int durasiMengaji = Integer.parseInt(input.nextLine());
+                    int durasiMengaji = input.nextInt();
                     sim.recitate(durasiMengaji);
                 }else {
                     System.out.println("Silahkan pergi ke object 'Table and Chair' untuk mengaji");
@@ -450,7 +450,7 @@ public class Menu {
             case 15:
                 if(sim.getUseItem().equals("Table and Chair") || sim.getUseItem().equals("Toilet") || sim.getUseItem().equals("Single Bed") || sim.getUseItem().equals("Queen Size Bed") || sim.getUseItem().equals("King Size Bed")){
                     System.out.println("Masukkan durasi untuk melamun : ");
-                    int durasiMelamun = Integer.parseInt(input.nextLine());
+                    int durasiMelamun = input.nextInt();
                     sim.daydream(durasiMelamun);
                 }else {
                     System.out.println("Silahkan pergi ke object 'Table and Chair' atau 'Toilet' atau 'Bed' untuk melamun");
