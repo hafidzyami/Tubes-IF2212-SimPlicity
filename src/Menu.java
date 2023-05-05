@@ -48,6 +48,7 @@ public class Menu {
     }
 
     public static void upgradeHouse(int xNew, int yNew, House house, World world) {
+        house.getHouseTile().changeTile("UC", xNew, yNew);
         System.out.println("Masukkan nama ruangan yang Anda inginkan : ");
         String name = input.nextLine();
         Thread t = new Thread(new Runnable(){

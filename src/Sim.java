@@ -431,7 +431,7 @@ public class Sim {
                 int now;
                 if (item != null && item.getPrice() <= getSimMoney()) {
                     gainMoney(-item.getPrice());
-                    System.out.println("sim membeli '" + item.getName() + "'' dengan harga : " + item.getPrice());
+                    System.out.println("sim membeli '" + item.getName() + "' dengan harga : " + item.getPrice());
                     int deliveryTime = ((int) (Math.random() * 5 * 1) + 1) * 30;
                     System.out.println("barang akan tersedia dalam waktu "+ deliveryTime + " detik, silahkan menunggu");
                     while (true) {

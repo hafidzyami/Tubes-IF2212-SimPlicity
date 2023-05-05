@@ -76,7 +76,7 @@ public class Game {
                             System.out.println("Ketikan posisi dari ruangan acuan (Kiri/Kanan/Atas/Bawah) : ");
                             String posisiRuangan = input.next();
                             if(posisiRuangan.equals("Kiri")|| posisiRuangan.equals("kiri")){
-                                if(xNew - 1 < 0 || house.getHouseTile().getTile(xNew-1, yNew) != "E"){
+                                if(xNew - 1 < 0 || house.getHouseTile().getTile(xNew-1, yNew) != "E" || house.getHouseTile().getTile(xNew-1, yNew).equals("UC")){
                                     System.out.println("Tidak bisa menambahkan ruangan di sana!");
                                 }
                                 else{
@@ -85,7 +85,7 @@ public class Game {
                                 }
                             }
                             else if(posisiRuangan.equals("Kanan") || posisiRuangan.equals("kanan")){
-                                if(xNew + 1 > 5 || house.getHouseTile().getTile(xNew+1, yNew) != "E"){
+                                if(xNew + 1 > 5 || house.getHouseTile().getTile(xNew+1, yNew) != "E" || house.getHouseTile().getTile(xNew+1, yNew).equals("UC")){
                                     System.out.println("Tidak bisa menambahkan ruangan di sana!");
                                 }
                                 else{
@@ -95,7 +95,7 @@ public class Game {
                                 
                             }
                             else if(posisiRuangan.equals("Atas") || posisiRuangan.equals("atas")){
-                                if(yNew - 1 < 0 || house.getHouseTile().getTile(xNew, yNew-1) != "E"){
+                                if(yNew - 1 < 0 || house.getHouseTile().getTile(xNew, yNew-1) != "E" || house.getHouseTile().getTile(xNew, yNew-1).equals("UC")){
                                     System.out.println("Tidak bisa menambahkan ruangan di sana!");
                                 }
                                 else{
@@ -104,7 +104,7 @@ public class Game {
                                 }
                             }
                             else if(posisiRuangan.equals("Bawah") || posisiRuangan.equals("bawah")){
-                                if(yNew + 1 > 5 || house.getHouseTile().getTile(xNew, yNew+1) != "E"){
+                                if(yNew + 1 > 5 || house.getHouseTile().getTile(xNew, yNew+1) != "E" || house.getHouseTile().getTile(xNew, yNew+1).equals("UC")){
                                     System.out.println("Tidak bisa menambahkan ruangan di sana!");
                                 }
                                 else{
