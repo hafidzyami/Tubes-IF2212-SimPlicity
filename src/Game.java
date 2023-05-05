@@ -120,13 +120,13 @@ public class Game {
                     break;
 
                 case "8", "move room":
-                    System.out.println("Anda sekarang berada di ruangan " + world.getPlayedSim().currentRoom.getRoomName() + " di rumah " + world.getPlayedSim().currentHouse.getOwner().getSimName());
+                    System.out.println("Anda sekarang berada di ruangan " + world.getPlayedSim().getCurrentRoom().getRoomName() + " di rumah " + world.getPlayedSim().getCurrentHouse().getOwner().getSimName());
                     System.out.println("Daftar ruangan yang bisa Anda kunjungi : ");
-                    world.getPlayedSim().currentHouse.printRoomList();
+                    world.getPlayedSim().getCurrentHouse().printRoomList();
                     try{
                         System.out.println("Silahkan pilih nomor ruangan yang ingin dituju : ");
                         int idxMoveRoom = input.nextInt();
-                        if(idxMoveRoom <= 0 || idxMoveRoom > world.getPlayedSim().currentHouse.getRoomList().size()){
+                        if(idxMoveRoom <= 0 || idxMoveRoom > world.getPlayedSim().getCurrentHouse().getRoomList().size()){
                             System.out.println("Input salah!");
                         }
                         else{
@@ -202,11 +202,11 @@ public class Game {
                     break;
 
                 case "13","go to object" :
-                    if(world.getPlayedSim().currentRoom.getItemList().size() > 0){
+                    if(world.getPlayedSim().getCurrentRoom().getItemList().size() > 0){
                         Menu.listObject(world);
                         System.out.println("Silahkan pilih nomor object yang ingin dituju!");
                         int key13 = input.nextInt();
-                        if(key13 < 0 || key13 > sim1.currentRoom.getItemList().size()){
+                        if(key13 < 0 || key13 > sim1.getCurrentRoom().getItemList().size()){
                             System.out.println("Input salah!");
                         }
                         else{
