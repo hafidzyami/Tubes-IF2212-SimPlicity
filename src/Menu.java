@@ -50,7 +50,7 @@ public class Menu {
     public static void upgradeHouse(int xNew, int yNew, House house, World world) {
         house.getHouseTile().changeTile("UC", xNew, yNew);
         System.out.println("Masukkan nama ruangan yang Anda inginkan : ");
-        String name = input.next();
+        String name = input.nextLine();
         Thread t = new Thread(new Runnable(){
             public void run(){
                 int start = world.getWorldClock().getTotalElapsed();
@@ -59,12 +59,13 @@ public class Menu {
                 System.out.println("Ruangan " + name + " akan selesai dibangun dalam 18 menit");
                 while (true) {
                     now = world.getWorldClock().getTotalElapsed();
-                    if (now >= start + 10){
+                    if (now >= start + 30){
                         Room newRoom = new Room(name, house);
                         newRoom.setRoomCoordinate(xNew, yNew);
                         house.addRoom(newRoom);
                         house.getHouseTile().changeTile(newRoom.getRoomName(), xNew, yNew);
                         System.out.println("Ruangan " + name + " sudah selesai dibangun!");
+                        world.getPlayedSim().setOnUpgrade(false);
                         break;
                     }
                     try {
@@ -89,11 +90,11 @@ public class Menu {
             //Scanner input = new Scanner(System.in);
             System.out.println("1.Non Food");
             System.out.println("2.Food Ingredients");
-            int idxBeli = input.nextInt();
+            int idxBeli = Integer.parseInt(input.nextLine());
             if(idxBeli == 1){
                 CLI.printNonFoodItem();
                 System.out.println("Silahkan masukan nomor barang : ");
-                int idxNonFood = input.nextInt();
+                int idxNonFood = Integer.parseInt(input.nextLine());
                 PurchaseAble item;
                 switch (idxNonFood) {
                     case 1 :
@@ -129,7 +130,7 @@ public class Menu {
             else if(idxBeli == 2){
                 CLI.printFoodIngredient();
                 System.out.println("Silahkan masukan nomor barang : ");
-                int idxIngredient = input.nextInt();
+                int idxIngredient = Integer.parseInt(input.nextLine());
                 PurchaseAble item;
                 switch (idxIngredient) {
                     case 1 :
@@ -172,7 +173,7 @@ public class Menu {
                 sim.getSimInventory().printInventory(sim.getSimInventory().getNonFoodItem());
                 System.out.println("Silahkan pilih nomor barang yang ingin dipasang dari inventory kamu : ");
                 //Scanner input = new Scanner(System.in);
-                int idxItem = input.nextInt();
+                int idxItem = Integer.parseInt(input.nextLine());
                 boolean flagEditRoom = false;
                 while(!flagEditRoom){
                     if(idxItem > 0 && idxItem <= sim.getSimInventory().getNonFoodCount()){
@@ -180,13 +181,13 @@ public class Menu {
                     }
                     else{
                         System.out.println("Silahkan pilih nomor yang benar!");
-                        idxItem = input.nextInt();
+                        idxItem = Integer.parseInt(input.nextLine());
                     }
                 }
                 System.out.println("Silahkan pilih posisi upperLeft (X) dari barang yang ingin di pasang : ");
-                int wantedX = input.nextInt();
+                int wantedX = Integer.parseInt(input.nextLine());
                 System.out.println("Silahkan pilih posisi upperLeft (Y) dari barang yang ingin di pasang : ");
-                int wantedY = input.nextInt();
+                int wantedY = Integer.parseInt(input.nextLine());
                 sim.installItem(sim.getCurrentRoom(), idxItem-1, wantedX, wantedY);
                 sim.getCurrentRoom().getRoomTile().printTile();
             }
@@ -199,7 +200,7 @@ public class Menu {
                 sim.getCurrentRoom().getRoomTile().printTile();
                 listObject(sim.getCurrentWorld());
                 System.out.println("Silahkan pilih nomor barang untuk dipindahkan : ");
-                int wantedIdx = input.nextInt();
+                int wantedIdx = Integer.parseInt(input.nextLine());
                 if(wantedIdx < 0 || wantedIdx > sim.getCurrentRoom().getItemList().size()){
                     System.out.println("Input salah!");
                 }
@@ -213,9 +214,9 @@ public class Menu {
                         flagCount++;
                     }
                     System.out.println("Silahkan pilih posisi upperLeft (X) dari barang yang ingin di pasang : ");
-                    int wantedX = input.nextInt();
+                    int wantedX = Integer.parseInt(input.nextLine());
                     System.out.println("Silahkan pilih posisi upperLeft (Y) dari barang yang ingin di pasang : ");
-                    int wantedY = input.nextInt();
+                    int wantedY = Integer.parseInt(input.nextLine());
                     if( (wantedX + item.getLength() - 1 > 6) || (wantedY + item.getWidth() - 1 > 6) ){
                         System.out.println("Item tidak bisa diletakkan karena melebihi dimensi ruangan!");
                     }
@@ -309,7 +310,7 @@ public class Menu {
         switch(idxAction){
             case 1 :
                 System.out.println("Masukkan durasi bekerja (dalam detik) :");
-                int durasiKerja = input.nextInt();
+                int durasiKerja = Integer.parseInt(input.nextLine());
                 sim.work(durasiKerja);
                 break;
             case 2 : 
@@ -329,8 +330,8 @@ public class Menu {
                 }
                 break;
             case 3 :
-                System.out.println("Masukkan durasi olahraga :");
-                int durasiOlahraga = input.nextInt();
+                System.out.println("Masukkan durasi olahraga(dalam detik) :");
+                int durasiOlahraga = Integer.parseInt(input.nextLine());
                 sim.sport(durasiOlahraga);
                 break;
             case 4 :
@@ -338,7 +339,7 @@ public class Menu {
                     int durasiTidur;
                     while (true){
                         System.out.print("Masukkan durasi Tidur (dalam menit): ");
-                        durasiTidur = input.nextInt();
+                        durasiTidur = Integer.parseInt(input.nextLine());
                         if(durasiTidur >= 3) {
                             break;
                         }else {
@@ -357,7 +358,7 @@ public class Menu {
                     while (true){
                         try{
                             System.out.println("Silahkan pilih makanan yang akan dimakan");
-                            int idxFood = input.nextInt();
+                            int idxFood = Integer.parseInt(input.nextLine());
                             if(idxFood > sim.getSimInventory().getFoodItem().size()){
                                 System.out.println("Indeks tersebut tidak ada, masukkan indeks dengan benar");
                             }else{
@@ -399,7 +400,7 @@ public class Menu {
                 CLI.printHouseAndSim(world);
                 world.printMap();
                 System.out.println("Ketikan nomor Sim untuk dikunjungi :");
-                int idxVisit = input.nextInt();
+                int idxVisit = Integer.parseInt(input.nextLine());
                 sim.visit(world.getHouseList().get(idxVisit-1).getLocX(), world.getHouseList().get(idxVisit-1).getLocY(), idxVisit-1);
                 break;
             case 8:
@@ -421,7 +422,7 @@ public class Menu {
             case 10:
                 if(sim.getUseItem().equals("Single Bed") || sim.getUseItem().equals("Queen Size Bed") || sim.getUseItem().equals("King Size Bed")){
                     System.out.println("Seberapa lama anda ingin menangis");
-                    int duration = input.nextInt();
+                    int duration = Integer.parseInt(input.nextLine());
                     sim.crying(duration);
                 }else{
                     System.out.println("Anda harus ke 'Bed' untuk menangis");
@@ -430,7 +431,7 @@ public class Menu {
             case 11:
                 if(sim.getUseItem().equals("Table and Chair")){
                     System.out.println("Masukkan durasi untuk mengaji : ");
-                    int durasiMengaji = input.nextInt();
+                    int durasiMengaji = Integer.parseInt(input.nextLine());
                     sim.recitate(durasiMengaji);
                 }else {
                     System.out.println("Silahkan pergi ke object 'Table and Chair' untuk mengaji");
@@ -440,20 +441,19 @@ public class Menu {
                 if(sim.getCurrentHouse().getOwner().getSimName().equals(sim.getSimName())){
                     System.out.println("Anda sekarang berada di rumah sendiri, jika ingin mencuri silahkan kunjungi rumah Sim lain!");
                     System.out.println("Jika tetap ingin melakukan ini, silahkan ketik '1'. Ketik '2' untuk batalkan");
-                    Scanner input = new Scanner(System.in);
-                    int flag = input.nextInt();
+                    int flag = Integer.parseInt(input.nextLine());
                     if(flag == 1){
                         System.out.println("Daftar barang yang bisa dicuri di ruangan ini : ");
                         listObject(world);
                         System.out.println("Masukkan nomor barang yang ingin dicuri");
-                        sim.steal(input.nextInt());
+                        sim.steal(Integer.parseInt(input.nextLine()));
                     }
                 }
                 else{
                     System.out.println("Daftar barang yang bisa dicuri di ruangan ini : ");
                     listObject(world);
                     System.out.println("Masukkan nama barang yang ingin dicuri");
-                    sim.steal(input.nextInt());
+                    sim.steal(Integer.parseInt(input.nextLine()));
                 }
                 break;
 
@@ -474,7 +474,7 @@ public class Menu {
             case 15:
                 if(sim.getUseItem().equals("Table and Chair") || sim.getUseItem().equals("Toilet") || sim.getUseItem().equals("Single Bed") || sim.getUseItem().equals("Queen Size Bed") || sim.getUseItem().equals("King Size Bed")){
                     System.out.println("Masukkan durasi untuk melamun : ");
-                    int durasiMelamun = input.nextInt();
+                    int durasiMelamun = Integer.parseInt(input.nextLine());
                     sim.daydream(durasiMelamun);
                 }else {
                     System.out.println("Silahkan pergi ke object 'Table and Chair' atau 'Toilet' atau 'Bed' untuk melamun");

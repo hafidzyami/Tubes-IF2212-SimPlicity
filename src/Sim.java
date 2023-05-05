@@ -131,7 +131,10 @@ public class Sim {
     public int getUpgradeTime() {
         return upgradeTime;
     }
-        
+     
+    public boolean getOnUpgrade() {
+        return onUpgrade;
+    }
 
     //setter 
     public void setIdle(){
@@ -152,6 +155,10 @@ public class Sim {
 
     public void setUseItem(String item) {
         this.useItem = item;
+    }
+
+    public void setOnUpgrade(boolean status) {
+        this.onUpgrade = status;
     }
 
     //gainer
@@ -183,12 +190,14 @@ public class Sim {
     public void gainNegativeEffect() {
         if (notSleepTime >= 600) {
             notSleepTime -= 600;
+            System.out.println("Sim merasa lelah karena belom tidur");
             gainMood(-5);
             gainHunger(-5);
         } 
         if (haveEat) {
             if (notPeeTime >= 240) {
                 notPeeTime -= 240;
+                System.out.println("Sim merasa tidak nyaman karena belom buang air");
                 gainMood(-5);
                 gainHunger(-5);
             }
@@ -267,29 +276,31 @@ public class Sim {
         if(duration % 20 != 0){
             System.out.println("Durasi olahraga harus kelipatan 20 detik!");
         }
-
         else{
-        setSimStatus("sport");
-        int sportTime = 0;
-        int temp = duration/20;
-        while(sportTime != duration){
-            currentWorld.getWorldClock().wait(1);
-            sportTime++;
-            System.out.println("Sedang olahraga selama " + sportTime + " detik");
+            setSimStatus("sport");
+            System.out.println(fullName + " mulai berolahraga");
+            int sportTime = 0;
+            int temp = duration/20;
+            for(int i = 0;i < temp; i++) {
+                while(sportTime != duration){
+                    currentWorld.getWorldClock().wait(5);
+                    sportTime += 5;
+                    System.out.println("Sudah olahraga selama " + sportTime + " detik");
+                    currentWorld.getWorldClock().updateTime(5); 
+                }
+                gainHealth(5);
+                gainHunger(-5);
+                gainMood(10); 
+            }
+            notSleepTime += duration;
+            if (haveEat) {
+                notPeeTime += duration;
+            }
+            gainNegativeEffect();
+            nextPassiveTime(duration);
+            setIdle();
+            System.out.println(this.fullName+ " merasa sehat");
         }
-        setIdle();
-        gainHealth(5*temp);
-        gainHunger(-5*temp);
-        gainMood(10*temp);     
-        }
-        currentWorld.getWorldClock().updateTime(duration); 
-        notSleepTime += duration;
-        if (haveEat) {
-            notPeeTime += duration;
-        }
-        gainNegativeEffect();
-        nextPassiveTime(duration);
-        setIdle();
     }
 
 
@@ -509,8 +520,14 @@ public class Sim {
     public void seeTime() {
         setSimStatus("see time");
         System.out.println("Sim sedang melihat waktu");
-        System.out.println("waktu hari ini tersisa " + currentWorld.getWorldClock().getSisaWaktu());
-
+        System.out.println("waktu hari ini tersisa " + currentWorld.getWorldClock().getSisaWaktu()+ " detik");
+        if (upgradeTime > 0) {
+            System.out.println("waktu upgrade rumah tersisa " + (1800-upgradeTime) + " detik");
+        }
+        if (deliveryTime > 0) {
+            System.out.println("waktu hingga barang sampai tersisa " + deliveryTime+ " detik");
+        }
+        
         setIdle();
     }
 
