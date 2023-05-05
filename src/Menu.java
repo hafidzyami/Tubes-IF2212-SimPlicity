@@ -145,10 +145,10 @@ public class Menu {
         else if(idx == 2){
             if( sim.getSimInventory().getNonFoodCount() > 0){
                 sim.getCurrentRoom().getRoomTile().printTile();
-                System.out.println("Silahkan pilih nomor barang yang ingin dipasang dari inventory kamu : ");
                 sim.getSimInventory().printInventory(sim.getSimInventory().getNonFoodItem());
+                System.out.println("Silahkan pilih nomor barang yang ingin dipasang dari inventory kamu : ");
                 //Scanner input = new Scanner(System.in);
-                int idxItem = Integer.parseInt(input.nextLine());
+                int idxItem = input.nextInt();
                 boolean flagEditRoom = false;
                 while(!flagEditRoom){
                     if(idxItem > 0 && idxItem <= sim.getSimInventory().getNonFoodCount()){
@@ -156,20 +156,78 @@ public class Menu {
                     }
                     else{
                         System.out.println("Silahkan pilih nomor yang benar!");
-                        idxItem = Integer.parseInt(input.nextLine());
+                        idxItem = input.nextInt();
                     }
                 }
                 System.out.println("Silahkan pilih posisi upperLeft (X) dari barang yang ingin di pasang : ");
-                int wantedX = Integer.parseInt(input.nextLine());
+                int wantedX = input.nextInt();
                 System.out.println("Silahkan pilih posisi upperLeft (Y) dari barang yang ingin di pasang : ");
-                int wantedY = Integer.parseInt(input.nextLine());
+                int wantedY = input.nextInt();
                 sim.installItem(sim.getCurrentRoom(), idxItem-1, wantedX, wantedY);
                 sim.getCurrentRoom().getRoomTile().printTile();
             }
             else{
                 System.out.println("Tidak bisa memasang barang karena inventory kamu kosong!");
+            }  
+        }
+        else if(idx == 3){
+            if(sim.getCurrentRoom().getItemList().size() > 0){
+                sim.getCurrentRoom().getRoomTile().printTile();
+                listObject(sim.getCurrentWorld());
+                System.out.println("Silahkan pilih nomor barang untuk dipindahkan : ");
+                int wantedIdx = input.nextInt();
+                if(wantedIdx < 0 || wantedIdx > sim.getCurrentRoom().getItemList().size()){
+                    System.out.println("Input salah!");
+                }
+                else{
+                    int flagCount = 0;
+                    NonFoodItem item = null;
+                    for(Item i : sim.getCurrentRoom().getItemList().values()){
+                        if(flagCount == wantedIdx -1){
+                            item = (NonFoodItem) i;
+                        }
+                        flagCount++;
+                    }
+                    System.out.println("Silahkan pilih posisi upperLeft (X) dari barang yang ingin di pasang : ");
+                    int wantedX = input.nextInt();
+                    System.out.println("Silahkan pilih posisi upperLeft (Y) dari barang yang ingin di pasang : ");
+                    int wantedY = input.nextInt();
+                    if( (wantedX + item.getLength() - 1 > 6) || (wantedY + item.getWidth() - 1 > 6) ){
+                        System.out.println("Item tidak bisa diletakkan karena melebihi dimensi ruangan!");
+                    }
+                    else{
+                        boolean flag = false;
+                        for(int i = wantedX; i < item.getLength() + wantedX; i++){
+                            for(int j = wantedY; j < item.getWidth() + wantedY; j++){
+                                if(sim.getCurrentRoom().getRoomTile().getTile(i, j).equals("E") || sim.getCurrentRoom().getRoomTile().getTile(i, j).equals(item.getName())){
+                                    flag = true;
+                                }
+                            }
+                        }
+                        if(!flag){
+                            System.out.println("Terdapat item lain!");
+                        }
+                        else{
+                            sim.getCurrentRoom().removeItem(item.getName());
+                            sim.getCurrentRoom().addItem(item.getName(), item);
+                            item.setUpperLeft(wantedX, wantedY);
+                            for(int i = wantedX; i < item.getLength() + wantedX; i++){
+                                for(int j = wantedY; j < item.getWidth() + wantedY; j++){
+                                    sim.getCurrentRoom().getRoomTile().changeTile(item.getName(), i, j);
+                                }
+                            };
+                            sim.getCurrentRoom().getRoomTile().printTile();
+                        }
+                    }
+                }
+                
             }
-            
+            else{
+                System.out.println("Tidak bisa memindahkan barang karena tidak ada barang di ruangan ini!");
+            }
+        }
+        else{
+            System.out.println("Input salah!");
         }
     }
 
@@ -349,10 +407,24 @@ public class Menu {
                 } 
                 break;
             case 12:
-                System.out.println("Daftar barang yang bisa dicuri di ruangan ini : ");
-                listObject(world);
-                System.out.println("Masukkan nama barang yang ingin dicuri");
-                sim.steal(input.nextLine());
+                if(sim.getCurrentHouse().getOwner().getSimName().equals(sim.getSimName())){
+                    System.out.println("Anda sekarang berada di rumah sendiri, jika ingin mencuri silahkan kunjungi rumah Sim lain!");
+                    System.out.println("Jika tetap ingin melakukan ini, silahkan ketik '1'. Ketik '2' untuk batalkan");
+                    Scanner input = new Scanner(System.in);
+                    int flag = input.nextInt();
+                    if(flag == 1){
+                        System.out.println("Daftar barang yang bisa dicuri di ruangan ini : ");
+                        listObject(world);
+                        System.out.println("Masukkan nama barang yang ingin dicuri");
+                        sim.steal(input.nextInt());
+                    }
+                }
+                else{
+                    System.out.println("Daftar barang yang bisa dicuri di ruangan ini : ");
+                    listObject(world);
+                    System.out.println("Masukkan nama barang yang ingin dicuri");
+                    sim.steal(input.nextInt());
+                }
                 break;
 
             case 13:

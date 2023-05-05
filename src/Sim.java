@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Sim {
     private String fullName;
@@ -91,6 +92,10 @@ public class Sim {
 
     public String getUseItem() {
         return useItem;
+    }
+
+    public World getCurrentWorld(){
+        return currentWorld;
     }
         
 
@@ -384,7 +389,7 @@ public class Sim {
         NonFoodItem item = this.inventory.getOneNFI(idxItem);
         
         if( (wantedX + item.getLength() - 1 > 6) || (wantedY + item.getWidth() - 1 > 6) ){
-            System.out.println("Item tidak bisa diletakkan!");
+            System.out.println("Item tidak bisa diletakkan karena melebihi dimensi ruangan!");
         }
         else{
             setSimStatus("installing item");
@@ -447,8 +452,16 @@ public class Sim {
         currentWorld.getWorldClock().updateTime(duration);
     }
 
-    public void steal(String itemName){
+    public void steal(int idx){
         setSimStatus("stealing");
+        int flag = 0;
+        String itemName = "";
+        for(Item i : currentRoom.getItemList().values()){
+            if(idx-1 == flag){
+                itemName = i.getName();
+            }
+            flag++;
+        }
         if(currentRoom.getItemList().containsKey(itemName)){
             this.inventory.addInventory((Item) currentRoom.getItemList().get(itemName));
             currentRoom.removeItem(itemName);

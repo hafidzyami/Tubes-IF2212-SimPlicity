@@ -140,6 +140,7 @@ public class Game {
                     System.out.println("Silahkan pilih aksi berikut :");
                     System.out.println("1. Membeli barang");
                     System.out.println("2. Install barang");
+                    System.out.println("3. Pindah barang");
                     try{
                         int idx = input.nextInt();
                         Menu.editRoom(idx, world.getPlayedSim());
