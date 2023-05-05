@@ -288,8 +288,9 @@ public class Menu {
                             }
                         }catch(Exception e){
                             System.out.println("Masukkan input berupa angka ya bang");
+                            break;
                         }
-                        }
+                    }
                 }else {
                     System.out.println("Silahkan ke 'Table and Chair' untuk makan");
                 }
