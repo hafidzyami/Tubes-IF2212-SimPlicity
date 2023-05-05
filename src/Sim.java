@@ -11,14 +11,11 @@ public class Sim {
     private String status;
     private final House myHouse;
     private int workTime; 
-
-    // ini nyoba
-    public Room currentRoom;
-    public House currentHouse;
-    public static World currentWorld;
-    
-    public Clock clock;
-    public String useItem;
+    // Location
+    private Room currentRoom;
+    private House currentHouse;
+    private static World currentWorld;
+    private String useItem;
 
     //konstruktor
     public Sim(String nama,House house, World world) {
@@ -91,6 +88,10 @@ public class Sim {
     public House getCurrentHouse() {
         return currentHouse;
     }
+
+    public String getUseItem() {
+        return useItem;
+    }
         
 
     //setter 
@@ -106,8 +107,12 @@ public class Sim {
         this.currentRoom = room;
     }
 
-    public void setSimJob( Job newJob){
+    public void setSimJob(Job newJob){
         this.job = newJob; 
+    }
+
+    public void setUseItem(String item) {
+        this.useItem = item;
     }
 
     //gainer
