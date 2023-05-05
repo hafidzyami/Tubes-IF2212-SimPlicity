@@ -1,16 +1,28 @@
 public class WorldClock  {
     private int gameDay;
     private int totalElapsed; //satuan detik
+    private boolean haveAddSim;
 
     public WorldClock() {
         gameDay = 1;
+        haveAddSim = false;
     }
 
     public void updateTime(int duration) {
+        int temp = getDay();
         this.totalElapsed += duration;
+        if(temp != getDay()){
+            haveAddSim = false;
+        }
     }
 
+    public boolean getHaveAddSim(){
+        return haveAddSim;
+    }
 
+    public void setHaveAddSim(boolean add){
+        haveAddSim = add;
+    }
 
     public int getDay() {
         gameDay = (totalElapsed / 720 ) + 1;

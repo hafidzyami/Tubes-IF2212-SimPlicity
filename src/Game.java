@@ -150,24 +150,29 @@ public class Game {
                     
                     break;
                 case "10", "add sim":
-                    System.out.print("Masukkan nama Sim :");
-                    String name = input.next();
-                    try{
-                        System.out.print("Masukkan lokasi rumah (X) untuk dibangun : ");
-                        int xHouse = input.nextInt();
-                        System.out.print("Masukkan lokasi rumah (Y) untuk dibangun : ");
-                        int yHouse = input.nextInt();
-                        if(!world.getWorldTile().getTile(xHouse, yHouse).equals("E")){
-                            System.out.println("Tidak bisa membangun rumah karena lokasi sudah ditempati rumah lain!");
+                    if(!world.getWorldClock().getHaveAddSim()){
+                        System.out.print("Masukkan nama Sim :");
+                        String name = input.next();
+                        try{
+                            System.out.print("Masukkan lokasi rumah (X) untuk dibangun : ");
+                            int xHouse = input.nextInt();
+                            System.out.print("Masukkan lokasi rumah (Y) untuk dibangun : ");
+                            int yHouse = input.nextInt();
+                            if(!world.getWorldTile().getTile(xHouse, yHouse).equals("E")){
+                                System.out.println("Tidak bisa membangun rumah karena lokasi sudah ditempati rumah lain!");
+                            }
+                            else if(xHouse >= 1 && xHouse <= world.getWorldLength() && yHouse >= 1 && yHouse <= world.getWorldWidth()){
+                                Menu.addSim(world, name, xHouse, yHouse);
+                                world.getWorldClock().setHaveAddSim(true);
+                            }
+                            else{
+                                System.out.println("Tidak bisa membangun rumah karena input lokasi di luar jangkauan World!");
+                            }
+                        }catch(Exception e){
+                            System.out.println("Masukkan lokasi rumah berupa bilangan");
                         }
-                        else if(xHouse >= 1 && xHouse <= world.getWorldLength() && yHouse >= 1 && yHouse <= world.getWorldWidth()){
-                            Menu.addSim(world, name, xHouse, yHouse);
-                        }
-                        else{
-                            System.out.println("Tidak bisa membangun rumah karena input lokasi di luar jangkauan World!");
-                        }
-                    }catch(Exception e){
-                        System.out.println("Masukkan lokasi rumah berupa bilangan");
+                    }else{
+                        System.out.println("Anda telah melakukan Add Sim di hari ini. Tunggu esok untuk add sim lagi.");
                     }
                     break;
 

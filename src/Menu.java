@@ -239,7 +239,7 @@ public class Menu {
         world.addNewHouse(house);
         sim.setCurrentRoom(house.getRoomList().get(0));
         world.updateMap();
-        System.out.println("Sim berhasil ditambahkan!");
+        System.out.println("Sim berhasil ditambahkan!"); 
     }
 
     public static void changeSim(World world, int idx) {
@@ -342,12 +342,13 @@ public class Menu {
                                         break;
                                     }
                                 }
-                                
+                                break;
                             }
                         }catch(Exception e){
                             System.out.println("Masukkan input berupa angka ya bang");
+                            break;
                         }
-                        }
+                    }
                 }else {
                     System.out.println("Silahkan ke 'Table and Chair' untuk makan");
                 }
