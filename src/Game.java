@@ -58,64 +58,69 @@ public class Game {
                     break;
 
                 case "7", "upgrade house":
-                    try{
-                        System.out.println("Berikut merupakan denah rumah Anda : ");
-                        House house = world.getPlayedSim().getMyHouse();
-                        house.getHouseTile().printTile();
-                        int xNew = house.getRoomList().get(0).getRoomCoordinate().getX();
-                        int yNew = house.getRoomList().get(0).getRoomCoordinate().getY();
-                        if(house.getHouseTile().getCountNonEmpty() > 1){
-                            System.out.println("Daftar ruangan : ");
-                            house.printRoomList();
-                            System.out.println("Pilih acuan ruangan untuk penambahan ruangan : ");
-                            int idxRuangan = input.nextInt();
-                            xNew = house.getRoomList().get(idxRuangan-1).getRoomCoordinate().getX();
-                            yNew = house.getRoomList().get(idxRuangan-1).getRoomCoordinate().getY();
-                        }
-                        System.out.println("Ketikan posisi dari ruangan acuan (Kiri/Kanan/Atas/Bawah) : ");
-                        String posisiRuangan = input.next();
-                        if(posisiRuangan.equals("Kiri")|| posisiRuangan.equals("kiri")){
-                            if(xNew - 1 < 0 || house.getHouseTile().getTile(xNew-1, yNew) != "E"){
-                                System.out.println("Tidak bisa menambahkan ruangan di sana!");
+                    if(world.getPlayedSim().getSimMoney() >= 1500){
+                        try{
+                            System.out.println("Berikut merupakan denah rumah Anda : ");
+                            House house = world.getPlayedSim().getMyHouse();
+                            house.getHouseTile().printTile();
+                            int xNew = house.getRoomList().get(0).getRoomCoordinate().getX();
+                            int yNew = house.getRoomList().get(0).getRoomCoordinate().getY();
+                            if(house.getHouseTile().getCountNonEmpty() > 1){
+                                System.out.println("Daftar ruangan : ");
+                                house.printRoomList();
+                                System.out.println("Pilih acuan ruangan untuk penambahan ruangan : ");
+                                int idxRuangan = input.nextInt();
+                                xNew = house.getRoomList().get(idxRuangan-1).getRoomCoordinate().getX();
+                                yNew = house.getRoomList().get(idxRuangan-1).getRoomCoordinate().getY();
+                            }
+                            System.out.println("Ketikan posisi dari ruangan acuan (Kiri/Kanan/Atas/Bawah) : ");
+                            String posisiRuangan = input.next();
+                            if(posisiRuangan.equals("Kiri")|| posisiRuangan.equals("kiri")){
+                                if(xNew - 1 < 0 || house.getHouseTile().getTile(xNew-1, yNew) != "E"){
+                                    System.out.println("Tidak bisa menambahkan ruangan di sana!");
+                                }
+                                else{
+                                    xNew--;
+                                    Menu.upgradeHouse(xNew, yNew, house, world);
+                                }
+                            }
+                            else if(posisiRuangan.equals("Kanan") || posisiRuangan.equals("kanan")){
+                                if(xNew + 1 > 5 || house.getHouseTile().getTile(xNew+1, yNew) != "E"){
+                                    System.out.println("Tidak bisa menambahkan ruangan di sana!");
+                                }
+                                else{
+                                    xNew++;
+                                    Menu.upgradeHouse(xNew, yNew, house, world);
+                                }
+                                
+                            }
+                            else if(posisiRuangan.equals("Atas") || posisiRuangan.equals("atas")){
+                                if(yNew - 1 < 0 || house.getHouseTile().getTile(xNew, yNew-1) != "E"){
+                                    System.out.println("Tidak bisa menambahkan ruangan di sana!");
+                                }
+                                else{
+                                    yNew--;
+                                    Menu.upgradeHouse(xNew, yNew, house, world);
+                                }
+                            }
+                            else if(posisiRuangan.equals("Bawah") || posisiRuangan.equals("bawah")){
+                                if(yNew + 1 > 5 || house.getHouseTile().getTile(xNew, yNew+1) != "E"){
+                                    System.out.println("Tidak bisa menambahkan ruangan di sana!");
+                                }
+                                else{
+                                    yNew++;
+                                    Menu.upgradeHouse(xNew, yNew, house, world);
+                                }
                             }
                             else{
-                                xNew--;
-                                Menu.upgradeHouse(xNew, yNew, house);
+                                System.out.println("Input salah!");
                             }
+                        }catch (Exception e){
+                            System.out.println("Masukkan acuan ruangan berupa bilangan");
                         }
-                        else if(posisiRuangan.equals("Kanan") || posisiRuangan.equals("kanan")){
-                            if(xNew + 1 > 5 || house.getHouseTile().getTile(xNew+1, yNew) != "E"){
-                                System.out.println("Tidak bisa menambahkan ruangan di sana!");
-                            }
-                            else{
-                                xNew++;
-                                Menu.upgradeHouse(xNew, yNew, house);
-                            }
-                            
-                        }
-                        else if(posisiRuangan.equals("Atas") || posisiRuangan.equals("atas")){
-                            if(yNew - 1 < 0 || house.getHouseTile().getTile(xNew, yNew-1) != "E"){
-                                System.out.println("Tidak bisa menambahkan ruangan di sana!");
-                            }
-                            else{
-                                yNew--;
-                                Menu.upgradeHouse(xNew, yNew, house);
-                            }
-                        }
-                        else if(posisiRuangan.equals("Bawah") || posisiRuangan.equals("bawah")){
-                            if(yNew + 1 > 5 || house.getHouseTile().getTile(xNew, yNew+1) != "E"){
-                                System.out.println("Tidak bisa menambahkan ruangan di sana!");
-                            }
-                            else{
-                                yNew++;
-                                Menu.upgradeHouse(xNew, yNew, house);
-                            }
-                        }
-                        else{
-                            System.out.println("Input salah!");
-                        }
-                    }catch (Exception e){
-                        System.out.println("Masukkan acuan ruangan berupa bilangan");
+                    }
+                    else{
+                        System.out.println("Sim harus memiliki setidaknya uang sebesar 1500 untuk upgrade rumah!");
                     }
                     break;
 

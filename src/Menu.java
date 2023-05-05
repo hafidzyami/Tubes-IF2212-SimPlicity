@@ -47,13 +47,35 @@ public class Menu {
         sim.seeInventory();
     }
 
-    public static void upgradeHouse(int xNew, int yNew, House house) {
+    public static void upgradeHouse(int xNew, int yNew, House house, World world) {
         System.out.println("Masukkan nama ruangan yang Anda inginkan : ");
         String name = input.nextLine();
-        Room newRoom = new Room(name, house);
-        newRoom.setRoomCoordinate(xNew, yNew);
-        house.addRoom(newRoom);
-        house.getHouseTile().changeTile(newRoom.getRoomName(), xNew, yNew);
+        Thread t = new Thread(new Runnable(){
+            public void run(){
+                int start = world.getWorldClock().getTotalElapsed();
+                int now;
+                world.getPlayedSim().gainMoney(-1500);
+                System.out.println("Ruangan " + name + " akan selesai dibangun dalam 18 menit");
+                while (true) {
+                    now = world.getWorldClock().getTotalElapsed();
+                    if (now >= start + 60*18){
+                        Room newRoom = new Room(name, house);
+                        newRoom.setRoomCoordinate(xNew, yNew);
+                        house.addRoom(newRoom);
+                        house.getHouseTile().changeTile(newRoom.getRoomName(), xNew, yNew);
+                        System.out.println("Ruangan " + name + " sudah selesai dibangun!");
+                        break;
+                    }
+                    try {
+                        Thread.sleep(1000);
+                    }
+                    catch (Exception e) {
+
+                    }
+                }
+            }
+        });
+        t.start();
     }
 
     public static void moveRoom(Sim sim, int idx) {
@@ -66,11 +88,11 @@ public class Menu {
             //Scanner input = new Scanner(System.in);
             System.out.println("1.Non Food");
             System.out.println("2.Food Ingredients");
-            int idxBeli = Integer.parseInt(input.nextLine());
+            int idxBeli = input.nextInt();
             if(idxBeli == 1){
                 CLI.printNonFoodItem();
                 System.out.println("Silahkan masukan nomor barang : ");
-                int idxNonFood = Integer.parseInt(input.nextLine());
+                int idxNonFood = input.nextInt();
                 PurchaseAble item;
                 switch (idxNonFood) {
                     case 1 :
@@ -106,7 +128,7 @@ public class Menu {
             else if(idxBeli == 2){
                 CLI.printFoodIngredient();
                 System.out.println("Silahkan masukan nomor barang : ");
-                int idxIngredient = Integer.parseInt(input.nextLine());
+                int idxIngredient = input.nextInt();
                 PurchaseAble item;
                 switch (idxIngredient) {
                     case 1 :
@@ -376,7 +398,7 @@ public class Menu {
                 CLI.printHouseAndSim(world);
                 world.printMap();
                 System.out.println("Ketikan nomor Sim untuk dikunjungi :");
-                int idxVisit = Integer.parseInt(input.nextLine());
+                int idxVisit = input.nextInt();
                 sim.visit(world.getHouseList().get(idxVisit-1).getLocX(), world.getHouseList().get(idxVisit-1).getLocY(), idxVisit-1);
                 break;
             case 8:
