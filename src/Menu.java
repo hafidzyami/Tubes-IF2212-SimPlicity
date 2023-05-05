@@ -284,7 +284,7 @@ public class Menu {
                                         break;
                                     }
                                 }
-                                
+                                break;
                             }
                         }catch(Exception e){
                             System.out.println("Masukkan input berupa angka ya bang");
