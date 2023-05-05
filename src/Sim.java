@@ -129,7 +129,7 @@ public class Sim {
     }
 
     public int getUpgradeTime() {
-        return deliveryTime;
+        return upgradeTime;
     }
         
 
@@ -609,7 +609,7 @@ public class Sim {
             notPeeTime += 10;
         }
         gainNegativeEffect();
-        nextPassiveTime(duration);
+        nextPassiveTime(10);
     }
 
     public void read() {
