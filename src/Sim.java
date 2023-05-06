@@ -452,6 +452,12 @@ public class Sim {
                 // gainMood(10*(duration/30));
                 // gainHunger(-10*(duration/30));
             }
+            notSleepTime += distance;
+                if (haveEat) {
+                    notPeeTime += distance;
+                }
+            gainNegativeEffect();
+            nextPassiveTime(distance);
             visitTime += distance;
             if (visitTime >= 30) {
                 while (visitTime >= 30) {
