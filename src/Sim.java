@@ -28,7 +28,7 @@ public class Sim {
     private int upgradeTime;
     //Cancel Game
     public boolean canceled = false;
-    //Visit Tracer
+    //Visit Tracker
     private int visitTime = 0;
 
     //konstruktor
@@ -438,7 +438,7 @@ public class Sim {
             setSimStatus("onTheWay");
             int x1 = currentHouse.getLocX();
             int y1 = currentHouse.getLocY();
-            int distance = (int) Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
+            int distance = (int) Math.ceil(Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2)));
             System.out.println("Sim berkunjung ke rumah " + currentWorld.getHouseList().get(idxHouse).getOwner().getSimName() + " dengan durasi : " + distance + " detik");
             while(getSimStatus().equals("onTheWay")) {
                     System.out.println("Sim sedang dalam perjalanan!");
@@ -467,6 +467,7 @@ public class Sim {
                     System.out.println("Sim merasa senang");
                 }
             }
+            useItem = "";
             setIdle();
         }
     }
