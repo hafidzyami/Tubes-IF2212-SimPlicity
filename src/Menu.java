@@ -64,7 +64,9 @@ public class Menu {
                         newRoom.setRoomCoordinate(xNew, yNew);
                         house.addRoom(newRoom);
                         house.getHouseTile().changeTile(newRoom.getRoomName(), xNew, yNew);
-                        System.out.println("Ruangan " + name + " sudah selesai dibangun!");
+                        if(!world.getPlayedSim().canceled) {
+                            System.out.println("Ruangan " + name + " sudah selesai dibangun!");
+                        }
                         world.getPlayedSim().setOnUpgrade(false);
                         break;
                     }

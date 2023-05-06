@@ -26,6 +26,8 @@ public class Sim {
     private int totalDeliveryTime;
     private boolean onUpgrade;
     private int upgradeTime;
+    //Cancel Game
+    public boolean canceled = false;
 
     //konstruktor
     public Sim(String nama,House house, World world) {
@@ -452,7 +454,9 @@ public class Sim {
                     while (true) {
                         now = currentWorld.getWorldClock().getTotalElapsed();
                         if (now >= start + time){
-                            System.out.println(item.getName() + " sudah masuk ke inventory");
+                            if(!canceled) {
+                                System.out.println(item.getName() + " sudah masuk ke inventory");
+                            }
                             inventory.addInventory((Item) item);
                             onDelivery = false;
                             deliveryTime = 0;

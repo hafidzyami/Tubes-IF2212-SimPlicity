@@ -43,6 +43,8 @@ public class Game {
                 case "3","exit" :
                     // TODO : Cari cara supaya kalau ada thread jalan
                     // harus bisa berhenti 
+                    world.getPlayedSim().canceled = true;
+                    world.getWorldClock().updateTime(99999);
                     playing = false;
                     Menu.exit();
                     break;
