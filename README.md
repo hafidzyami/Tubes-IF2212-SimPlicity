@@ -18,7 +18,7 @@ Permainan ini dibuat menggunakan bahasa java yang mengimplementasikan konsep kon
 Berikut tahapan untuk menjalankan program Sim-Plicity ini. 
 1. Clone folder Tubes-IF2212-SimPlicity dari github ini ke folder dalam device Anda
 2. Buka command prompt atau terminal di device Anda
-3. Pindah ke direktori "src" yang ada dalam folder Tubes-IF2212-SimPlicity
+3. Pindah ke direktori "Tubes-IF2212-SimPlicity" yang ada dalam folder Tubes-IF2212-SimPlicity
 4. Untuk Meng-compile, Anda bisa menuliskan 
 ```
 ./gradlew build
