@@ -30,13 +30,15 @@ public class Game {
         sim1.setCurrentRoom(house1.getRoomList().get(0));
         while(playing) {
             world.updateMap();
-            if(!world.updateMap()) {
+            if(world.updateMap()) {
                 playing = false;
+                System.out.println("GAME OVER");
             }
             command = CLI.playing();
             switch(command.toLowerCase()) {
                 case "1","startgame" :
                     CLI.repeatedStart();
+                    world.updateMap();
                     break;
 
                 case "2","help" :
@@ -49,18 +51,22 @@ public class Game {
                     world.getWorldClock().updateTime(99999);
                     playing = false;
                     Menu.exit();
+                    world.updateMap();
                     break;
 
                 case "4","view sim info" :
                     Menu.viewSimInfo(world);
+                    world.updateMap();
                     break;
 
                 case "5", "view current location":
                     Menu.viewCurrentLocation(world.getPlayedSim());
+                    world.updateMap();
                     break;
 
                 case "6", "view inventory":
                     Menu.viewInventory(world);
+                    world.updateMap();
                     break;
 
                 case "7", "upgrade house":
@@ -137,6 +143,7 @@ public class Game {
                     else{
                         System.out.println("Sim harus memiliki setidaknya uang sebesar 1500 untuk upgrade rumah!");
                     }
+                    world.updateMap();
                     break;
 
                 case "8", "move room":
@@ -155,6 +162,7 @@ public class Game {
                     }catch(Exception e){
                         System.out.println("Masukkan nomor ruangan berupa bilangan");
                     }
+                    world.updateMap();
                     break;
                 case "9", "edit room":
                     System.out.println("Silahkan pilih aksi berikut :");
@@ -167,7 +175,7 @@ public class Game {
                     }catch(Exception e){
                         System.out.println("Masukkan input berupa bilangan");
                     }
-                    
+                    world.updateMap();
                     break;
                 case "10", "add sim":
                     if(!world.getWorldClock().getHaveAddSim()){

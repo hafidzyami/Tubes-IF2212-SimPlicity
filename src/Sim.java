@@ -242,29 +242,32 @@ public class Sim {
         } else {
             setSimStatus("work"); 
             System.out.println("Sim sedang bekerja sebagai " + getSimJob().getJobName());
+            int time = 0;
             int temp = duration/30; 
             for (int i = 0; i < temp; i++){
                 System.out.println("work work work");
-                currentWorld.getWorldClock().wait(30);
+                currentWorld.getWorldClock().wait(1);
                 gainHunger(-10); 
                 gainMood(-10); 
+                time += 30;
                 workTime += 30; 
                 if (workTime % 240 == 0){
                     gainMoney(getSimJob().getDaySalary()); 
-                    System.out.println("sim telah selesai bekerja dan mendapatkan "+ getSimJob().getDaySalary()); 
+                    System.out.println("sim telah bekerja 4 menit dan mendapatkan "+ getSimJob().getDaySalary()); 
                     System.out.println("uang sim menjadi : " + getSimMoney()); 
                 } 
                 else {
-                    System.out.println("sim sudah bekerja selama "+ workTime + " detik.");
+                    System.out.println("sim sudah bekerja selama "+ time + " detik.");
                 }
-                currentWorld.getWorldClock().updateTime(duration);
+            }
+            System.out.println("Pekerjaan selesai");
+            currentWorld.getWorldClock().updateTime(duration);
                 notSleepTime += duration;
                 if (haveEat) {
                     notPeeTime += duration;
                 }
                 gainNegativeEffect();
                 nextPassiveTime(duration);
-            }
         }
         setIdle();
     }

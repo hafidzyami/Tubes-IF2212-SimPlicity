@@ -25,14 +25,25 @@ public class World {
         map.printTile();
     }
 
-    public boolean updateMap() {
+    public synchronized boolean updateMap() {
+        for (House temp : houseList) {
+            int idX = temp.getLocX();
+            int idY = temp.getLocY();
+            map.changeTile(temp.getOwner().getSimName(), idX, idY);
+        }
+        ArrayList<Sim> deadSim = new ArrayList<>();
         for(Sim temp : simList) {
             if(temp.checkDie()) {
                 System.out.println(temp.getSimName() +" Mati");
-                simList.remove(temp);
+                deadSim.add(temp);
             }
         }
-
+        for(Sim temp : deadSim) {
+            simList.remove(temp);
+        }
+        deadSim = new ArrayList<>();
+    
+        ArrayList<House> hauntedHouse = new ArrayList<>();
         for(House temp : houseList) {
             int idX = temp.getLocX();
             int idY = temp.getLocY();
@@ -40,18 +51,22 @@ public class World {
                 map.changeTile(temp.getOwner().getSimName(), idX, idY);
             }
             else {
-                System.out.println(temp.getOwner() +" Mati dan rumahnya hilang");
-                houseList.remove(temp);
+                System.out.println(temp.getOwner().getSimName() +" Mati dan rumahnya hilang");
+                hauntedHouse.add(temp);
             }
-            if (!simList.contains(playedSim)) {
-                if(simList.size() >= 0) {
-                    playedSim = simList.get(0);
-                    System.out.println("Otomatis memainkan " + playedSim.getSimName());
-                }
-                else {
-                    System.out.println("GAME OVER");
-                    return true;
-                }
+        }
+        for(House temp : hauntedHouse) {
+            houseList.remove(temp);
+        }
+        hauntedHouse = new ArrayList<>();
+
+        if (!simList.contains(playedSim)) {
+            if(simList.size() > 0) {
+                playedSim = simList.get(0);
+                System.out.println("Otomatis memainkan " + playedSim.getSimName());
+            }
+            else {
+                return true;
             }
         }
         return false;
