@@ -38,6 +38,9 @@ public class Menu {
     }
 
     public static void viewCurrentLocation(Sim sim) {
+        sim.getCurrentWorld().printMap();
+        sim.getCurrentHouse().getHouseTile().printTile();
+        sim.getCurrentRoom().getRoomTile().printTile();
         String owner = sim.getCurrentHouse().getOwner().getSimName();
         System.out.println(sim.getSimName() + " berada di rumah milik " + owner + " di dalam " + sim.getCurrentRoom().getRoomName());
     }
