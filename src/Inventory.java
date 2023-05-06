@@ -6,10 +6,10 @@ public class Inventory < T extends Item> {
 
     
     public Inventory() {
-        itemList.put((T) new NonFoodItem("Gas Stove"), 1);
-        itemList.put((T) new NonFoodItem("Single Bed"), 1);
-        itemList.put((T) new NonFoodItem("Toilet"), 1);
-        itemList.put((T) new NonFoodItem("Table and Chair"), 1);
+        itemList.put((T) new NonFood("Gas Stove"), 1);
+        itemList.put((T) new NonFood("Single Bed"), 1);
+        itemList.put((T) new NonFood("Toilet"), 1);
+        itemList.put((T) new NonFood("Table and Chair"), 1);
         itemList.put((T) new Clock(), 1);
         itemList.put((T) new FoodIngredients("Rice"), 1);
         itemList.put((T) new FoodIngredients("Chicken"), 1);
@@ -40,12 +40,12 @@ public class Inventory < T extends Item> {
         return temp;
     }
 
-    public NonFoodItem getOneNFI(int idx){
+    public NonFood getOneNFI(int idx){
         int i = 0;
-        NonFoodItem temp = null;
+        NonFood temp = null;
         for(T j : getNonFoodItem().keySet()){
             if(i == idx){
-                temp = (NonFoodItem) j;
+                temp = (NonFood) j;
             }
             i++;
         }
@@ -91,7 +91,7 @@ public class Inventory < T extends Item> {
     public HashMap<T,Integer> getNonFoodItem () {
         HashMap<T,Integer> temp = new HashMap <>();
         for(T i : itemList.keySet()){
-            if(i instanceof NonFoodItem){
+            if(i instanceof NonFood){
                 temp.put(i, temp.get(i));
             }
         }
@@ -129,7 +129,7 @@ public class Inventory < T extends Item> {
     public static void main(String[] args){
         Inventory<Item> x = new Inventory<>();
         FoodIngredients item1 = new FoodIngredients("Rice");
-        NonFoodItem item2 = new NonFoodItem("Single Bed");
+        NonFood item2 = new NonFood("Single Bed");
         x.printInventory(x.getInventory());
         System.out.println(" ");
         x.addInventory(item1);

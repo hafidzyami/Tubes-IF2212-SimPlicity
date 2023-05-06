@@ -1,4 +1,4 @@
-public class Clock extends NonFoodItem {
+public class Clock extends NonFood {
     
     public Clock(){
         super("Clock");

@@ -550,7 +550,7 @@ public class Sim {
     }
 
     public void installItem(Room room, int idxItem, int wantedX, int wantedY){
-        NonFoodItem item = this.inventory.getOneNFI(idxItem);
+        NonFood item = this.inventory.getOneNFI(idxItem);
         
         if( (wantedX + item.getLength() - 1 > 6) || (wantedY + item.getWidth() - 1 > 6) ){
             System.out.println("Item tidak bisa diletakkan karena melebihi dimensi ruangan!");
