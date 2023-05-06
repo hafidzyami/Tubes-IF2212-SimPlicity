@@ -30,6 +30,10 @@ public class Game {
         sim1.setCurrentRoom(house1.getRoomList().get(0));
         world.updateMap();
         while(playing) {
+            world.updateMap();
+            if(!world.updateMap()) {
+                playing = false;
+            }
             command = CLI.playing();
             switch(command.toLowerCase()) {
                 case "1","startgame" :

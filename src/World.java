@@ -25,13 +25,36 @@ public class World {
         map.printTile();
     }
 
-    public void updateMap() {
+    public boolean updateMap() {
+        for(Sim temp : simList) {
+            if(temp.checkDie()) {
+                System.out.println(temp.getSimName() +" Mati");
+                simList.remove(temp);
+            }
+        }
+
         for(House temp : houseList) {
             int idX = temp.getLocX();
             int idY = temp.getLocY();
-
-            map.changeTile(temp.getOwner().getSimName(), idX, idY);
+            if (!temp.getOwner().checkDie()) {
+                map.changeTile(temp.getOwner().getSimName(), idX, idY);
+            }
+            else {
+                System.out.println(temp.getOwner() +" Mati dan rumahnya hilang");
+                houseList.remove(temp);
+            }
+            if (!simList.contains(playedSim)) {
+                if(simList.size() >= 0) {
+                    playedSim = simList.get(0);
+                    System.out.println("Otomatis memainkan " + playedSim.getSimName());
+                }
+                else {
+                    System.out.println("GAME OVER");
+                    return true;
+                }
+            }
         }
+        return false;
     }
 
     public static World getInstance() {
@@ -94,5 +117,13 @@ public class World {
         World world = World.getInstance();
         world.printMap();
         System.out.println(world.getHouseList());
+        House house1 = House.newHouse(world, 5, 5);
+        Sim sim1 = new Sim("aku", house1, world);
+        house1.setOwner(sim1);
+        world.addSimList(sim1);
+        world.addNewHouse(house1);
+        world.setPlayedSim(sim1);
+        sim1.setCurrentRoom(house1.getRoomList().get(0));
+        world.updateMap();
     }
 }

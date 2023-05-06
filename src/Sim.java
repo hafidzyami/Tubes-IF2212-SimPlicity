@@ -221,6 +221,20 @@ public class Sim {
         }
     }
 
+    //check mati
+    public boolean checkDie() {
+        if (mood <= 0) {
+            return true;
+        }
+        if (hunger <= 0) {
+            return true;
+        }
+        if (health <= 0) {
+            return true;
+        }
+        return false;
+    }
+    
     // active action 
     public void work (int duration){
         if (duration % 120 != 0){
