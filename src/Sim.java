@@ -11,6 +11,7 @@ public class Sim {
     private String status;
     private final House myHouse;
     private int workTime; 
+    private int sleepTime;
     // Location
     private Room currentRoom;
     private House currentHouse;
@@ -372,18 +373,15 @@ public class Sim {
 
     public void sleep (int duration){
         setSimStatus("sleep");
-        int sleepTime = 0;
         System.out.println("Sim mulai tidur");
-        while(sleepTime != duration){
-            currentWorld.getWorldClock().wait(60);
-            sleepTime++;
-            System.out.println("Sedang tidur selama " + sleepTime + " menit");
-            currentWorld.getWorldClock().updateTime(60); 
-        }
+        System.out.println("Sedang tidur selama " + sleepTime + " detik");
+        currentWorld.getWorldClock().wait(duration);
+        sleepTime += duration;
+        currentWorld.getWorldClock().updateTime(duration); 
         setIdle();
-        if(sleepTime >= 4){
-            gainMood(30*(duration/4));
-            gainHealth(20*(duration/4));
+        if(sleepTime >= 240){
+            gainMood(30);
+            gainHealth(20);
         }
         notSleepTime = 0;
         if (haveEat) {
