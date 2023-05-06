@@ -137,6 +137,16 @@ public class World {
             System.out.println((i+1) + ". " + simList.get(i).getSimName());
         }
     }
+
+    public void updateNotPlayed(int duration) {
+        for(Sim temp : simList) {
+            if(!temp.equals(playedSim)) {
+                temp.gainNegativeEffect(duration);
+                temp.nextPassiveTime(duration);
+            } 
+        }
+    }
+    
     public static void main(String[] args) {
         World world = World.getInstance();
         world.printMap();

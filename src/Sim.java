@@ -37,7 +37,7 @@ public class Sim {
         this.hunger = 80;
         this.mood = 80;
         this.health = 80;
-        this.money = 10000;
+        this.money = 100;
         this.job = Job.firstJob();
         this.myHouse = house;
         this.currentHouse = house;
@@ -205,7 +205,7 @@ public class Sim {
         if (notSleepTime >= 600) {
             while (notSleepTime >= 600) {
                 notSleepTime -= 600;
-                System.out.println("Sim merasa lelah karena belom tidur");
+                System.out.println(fullName + " merasa lelah karena belom tidur");
                 gainMood(-5);
                 gainHealth(-5);
             }
@@ -214,7 +214,7 @@ public class Sim {
             if (notPeeTime >= 240) {
                 while(notPeeTime >=240) {
                     notPeeTime -= 240;
-                    System.out.println("Sim merasa tidak nyaman karena belom buang air");
+                    System.out.println(fullName+ " merasa tidak nyaman karena belom buang air");
                     gainMood(-5);
                     gainHealth(-5);
                 }
@@ -222,6 +222,30 @@ public class Sim {
         }
     }
 
+    public void gainNegativeEffect(int duration) {
+        notSleepTime += duration;
+        if (haveEat) {
+            notPeeTime += duration;
+        }
+        if (notSleepTime >= 600) {
+            while (notSleepTime >= 600) {
+                notSleepTime -= 600;
+                System.out.println(fullName + " merasa lelah karena belom tidur");
+                gainMood(-5);
+                gainHealth(-5);
+            }
+        } 
+        if (haveEat) {
+            if (notPeeTime >= 240) {
+                while(notPeeTime >=240) {
+                    notPeeTime -= 240;
+                    System.out.println(fullName + "Sim merasa tidak nyaman karena belom buang air");
+                    gainMood(-5);
+                    gainHealth(-5);
+                }
+            }
+        }
+    }
     // Passive Action Time Up
     public void nextPassiveTime(int duration) {
         if(onDelivery) {
@@ -415,6 +439,7 @@ public class Sim {
                 inventory.addInventory(meal);
                 System.out.println(meal.getName() + " ditambahkan ke inventory!");
                 currentWorld.getWorldClock().updateTime(duration); 
+                currentWorld.updateNotPlayed(duration);
                 notSleepTime += duration;
                 if (haveEat) {
                     notPeeTime += duration;
@@ -452,6 +477,7 @@ public class Sim {
                 // gainMood(10*(duration/30));
                 // gainHunger(-10*(duration/30));
             }
+            currentWorld.updateNotPlayed(distance);
             notSleepTime += distance;
                 if (haveEat) {
                     notPeeTime += distance;

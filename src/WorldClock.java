@@ -43,6 +43,7 @@ public class WorldClock  {
     // Delay dengan duration dalam detik
     public void wait(int duration) {
         try {
+            //System.out.print(".");
             Thread.sleep(duration*1000);
         }
         catch(Exception e) {

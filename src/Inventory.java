@@ -11,12 +11,12 @@ public class Inventory < T extends Item> {
         itemList.put((T) new NonFood("Toilet"), 1);
         itemList.put((T) new NonFood("Table and Chair"), 1);
         itemList.put((T) new Clock(), 1);
-        itemList.put((T) new FoodIngredients("Rice"), 1);
-        itemList.put((T) new FoodIngredients("Chicken"), 1);
-        itemList.put((T) new FoodIngredients("Beef"), 1);
-        itemList.put((T) new FoodIngredients("Nut"), 1);
-        itemList.put((T) new FoodIngredients("Milk"), 1);
-        itemList.put((T) new FoodIngredients("Potato"), 1);
+        // itemList.put((T) new FoodIngredients("Rice"), 1);
+        // itemList.put((T) new FoodIngredients("Chicken"), 1);
+        // itemList.put((T) new FoodIngredients("Beef"), 1);
+        // itemList.put((T) new FoodIngredients("Nut"), 1);
+        // itemList.put((T) new FoodIngredients("Milk"), 1);
+        // itemList.put((T) new FoodIngredients("Potato"), 1);
         inventoryCount = itemList.size();
     }
 
