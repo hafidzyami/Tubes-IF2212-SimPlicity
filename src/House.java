@@ -19,16 +19,16 @@ public class House {
         House retHouse = new House(new Point(x, y));
         Room ruang01 = Room.firstRoom(retHouse);
         retHouse.roomList.add(ruang01);
-        retHouse.houseTile.changeTile(ruang01.getRoomName(), 3, 3);
+        retHouse.houseTile.changeTile(ruang01.getRoomName(), 4, 4);
         return retHouse;
     }
 
     public static House newHouse(World world,Point point) {
         House retHouse = new House(new Point(point.getX(),point.getY()));
         Room ruang01 = Room.firstRoom(retHouse);
-        ruang01.setRoomCoordinate(3, 3);
+        ruang01.setRoomCoordinate(4, 4);
         retHouse.roomList.add(ruang01);
-        retHouse.houseTile.changeTile(ruang01.getRoomName(), 3, 3);
+        retHouse.houseTile.changeTile(ruang01.getRoomName(), 4, 4);
         return retHouse;
     }
 

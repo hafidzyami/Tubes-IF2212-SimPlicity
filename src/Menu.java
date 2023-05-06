@@ -38,6 +38,9 @@ public class Menu {
     }
 
     public static void viewCurrentLocation(Sim sim) {
+        sim.getCurrentWorld().printMap();
+        sim.getCurrentHouse().getHouseTile().printTile();
+        sim.getCurrentRoom().getRoomTile().printTile();
         String owner = sim.getCurrentHouse().getOwner().getSimName();
         System.out.println(sim.getSimName() + " berada di rumah milik " + owner + " di dalam " + sim.getCurrentRoom().getRoomName());
     }
@@ -64,7 +67,9 @@ public class Menu {
                         newRoom.setRoomCoordinate(xNew, yNew);
                         house.addRoom(newRoom);
                         house.getHouseTile().changeTile(newRoom.getRoomName(), xNew, yNew);
-                        System.out.println("Ruangan " + name + " sudah selesai dibangun!");
+                        if(!world.getPlayedSim().canceled) {
+                            System.out.println("Ruangan " + name + " sudah selesai dibangun!");
+                        }
                         world.getPlayedSim().setOnUpgrade(false);
                         break;
                     }

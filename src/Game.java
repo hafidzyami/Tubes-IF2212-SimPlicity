@@ -41,8 +41,9 @@ public class Game {
                     break;
 
                 case "3","exit" :
-                    // TODO : Cari cara supaya kalau ada thread jalan
-                    // harus bisa berhenti 
+                    // Semua Thread akan berhenti
+                    world.getPlayedSim().canceled = true;
+                    world.getWorldClock().updateTime(99999);
                     playing = false;
                     Menu.exit();
                     break;
@@ -80,8 +81,8 @@ public class Game {
                                     yNew = house.getRoomList().get(idxRuangan-1).getRoomCoordinate().getY();
                                 }
                                 System.out.println("Ketikan posisi dari ruangan acuan (Kiri/Kanan/Atas/Bawah) : ");
-                                String posisiRuangan = input.nextLine();
-                                if(posisiRuangan.equals("Kiri")|| posisiRuangan.equals("kiri")){
+                                String posisiRuangan = input.nextLine().toLowerCase();
+                                if(posisiRuangan.equals("kiri")){
                                     if(xNew - 1 < 0 || house.getHouseTile().getTile(xNew-1, yNew) != "E" || house.getHouseTile().getTile(xNew-1, yNew).equals("UC")){
                                         System.out.println("Tidak bisa menambahkan ruangan di sana!");
                                     }
@@ -91,7 +92,7 @@ public class Game {
                                         world.getPlayedSim().setOnUpgrade(true);
                                     }
                                 }
-                                else if(posisiRuangan.equals("Kanan") || posisiRuangan.equals("kanan")){
+                                else if(posisiRuangan.equals("kanan")){
                                     if(xNew + 1 > 5 || house.getHouseTile().getTile(xNew+1, yNew) != "E" || house.getHouseTile().getTile(xNew+1, yNew).equals("UC")){
                                         System.out.println("Tidak bisa menambahkan ruangan di sana!");
                                     }
@@ -102,22 +103,24 @@ public class Game {
                                     }
                                     
                                 }
-                                else if(posisiRuangan.equals("Atas") || posisiRuangan.equals("atas")){
+                                else if(posisiRuangan.equals("atas")){
                                     if(yNew - 1 < 0 || house.getHouseTile().getTile(xNew, yNew-1) != "E" || house.getHouseTile().getTile(xNew, yNew-1).equals("UC")){
                                         System.out.println("Tidak bisa menambahkan ruangan di sana!");
                                     }
                                     else{
                                         yNew--;
                                         Menu.upgradeHouse(xNew, yNew, house, world);
+                                        world.getPlayedSim().setOnUpgrade(true);
                                     }
                                 }
-                                else if(posisiRuangan.equals("Bawah") || posisiRuangan.equals("bawah")){
+                                else if(posisiRuangan.equals("bawah")){
                                     if(yNew + 1 > 5 || house.getHouseTile().getTile(xNew, yNew+1) != "E" || house.getHouseTile().getTile(xNew, yNew+1).equals("UC")){
                                         System.out.println("Tidak bisa menambahkan ruangan di sana!");
                                     }
                                     else{
                                         yNew++;
                                         Menu.upgradeHouse(xNew, yNew, house, world);
+                                        world.getPlayedSim().setOnUpgrade(true);
                                     }
                                 }
                                 else{

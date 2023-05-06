@@ -9,7 +9,7 @@ public class World {
     private Sim playedSim;
     private ArrayList<Sim> simList = new ArrayList<>();
 
-    // Don't forget change to 64x64
+    // TODO : Don't forget change to 64x64
     private final int LEN_CAPACITY = 5;
     private final int WID_CAPACITY = 10;
 
