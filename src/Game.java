@@ -33,6 +33,7 @@ public class Game {
             if(world.updateMap()) {
                 playing = false;
                 System.out.println("GAME OVER");
+                break;
             }
             command = CLI.playing();
             switch(command.toLowerCase()) {
@@ -180,7 +181,7 @@ public class Game {
                 case "10", "add sim":
                     if(!world.getWorldClock().getHaveAddSim()){
                         System.out.print("Masukkan nama Sim :");
-                        String name = input.next();
+                        String name = input.nextLine();
                         try{
                             System.out.print("Masukkan lokasi rumah (X) untuk dibangun : ");
                             int xHouse = Integer.parseInt(input.nextLine());

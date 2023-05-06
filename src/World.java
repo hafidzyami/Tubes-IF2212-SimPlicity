@@ -51,7 +51,7 @@ public class World {
                 map.changeTile(temp.getOwner().getSimName(), idX, idY);
             }
             else {
-                System.out.println(temp.getOwner().getSimName() +" Mati dan rumahnya hilang");
+                System.out.println(temp.getOwner().getSimName() +" sudah mati dan rumahnya hilang");
                 hauntedHouse.add(temp);
             }
         }
