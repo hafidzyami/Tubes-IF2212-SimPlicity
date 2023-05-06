@@ -10,8 +10,8 @@ public class World {
     private ArrayList<Sim> simList = new ArrayList<>();
 
     // TODO : Don't forget change to 64x64
-    private final int LEN_CAPACITY = 5;
-    private final int WID_CAPACITY = 10;
+    private final int LEN_CAPACITY = 64;
+    private final int WID_CAPACITY = 64;
 
     private World() {
         Tile matrix = new Tile(LEN_CAPACITY,WID_CAPACITY);
@@ -42,7 +42,8 @@ public class World {
             simList.remove(temp);
         }
         deadSim = new ArrayList<>();
-    
+        
+
         ArrayList<House> hauntedHouse = new ArrayList<>();
         for(House temp : houseList) {
             int idX = temp.getLocX();
@@ -67,6 +68,11 @@ public class World {
             if(simList.size() > 0) {
                 playedSim = simList.get(0);
                 System.out.println("Otomatis memainkan " + playedSim.getSimName());
+                for(Sim temp : simList) {
+                    temp.setCurrentHouse(temp.getMyHouse());
+                    //System.out.println(temp.getMyHouse().getRoomList().get(0).getRoomName());
+                    temp.setCurrentRoom(temp.getMyHouse().getRoomList().get(0));
+                }
             }
             else {
                 return true;

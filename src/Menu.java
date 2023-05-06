@@ -33,13 +33,17 @@ public class Menu {
     }
 
     public static void viewSimInfo(World world) {
+
         Sim sim = world.getPlayedSim(); 
         System.out.println(sim.getSimInfo());
     }
 
     public static void viewCurrentLocation(Sim sim) {
+        System.out.println("-----BERIKUT PETA DUNIA------");
         sim.getCurrentWorld().printMap();
+        System.out.println("-----BERIKUT DENAH RUMAH------");
         sim.getCurrentHouse().getHouseTile().printTile();
+        System.out.println("-----BERIKUT DENAH RUANGAN------");
         sim.getCurrentRoom().getRoomTile().printTile();
         String owner = sim.getCurrentHouse().getOwner().getSimName();
         System.out.println(sim.getSimName() + " berada di rumah milik " + owner + " di dalam " + sim.getCurrentRoom().getRoomName());

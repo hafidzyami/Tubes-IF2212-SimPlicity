@@ -44,7 +44,7 @@ public class Room {
     }
 
     public static Room firstRoom(House house) {
-        Room retRoom = new Room("Ruang utama",house);
+        Room retRoom = new Room("RuangUtama",house);
         retRoom.setRoomCoordinate(4, 4);
         return retRoom;
     }

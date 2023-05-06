@@ -28,6 +28,8 @@ public class Sim {
     private int upgradeTime;
     //Cancel Game
     public boolean canceled = false;
+    //Visit Tracer
+    private int visitTime = 0;
 
     //konstruktor
     public Sim(String nama,House house, World world) {
@@ -167,6 +169,11 @@ public class Sim {
     public void setOnUpgrade(boolean status) {
         this.onUpgrade = status;
     }
+
+    public void setCurrentHouse(House house) {
+        this.currentHouse = house;
+    }
+
 
     //gainer
     public void gainMood(int mood){
@@ -444,6 +451,15 @@ public class Sim {
                 // ini gw masih bingung
                 // gainMood(10*(duration/30));
                 // gainHunger(-10*(duration/30));
+            }
+            visitTime += distance;
+            if (visitTime >= 30) {
+                while (visitTime >= 30) {
+                    visitTime -= 30;
+                    gainMood(10);
+                    gainHunger(-10);
+                    System.out.println("Sim merasa senang");
+                }
             }
             setIdle();
         }
