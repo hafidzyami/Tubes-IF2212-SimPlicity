@@ -23,6 +23,7 @@ public class Sim {
     //Passive time tracker
     private boolean onDelivery;
     private int deliveryTime;
+    private int totalDeliveryTime;
     private boolean onUpgrade;
     private int upgradeTime;
 
@@ -134,6 +135,10 @@ public class Sim {
      
     public boolean getOnUpgrade() {
         return onUpgrade;
+    }
+
+    public boolean getOnDelivery(){
+        return onDelivery;
     }
 
     //setter 
@@ -439,13 +444,17 @@ public class Sim {
                 if (item != null && item.getPrice() <= getSimMoney()) {
                     gainMoney(-item.getPrice());
                     System.out.println("sim membeli '" + item.getName() + "' dengan harga : " + item.getPrice());
-                    int deliveryTime = ((int) (Math.random() * 5 * 1) + 1) * 30;
-                    System.out.println("barang akan tersedia dalam waktu "+ deliveryTime + " detik, silahkan menunggu");
+                    int time = ((int) (Math.random() * 5 * 1) + 1) * 30;
+                    System.out.println("barang akan tersedia dalam waktu "+ time + " detik, silahkan menunggu");
+                    onDelivery = true;
+                    totalDeliveryTime = time;
                     while (true) {
                         now = currentWorld.getWorldClock().getTotalElapsed();
-                        if (now >= start + deliveryTime){
+                        if (now >= start + time){
                             System.out.println(item.getName() + " sudah masuk ke inventory");
                             inventory.addInventory((Item) item);
+                            onDelivery = false;
+                            deliveryTime = 0;
                             break;
                         }
                         try {
@@ -521,11 +530,11 @@ public class Sim {
         setSimStatus("see time");
         System.out.println("Sim sedang melihat waktu");
         System.out.println("waktu hari ini tersisa " + currentWorld.getWorldClock().getSisaWaktu()+ " detik");
-        if (upgradeTime > 0) {
+        if (onUpgrade) {
             System.out.println("waktu upgrade rumah tersisa " + (1800-upgradeTime) + " detik");
         }
-        if (deliveryTime > 0) {
-            System.out.println("waktu hingga barang sampai tersisa " + deliveryTime+ " detik");
+        if (onDelivery) {
+            System.out.println("waktu hingga barang sampai tersisa " + (totalDeliveryTime - deliveryTime)+ " detik");
         }
         
         setIdle();

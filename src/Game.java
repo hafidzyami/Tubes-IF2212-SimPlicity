@@ -249,6 +249,8 @@ public class Game {
                     }
                     break;
                 default :
+                    System.out.println("Tolong masukkan input dengan benar");
+                    break;
             }
         }
 

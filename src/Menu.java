@@ -86,84 +86,88 @@ public class Menu {
 
     public static void editRoom(int idx, Sim sim) {
         if(idx == 1){
-            System.out.println("Silahkan pilih barang yang ingin dibeli : ");
-            //Scanner input = new Scanner(System.in);
-            System.out.println("1.Non Food");
-            System.out.println("2.Food Ingredients");
-            int idxBeli = Integer.parseInt(input.nextLine());
-            if(idxBeli == 1){
-                CLI.printNonFoodItem();
-                System.out.println("Silahkan masukan nomor barang : ");
-                int idxNonFood = Integer.parseInt(input.nextLine());
-                PurchaseAble item;
-                switch (idxNonFood) {
-                    case 1 :
-                        item = new NonFoodItem("Single Bed");
-                        break;
-                    case 2 :
-                        item = new NonFoodItem("Queen Size Bed");
-                        break;
-                    case 3 :
-                        item = new NonFoodItem("King Size Bed");
-                        break;
-                    case 4 :
-                        item = new NonFoodItem("Toilet");
-                        break;
-                    case 5 :
-                        item = new NonFoodItem("Gas Stove");
-                        break;
-                    case 6 :
-                        item = new NonFoodItem("Electric Stove");
-                        break;
-                    case 7 :
-                        item = new NonFoodItem("Table And Chair");
-                        break;
-                    case 8 :
-                        item = new Clock();
-                        break;
-                    default :
-                        item = null;
+            if(sim.getOnDelivery()){
+                System.out.println("Anda sedang memiliki pesanan lain yang belum sampai");
+            }else {
+                System.out.println("Silahkan pilih barang yang ingin dibeli : ");
+                //Scanner input = new Scanner(System.in);
+                System.out.println("1.Non Food");
+                System.out.println("2.Food Ingredients");
+                int idxBeli = Integer.parseInt(input.nextLine());
+                if(idxBeli == 1){
+                    CLI.printNonFoodItem();
+                    System.out.println("Silahkan masukan nomor barang : ");
+                    int idxNonFood = Integer.parseInt(input.nextLine());
+                    PurchaseAble item;
+                    switch (idxNonFood) {
+                        case 1 :
+                            item = new NonFoodItem("Single Bed");
+                            break;
+                        case 2 :
+                            item = new NonFoodItem("Queen Size Bed");
+                            break;
+                        case 3 :
+                            item = new NonFoodItem("King Size Bed");
+                            break;
+                        case 4 :
+                            item = new NonFoodItem("Toilet");
+                            break;
+                        case 5 :
+                            item = new NonFoodItem("Gas Stove");
+                            break;
+                        case 6 :
+                            item = new NonFoodItem("Electric Stove");
+                            break;
+                        case 7 :
+                            item = new NonFoodItem("Table and Chair");
+                            break;
+                        case 8 :
+                            item = new Clock();
+                            break;
+                        default :
+                            item = null;
+                    }
+                    System.out.println(item.getName());
+                    sim.buyItem(item);
                 }
-                System.out.println(item.getName());
-                sim.buyItem(item);
-            }
-            else if(idxBeli == 2){
-                CLI.printFoodIngredient();
-                System.out.println("Silahkan masukan nomor barang : ");
-                int idxIngredient = Integer.parseInt(input.nextLine());
-                PurchaseAble item;
-                switch (idxIngredient) {
-                    case 1 :
-                        item = new FoodIngredients("Rice");
-                        break;
-                    case 2 :
-                        item = new FoodIngredients("Potato");
-                        break;
-                    case 3 :
-                        item = new FoodIngredients("Chicken");
-                        break;
-                    case 4 :
-                        item = new FoodIngredients("Beef");
-                        break;
-                    case 5 :
-                        item = new FoodIngredients("Carrot");
-                        break;
-                    case 6 :
-                        item = new FoodIngredients("Spinach");
-                        break;
-                    case 7 :
-                        item = new FoodIngredients("Nut");
-                        break;
-                    case 8 :
-                        item = new FoodIngredients("Milk");
-                        break;
-                    default :
-                        item = null;
+                else if(idxBeli == 2){
+                    CLI.printFoodIngredient();
+                    System.out.println("Silahkan masukan nomor barang : ");
+                    int idxIngredient = Integer.parseInt(input.nextLine());
+                    PurchaseAble item;
+                    switch (idxIngredient) {
+                        case 1 :
+                            item = new FoodIngredients("Rice");
+                            break;
+                        case 2 :
+                            item = new FoodIngredients("Potato");
+                            break;
+                        case 3 :
+                            item = new FoodIngredients("Chicken");
+                            break;
+                        case 4 :
+                            item = new FoodIngredients("Beef");
+                            break;
+                        case 5 :
+                            item = new FoodIngredients("Carrot");
+                            break;
+                        case 6 :
+                            item = new FoodIngredients("Spinach");
+                            break;
+                        case 7 :
+                            item = new FoodIngredients("Nut");
+                            break;
+                        case 8 :
+                            item = new FoodIngredients("Milk");
+                            break;
+                        default :
+                            item = null;
+                    }
+                    sim.buyItem(item);
                 }
-                sim.buyItem(item);
-            }
-            else{
-                System.out.println("Masukkan input yang benar!");
+                else{
+                    System.out.println("Masukkan input yang benar!");
+                }
             }
         }
         else if(idx == 2){
@@ -386,10 +390,32 @@ public class Menu {
             case 6 : 
                 if(sim.getUseItem().equals("Gas Stove") || sim.getUseItem().equals("Electric Stove")){
                     CLI.printFoodMenu();
-                    System.out.println("Silahkan ketik menu yang akan dimasak");
-                    String meal = input.nextLine();
-                    sim.cook(meal);
-                    // tunggu code jadi
+                    System.out.println("Silahkan ketik nomor menu yang akan dimasak");
+                    try {
+                        int idxMeal = input.nextInt();
+                        switch (idxMeal) {
+                            case 1:
+                                sim.cook("Chicken Rice");
+                                break;
+                            case 2:
+                                sim.cook("Curry Rice");
+                                break;
+                            case 3: 
+                                sim.cook("Nut Milk");
+                                break;
+                            case 4: 
+                                sim.cook("Stir Fry Vegetable");
+                                break; 
+                            case 5:
+                                sim.cook("Steak");
+                                break;
+                            default:
+                                System.out.println("Tolong masukkan nomor sesuai yang tertera pada menu");
+                                break;
+                        }
+                    }catch (Exception e){
+                        System.out.println("Tolong masukkan input berupa nomor menu");
+                    }
                 }
                 else{
                     System.out.println("Silahkan pergi ke object 'Stove' untuk masak!");
@@ -487,6 +513,9 @@ public class Menu {
                 else{
                     System.out.println("Silahkan pergi ke object 'Toilet' untuk mandi!");
                 }
+                break;
+            default: 
+                System.out.println("Silahkan pilih nomor dengan benar");
                 break;
         }
     }
