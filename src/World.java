@@ -57,6 +57,9 @@ public class World {
         }
         for(House temp : hauntedHouse) {
             houseList.remove(temp);
+            int idX = temp.getLocX();
+            int idY = temp.getLocY();
+            map.changeTile("E", idX, idY);
         }
         hauntedHouse = new ArrayList<>();
 
