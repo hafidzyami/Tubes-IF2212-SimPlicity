@@ -196,17 +196,21 @@ public class Sim {
 
     public void gainNegativeEffect() {
         if (notSleepTime >= 600) {
-            notSleepTime -= 600;
-            System.out.println("Sim merasa lelah karena belom tidur");
-            gainMood(-5);
-            gainHunger(-5);
+            while (notSleepTime >= 600) {
+                notSleepTime -= 600;
+                System.out.println("Sim merasa lelah karena belom tidur");
+                gainMood(-5);
+                gainHealth(-5);
+            }
         } 
         if (haveEat) {
             if (notPeeTime >= 240) {
-                notPeeTime -= 240;
-                System.out.println("Sim merasa tidak nyaman karena belom buang air");
-                gainMood(-5);
-                gainHunger(-5);
+                while(notPeeTime >=240) {
+                    notPeeTime -= 240;
+                    System.out.println("Sim merasa tidak nyaman karena belom buang air");
+                    gainMood(-5);
+                    gainHealth(-5);
+                }
             }
         }
     }
@@ -234,6 +238,12 @@ public class Sim {
         }
         return false;
     }
+    // INSTA DEAD
+    public void mati() {
+        this.health = 0;
+        this.hunger = 0;
+        this.mood = 0;
+    }
     
     // active action 
     public void work (int duration){
@@ -246,7 +256,8 @@ public class Sim {
             int temp = duration/30; 
             for (int i = 0; i < temp; i++){
                 System.out.println("work work work");
-                currentWorld.getWorldClock().wait(1);
+                // TODO : testing
+                currentWorld.getWorldClock().wait(30);
                 gainHunger(-10); 
                 gainMood(-10); 
                 time += 30;
@@ -355,6 +366,7 @@ public class Sim {
     public void eat (Food food){
         setSimStatus("eating");
         System.out.println("Sim sedang makan " + food.getName());
+        //TODO : testing wait duration ganti
         currentWorld.getWorldClock().wait(30); 
         gainHunger(food.getSatiation());
         System.out.println("Sim telah makan!");
@@ -551,6 +563,7 @@ public class Sim {
     public void seeTime() {
         setSimStatus("see time");
         System.out.println("Sim sedang melihat waktu");
+        System.out.println("Hari ini adalah hari ke " + currentWorld.getWorldClock().getDay());
         System.out.println("waktu hari ini tersisa " + currentWorld.getWorldClock().getSisaWaktu()+ " detik");
         if (onUpgrade) {
             System.out.println("waktu upgrade rumah tersisa " + (1800-upgradeTime) + " detik");

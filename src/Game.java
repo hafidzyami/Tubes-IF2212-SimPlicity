@@ -203,6 +203,7 @@ public class Game {
                     }else{
                         System.out.println("Anda telah melakukan Add Sim di hari ini. Tunggu esok untuk add sim lagi.");
                     }
+                    world.updateMap();
                     break;
 
                 case "11", "change sim":
@@ -230,10 +231,12 @@ public class Game {
                     else{
                         System.out.println("Tidak ada Sim untuk dipilih! Silahkan add Sim!");
                     }
+                    world.updateMap();
                     break;
 
                 case "12","list object" :
                     Menu.listObject(world);
+                    world.updateMap();
                     break;
 
                 case "13","go to object" :
@@ -251,6 +254,7 @@ public class Game {
                     else{
                         System.out.println("Tidak ada object yang bisa dituju karena current room kosong!");
                     }
+                    world.updateMap();
                     break;
 
                 case "14","action" :
@@ -262,6 +266,11 @@ public class Game {
                     }catch(Exception e){
                         System.out.println("Masukkan input nomor berupa bilangan");
                     }
+                    world.updateMap();
+                    break;
+                case "999" :
+                    world.getPlayedSim().mati();
+                    world.updateMap();
                     break;
                 default :
                     System.out.println("Tolong masukkan input dengan benar");

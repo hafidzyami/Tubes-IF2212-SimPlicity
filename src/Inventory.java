@@ -106,7 +106,7 @@ public class Inventory < T extends Item> {
     public HashMap<T,Integer> getFoodItem () {
         HashMap<T,Integer> temp = new HashMap <>();
         for(T i : itemList.keySet()){
-            if(i instanceof FoodCooked){
+            if(i instanceof Food){
                 temp.put(i, temp.get(i));
             }
         }
