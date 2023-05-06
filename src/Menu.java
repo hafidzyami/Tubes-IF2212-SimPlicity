@@ -432,7 +432,11 @@ public class Menu {
                 world.printMap();
                 System.out.println("Ketikan nomor Sim untuk dikunjungi :");
                 int idxVisit = Integer.parseInt(input.nextLine());
-                sim.visit(world.getHouseList().get(idxVisit-1).getLocX(), world.getHouseList().get(idxVisit-1).getLocY(), idxVisit-1);
+                if(idxVisit > world.getHouseList().size()){
+                    System.out.println("Tidak ada sim di nomor tersebut");
+                }else{
+                    sim.visit(world.getHouseList().get(idxVisit-1).getLocX(), world.getHouseList().get(idxVisit-1).getLocY(), idxVisit-1);
+                }
                 break;
             case 8:
                 if(sim.getUseItem().equals("Toilet")){
