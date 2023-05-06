@@ -21,11 +21,11 @@ Berikut tahapan untuk menjalankan program Sim-Plicity ini.
 3. Pindah ke direktori "src" yang ada dalam folder Tubes-IF2212-SimPlicity
 4. Untuk Meng-compile, Anda bisa menuliskan 
 ```
-javac Main.java
+./gradlew build
 ```
 5. Setelah compile berhasil, Anda bisa run dengan menuliskan
 ```
-java Main
+java -jar build/libs/Tubes-IF2212-SimPlicity.jar
 ```
 6. Anda telah berhasil menjalankan program dan game siap untuk dimainkan 
 
