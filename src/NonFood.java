@@ -1,7 +1,7 @@
 import java.awt.Point;
 
 
-public class NonFoodItem extends Item implements PurchaseAble {
+public class NonFood extends Item implements PurchaseAble {
     // atribut Item
     // private String relatedAction;
 
@@ -14,7 +14,7 @@ public class NonFoodItem extends Item implements PurchaseAble {
 
 
     // konstruktor
-    public NonFoodItem(String name){
+    public NonFood(String name){
         this.name = name;
         this.upperLeft = new Point(0, 0);
         // pada dasarnya NonFoodItem bersifat available
@@ -98,7 +98,7 @@ public class NonFoodItem extends Item implements PurchaseAble {
     }
 
     public static void main(String[] args){
-        NonFoodItem sb = new NonFoodItem("Clock");
+        NonFood sb = new NonFood("Clock");
         System.out.println("name :" + sb.name);
         System.out.println("upperLeft :" + sb.upperLeft);
         System.out.println("price :" + sb.price);

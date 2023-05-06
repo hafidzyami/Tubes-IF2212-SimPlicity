@@ -110,25 +110,25 @@ public class Menu {
                     PurchaseAble item;
                     switch (idxNonFood) {
                         case 1 :
-                            item = new NonFoodItem("Single Bed");
+                            item = new NonFood("Single Bed");
                             break;
                         case 2 :
-                            item = new NonFoodItem("Queen Size Bed");
+                            item = new NonFood("Queen Size Bed");
                             break;
                         case 3 :
-                            item = new NonFoodItem("King Size Bed");
+                            item = new NonFood("King Size Bed");
                             break;
                         case 4 :
-                            item = new NonFoodItem("Toilet");
+                            item = new NonFood("Toilet");
                             break;
                         case 5 :
-                            item = new NonFoodItem("Gas Stove");
+                            item = new NonFood("Gas Stove");
                             break;
                         case 6 :
-                            item = new NonFoodItem("Electric Stove");
+                            item = new NonFood("Electric Stove");
                             break;
                         case 7 :
-                            item = new NonFoodItem("Table and Chair");
+                            item = new NonFood("Table and Chair");
                             break;
                         case 8 :
                             item = new Clock();
@@ -219,10 +219,10 @@ public class Menu {
                 }
                 else{
                     int flagCount = 0;
-                    NonFoodItem item = null;
+                    NonFood item = null;
                     for(Item i : sim.getCurrentRoom().getItemList().values()){
                         if(flagCount == wantedIdx -1){
-                            item = (NonFoodItem) i;
+                            item = (NonFood) i;
                         }
                         flagCount++;
                     }
