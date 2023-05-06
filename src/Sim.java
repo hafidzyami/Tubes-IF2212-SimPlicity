@@ -445,6 +445,7 @@ public class Sim {
                     gainMoney(-item.getPrice());
                     System.out.println("sim membeli '" + item.getName() + "' dengan harga : " + item.getPrice());
                     int time = ((int) (Math.random() * 5 * 1) + 1) * 30;
+                    //int time = 20;
                     System.out.println("barang akan tersedia dalam waktu "+ time + " detik, silahkan menunggu");
                     onDelivery = true;
                     totalDeliveryTime = time;

@@ -109,6 +109,7 @@ public class Game {
                                     else{
                                         yNew--;
                                         Menu.upgradeHouse(xNew, yNew, house, world);
+                                        world.getPlayedSim().setOnUpgrade(true);
                                     }
                                 }
                                 else if(posisiRuangan.equals("Bawah") || posisiRuangan.equals("bawah")){
@@ -118,6 +119,7 @@ public class Game {
                                     else{
                                         yNew++;
                                         Menu.upgradeHouse(xNew, yNew, house, world);
+                                        world.getPlayedSim().setOnUpgrade(true);
                                     }
                                 }
                                 else{
