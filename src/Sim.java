@@ -375,7 +375,7 @@ public class Sim {
         setSimStatus("sleep");
         System.out.println("Sim mulai tidur");
         System.out.println("Sedang tidur selama " + duration + " detik");
-        currentWorld.getWorldClock().wait(10);
+        currentWorld.getWorldClock().wait(duration);
         sleepTime += duration;
         currentWorld.getWorldClock().updateTime(duration); 
         setIdle();
