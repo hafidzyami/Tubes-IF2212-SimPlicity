@@ -197,9 +197,9 @@ public class Menu {
                         idxItem = Integer.parseInt(input.nextLine());
                     }
                 }
-                System.out.println("Silahkan pilih posisi upperLeft (X) dari barang yang ingin di pasang : ");
+                System.out.println("Silahkan pilih posisi pojok kiri (X) dari barang yang ingin di pasang : ");
                 int wantedX = Integer.parseInt(input.nextLine());
-                System.out.println("Silahkan pilih posisi upperLeft (Y) dari barang yang ingin di pasang : ");
+                System.out.println("Silahkan pilih posisi pojok kiri (Y) dari barang yang ingin di pasang : ");
                 int wantedY = Integer.parseInt(input.nextLine());
                 sim.installItem(sim.getCurrentRoom(), idxItem-1, wantedX, wantedY);
                 sim.getCurrentRoom().getRoomTile().printTile();
@@ -226,9 +226,9 @@ public class Menu {
                         }
                         flagCount++;
                     }
-                    System.out.println("Silahkan pilih posisi upperLeft (X) dari barang yang ingin di pasang : ");
+                    System.out.println("Silahkan pilih posisi pojok kiri (X) dari barang yang ingin di pasang : ");
                     int wantedX = Integer.parseInt(input.nextLine());
-                    System.out.println("Silahkan pilih posisi upperLeft (Y) dari barang yang ingin di pasang : ");
+                    System.out.println("Silahkan pilih posisi pojok kiri (Y) dari barang yang ingin di pasang : ");
                     int wantedY = Integer.parseInt(input.nextLine());
                     if( (wantedX + item.getLength() - 1 > 6) || (wantedY + item.getWidth() - 1 > 6) ){
                         System.out.println("Item tidak bisa diletakkan karena melebihi dimensi ruangan!");
@@ -353,9 +353,9 @@ public class Menu {
                 if(sim.getUseItem().equals("Single Bed") || sim.getUseItem().equals("Queen Size Bed") || sim.getUseItem().equals("King Size Bed")){
                     int durasiTidur;
                     while (true){
-                        System.out.print("Masukkan durasi Tidur (dalam menit): ");
+                        System.out.print("Masukkan durasi Tidur (minimal 3 menit): ");
                         durasiTidur = Integer.parseInt(input.nextLine());
-                        if(durasiTidur >= 3) {
+                        if(durasiTidur >= 180) {
                             break;
                         }else {
                             System.out.println("Tidur minimal 3 menit tolong masukkan durasi ulang");

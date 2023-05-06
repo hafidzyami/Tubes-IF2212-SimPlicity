@@ -340,7 +340,7 @@ public class Sim {
     }
 
     public void sport (int duration){
-        if(duration % 20 != 0){
+        if(duration % 20 != 0 || duration < 0){
             System.out.println("Durasi olahraga harus kelipatan 20 detik!");
         }
         else{
@@ -374,14 +374,18 @@ public class Sim {
     public void sleep (int duration){
         setSimStatus("sleep");
         System.out.println("Sim mulai tidur");
-        System.out.println("Sedang tidur selama " + sleepTime + " detik");
-        currentWorld.getWorldClock().wait(duration);
+        System.out.println("Sedang tidur selama " + duration + " detik");
+        currentWorld.getWorldClock().wait(10);
         sleepTime += duration;
         currentWorld.getWorldClock().updateTime(duration); 
         setIdle();
         if(sleepTime >= 240){
-            gainMood(30);
-            gainHealth(20);
+            while(sleepTime >= 240) {
+                sleepTime -= 240;
+                gainMood(30);
+                gainHealth(20);
+                System.out.println("Sim merasa bugar");
+            }
         }
         notSleepTime = 0;
         if (haveEat) {
